@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+<title>OutTrack — Outdo Hub</title>
+<meta name="theme-color" content="#08090c" />
+<meta name="description" content="OutTrack — high-performance habit tracking + Outdo Mode deep work." />
+<link rel="manifest" href="manifest.webmanifest" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="OutTrack" />
+<link rel="apple-touch-icon" href="icon.svg" />
+<link rel="icon" type="image/svg+xml" href="icon.svg" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="app">
+
+  <!-- HUB VIEW -->
+  <section id="view-hub" class="view active">
+    <header class="topbar">
+      <div>
+        <p id="hub-date" class="date-label">—</p>
+        <h1 class="logo">OUT<span>TRACK</span></h1>
+      </div>
+      <div class="streak-pill" id="streak-pill" title="Daily streak — complete all habits to extend">
+        <span class="flame">◉</span>
+        <span id="streak-count">0</span>
+        <small>STREAK</small>
+      </div>
+    </header>
+
+    <div class="hub-grid">
+      <div class="card ring-card">
+        <div class="ring-wrap">
+          <svg viewBox="0 0 120 120" class="ring">
+            <circle cx="60" cy="60" r="52" class="ring-bg"/>
+            <circle cx="60" cy="60" r="52" class="ring-fg" id="ring-fg"/>
+            <text x="60" y="56" text-anchor="middle" class="ring-pct" id="ring-pct">0%</text>
+            <text x="60" y="74" text-anchor="middle" class="ring-sub" id="ring-sub">0 / 4 done</text>
+          </svg>
+        </div>
+        <div class="ring-meta">
+          <h2>Today's output</h2>
+          <p id="hub-quote">Small wins compound.</p>
+          <div class="points-mini" id="points-mini"></div>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h3>NON-NEGOTIABLES</h3>
+        <button id="add-habit-btn" class="ghost-btn" aria-label="Add habit">+ ADD</button>
+      </div>
+      <ul id="habit-list" class="habit-list"></ul>
+
+      <button id="launch-focus" class="cta">
+        <span class="cta-glow"></span>
+        <span class="cta-label">▶ &nbsp;LAUNCH OUTDO MODE</span>
+        <span class="cta-sub">45 min deep-work block</span>
+      </button>
+      <p class="hint">Tap a habit to complete. Tap again to undo. Everything saves offline.</p>
+    </div>
+  </section>
+
+  <!-- OUTDO MODE VIEW -->
+  <section id="view-focus" class="view">
+    <div id="focus-stage">
+      <header class="focus-top">
+        <button id="exit-focus" class="ghost-btn">✕ EXIT</button>
+        <span class="focus-badge">● OUTDO MODE</span>
+        <button id="fs-btn" class="ghost-btn" aria-label="Fullscreen">⛶</button>
+      </header>
+
+      <div class="presets">
+        <button data-min="25" class="preset">25</button>
+        <button data-min="45" class="preset active">45</button>
+        <button data-min="90" class="preset">90</button>
+      </div>
+
+      <div class="timer-wrap">
+        <svg viewBox="0 0 200 200" class="timer-ring">
+          <circle cx="100" cy="100" r="88" class="ring-bg"/>
+          <circle cx="100" cy="100" r="88" class="ring-fg" id="timer-fg"/>
+        </svg>
+        <div class="timer-text">
+          <div id="timer-display">45:00</div>
+          <div id="timer-state">READY</div>
+        </div>
+      </div>
+
+      <div class="timer-controls">
+        <button id="timer-start" class="primary-btn">START BLOCK</button>
+        <button id="timer-reset" class="ghost-btn">RESET</button>
+      </div>
+
+      <label class="sound-row">
+        <span>AMBIENCE</span>
+        <select id="sound-select">
+          <option value="off">Off — Silence</option>
+          <option value="white">White Noise</option>
+          <option value="rain">Rain</option>
+          <option value="synth">Cyberpunk Synth</option>
+        </select>
+      </label>
+
+      <div class="journal">
+        <label for="focus-input">What is your single focus for this block?</label>
+        <input id="focus-input" type="text" maxlength="120" placeholder="e.g. Ship OutTrack v1…" autocomplete="off" />
+        <p id="focus-saved">Saved ✓</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANALYTICS VIEW -->
+  <section id="view-analytics" class="view">
+    <header class="topbar">
+      <div>
+        <p class="date-label">CONSISTENCY</p>
+        <h1 class="logo">ANA<span>LYTICS</span></h1>
+      </div>
+      <div class="streak-pill small">
+        <span id="total-points">0</span><small>PTS</small>
+      </div>
+    </header>
+
+    <div class="card">
+      <h3>WEEKLY GRID</h3>
+      <p class="muted">Last 35 days — brightness = completion.</p>
+      <div id="grid" class="grid"></div>
+      <div class="grid-legend"><span>Less</span><i class="sq l0"></i><i class="sq l1"></i><i class="sq l2"></i><i class="sq l3"></i><i class="sq l4"></i><span>More</span></div>
+    </div>
+
+    <div class="card">
+      <h3>IDENTITY LEVELS</h3>
+      <p class="muted">Every completion = +10 pts in its life area.</p>
+      <div id="identity"></div>
+    </div>
+
+    <div class="card">
+      <h3>FOCUS LOG</h3>
+      <div id="focus-log" class="focus-log"></div>
+    </div>
+
+    <button id="reset-data" class="ghost-btn danger">RESET ALL DATA</button>
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <nav id="tabbar">
+    <button data-tab="hub" class="tab active"><i>◈</i><span>Hub</span></button>
+    <button data-tab="focus" class="tab focus-tab"><i>◎</i><span>Outdo</span></button>
+    <button data-tab="analytics" class="tab"><i>▦</i><span>Stats</span></button>
+  </nav>
+</div>
+
+<!-- Add-habit sheet -->
+<div id="sheet-backdrop" hidden></div>
+<div id="sheet" hidden>
+  <h3>New non-negotiable</h3>
+  <input id="new-habit-label" type="text" maxlength="28" placeholder="e.g. Deep reading" />
+  <div class="area-pick" id="area-pick">
+    <button data-area="mind" class="active">Mind</button>
+    <button data-area="body">Body</button>
+    <button data-area="craft">Craft</button>
+  </div>
+  <div class="sheet-row">
+    <button id="sheet-cancel" class="ghost-btn">CANCEL</button>
+    <button id="sheet-save" class="primary-btn">ADD HABIT</button>
+  </div>
+</div>
+
+<div id="toast" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>
