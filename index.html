@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
-<title>OutTrack — Outdo Hub</title>
-<meta name="theme-color" content="#08090c" />
-<meta name="description" content="OutTrack — high-performance habit tracking + Outdo Mode deep work." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>OutTrack</title>
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+<meta name="description" content="OutTrack — Habits, Journal, Food-Tipps + Outdo Mode." />
 <link rel="manifest" href="manifest.webmanifest" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="OutTrack" />
 <link rel="apple-touch-icon" href="icon.svg" />
 <link rel="icon" type="image/svg+xml" href="icon.svg" />
@@ -18,160 +19,298 @@
 <body>
 <div id="app">
 
-  <!-- HUB VIEW -->
+  <!-- HUB -->
   <section id="view-hub" class="view active">
-    <header class="topbar">
-      <div>
-        <p id="hub-date" class="date-label">—</p>
-        <h1 class="logo">OUT<span>TRACK</span></h1>
-      </div>
-      <div class="streak-pill" id="streak-pill" title="Daily streak — complete all habits to extend">
-        <span class="flame">◉</span>
-        <span id="streak-count">0</span>
-        <small>STREAK</small>
-      </div>
+    <header class="navlarge">
+      <p id="hub-date" class="nav-eyebrow">—</p>
+      <h1 data-i18n="nav_hub">Hub</h1>
     </header>
-
-    <div class="hub-grid">
-      <div class="card ring-card">
+    <div class="content">
+      <div class="card summary-card">
         <div class="ring-wrap">
-          <svg viewBox="0 0 120 120" class="ring">
+          <svg viewBox="0 0 120 120" class="ring" role="img" aria-label="Tagesfortschritt">
             <circle cx="60" cy="60" r="52" class="ring-bg"/>
             <circle cx="60" cy="60" r="52" class="ring-fg" id="ring-fg"/>
-            <text x="60" y="56" text-anchor="middle" class="ring-pct" id="ring-pct">0%</text>
-            <text x="60" y="74" text-anchor="middle" class="ring-sub" id="ring-sub">0 / 4 done</text>
+            <text x="60" y="58" text-anchor="middle" class="ring-pct" id="ring-pct">0%</text>
+            <text x="60" y="76" text-anchor="middle" class="ring-sub" id="ring-sub">0 / 4</text>
           </svg>
         </div>
         <div class="ring-meta">
-          <h2>Today's output</h2>
-          <p id="hub-quote">Small wins compound.</p>
+          <div class="streak-row"><span class="flame" aria-hidden="true">🔥</span><strong id="streak-count">0</strong><span class="muted" data-i18n="streak_days">Tage Streak</span></div>
+          <p id="hub-quote" class="muted">Kleine Siege summieren sich.</p>
           <div class="points-mini" id="points-mini"></div>
         </div>
       </div>
 
-      <div class="section-head">
-        <h3>NON-NEGOTIABLES</h3>
-        <button id="add-habit-btn" class="ghost-btn" aria-label="Add habit">+ ADD</button>
-      </div>
-      <ul id="habit-list" class="habit-list"></ul>
+      <div class="section-head"><h2 data-i18n="sec_habits">Habits</h2><button id="add-habit-btn" class="link-btn" data-i18n="add_new">+ Neu</button></div>
+      <ul id="habit-list" class="inset-list"></ul>
 
-      <button id="launch-focus" class="cta">
-        <span class="cta-glow"></span>
-        <span class="cta-label">▶ &nbsp;LAUNCH OUTDO MODE</span>
-        <span class="cta-sub">45 min deep-work block</span>
-      </button>
-      <p class="hint">Tap a habit to complete. Tap again to undo. Everything saves offline.</p>
+      <div class="card pro-only">
+        <div class="stat-top"><h2 data-i18n="ov_title">Progressive Overload</h2><span class="badge" id="pr-count">0 PRs</span></div>
+        <p class="muted" data-i18n="ov_sub">Kraft loggen — die App meldet PRs und zeigt Progression.</p>
+        <div class="form-grid">
+          <input id="lift-ex" type="text" list="lift-ex-list" maxlength="30" data-i18n-ph="ex_ph" placeholder="Übung, z. B. Bankdrücken" aria-label="Übung" />
+          <datalist id="lift-ex-list"></datalist>
+          <div class="form-row3">
+            <label><span data-i18n="lift_kg">kg</span><input id="lift-kg" type="number" inputmode="decimal" min="0" max="999" step="0.5" value="60" aria-label="kg" /></label>
+            <label><span data-i18n="lift_reps">Wdh.</span><input id="lift-reps" type="number" inputmode="numeric" min="1" max="99" value="8" aria-label="Wdh." /></label>
+            <label><span data-i18n="lift_sets">Sätze</span><input id="lift-sets" type="number" inputmode="numeric" min="1" max="20" value="3" aria-label="Sätze" /></label>
+          </div>
+        </div>
+        <button id="lift-save" class="apple-btn" data-i18n="lift_save">Satz loggen</button>
+        <ul id="lift-today" class="mini-list"></ul>
+        <div id="lift-bests" class="bests"></div>
+      </div>
+
+      <div class="card redirect-card pro-only">
+        <h2 data-i18n="rc_title">Fokus-Check</h2>
+        <p class="muted" data-i18n="rc_sub">Greifst du gerade zum Handy, obwohl du arbeiten wolltest? 60 Sekunden Pause statt Autopilot.</p>
+        <button id="redirect-open" class="secondary-btn" data-i18n="rc_open">Impuls umleiten</button>
+      </div>
+
+      <button id="launch-focus" class="apple-btn"><span class="btn-main" data-i18n="launch_title">Outdo Mode starten</span><span class="btn-sub" data-i18n="launch_sub">45 Min. Deep Work</span></button>
+      <p class="footnote" data-i18n="hub_foot">Antippen zum Abhaken. Alles wird offline gespeichert.</p>
     </div>
   </section>
 
-  <!-- OUTDO MODE VIEW -->
-  <section id="view-focus" class="view">
-    <div id="focus-stage">
-      <header class="focus-top">
-        <button id="exit-focus" class="ghost-btn">✕ EXIT</button>
-        <span class="focus-badge">● OUTDO MODE</span>
-        <button id="fs-btn" class="ghost-btn" aria-label="Fullscreen">⛶</button>
-      </header>
-
-      <div class="presets">
-        <button data-min="25" class="preset">25</button>
-        <button data-min="45" class="preset active">45</button>
-        <button data-min="90" class="preset">90</button>
+  <!-- JOURNAL -->
+  <section id="view-journal" class="view">
+    <header class="navlarge"><p class="nav-eyebrow" data-i18n="eyebrow_reflexion">Reflexion</p><h1 data-i18n="nav_journal">Journal</h1></header>
+    <div class="content">
+      <div class="card">
+        <input id="journal-title" type="text" maxlength="60" data-i18n-ph="j_title_ph" placeholder="Titel (optional)" aria-label="Titel" />
+        <textarea id="journal-text" rows="4" maxlength="2000" data-i18n-ph="j_text_ph" placeholder="Was beschäftigt dich gerade? …" aria-label="Journaltext"></textarea>
+        <button id="journal-save" class="apple-btn" data-i18n="j_save">Eintrag speichern</button>
+        <p class="consent-note">🔒 <span data-i18n="j_consent">Wird nur lokal auf deinem Gerät gespeichert.</span></p>
       </div>
+      <div class="section-head"><h2 data-i18n="sec_entries">Einträge</h2><button id="journal-search-clear" class="link-btn" hidden>×</button></div>
+      <input id="journal-search" type="search" data-i18n-ph="j_search_ph" placeholder="Suchen" aria-label="Suchen" />
+      <ul id="journal-list" class="inset-list"></ul>
+    </div>
+  </section>
 
-      <div class="timer-wrap">
-        <svg viewBox="0 0 200 200" class="timer-ring">
-          <circle cx="100" cy="100" r="88" class="ring-bg"/>
-          <circle cx="100" cy="100" r="88" class="ring-fg" id="timer-fg"/>
-        </svg>
-        <div class="timer-text">
-          <div id="timer-display">45:00</div>
-          <div id="timer-state">READY</div>
+  <!-- OUTDO MODE -->
+  <section id="view-focus" class="view">
+    <header class="navlarge"><p class="nav-eyebrow" data-i18n="eyebrow_deep">Deep Work</p><h1 data-i18n="nav_focus">Outdo Mode</h1></header>
+    <div class="content" id="focus-stage">
+      <div class="segmented" id="presets" role="group" aria-label="Dauer">
+        <button data-min="25">25</button>
+        <button data-min="45" class="active">45</button>
+        <button data-min="90">90</button>
+      </div>
+      <div class="card custom-time">
+        <div class="time-fields">
+          <label><span data-i18n="t_hours">Std.</span><input id="custom-h" type="number" inputmode="numeric" min="0" max="12" value="0" aria-label="Std." /></label>
+          <span class="colon" aria-hidden="true">:</span>
+          <label><span data-i18n="t_minutes">Min.</span><input id="custom-m" type="number" inputmode="numeric" min="0" max="59" value="45" aria-label="Min." /></label>
+          <span class="colon" aria-hidden="true">:</span>
+          <label><span data-i18n="t_seconds">Sek.</span><input id="custom-s" type="number" inputmode="numeric" min="0" max="59" value="0" aria-label="Sek." /></label>
+        </div>
+        <button id="custom-apply" class="secondary-btn" data-i18n="custom_apply">Eigene Zeit übernehmen</button>
+      </div>
+      <div class="card timer-card">
+        <div class="timer-wrap">
+          <svg viewBox="0 0 200 200" class="timer-ring" role="img" aria-label="Timer">
+            <circle cx="100" cy="100" r="88" class="ring-bg"/>
+            <circle cx="100" cy="100" r="88" class="ring-fg" id="timer-fg"/>
+          </svg>
+          <div class="timer-text"><div id="timer-display" aria-hidden="true">45:00</div><div id="timer-state" role="status" data-i18n="st_ready">Bereit</div></div>
+        </div>
+        <div class="timer-controls">
+          <button id="timer-start" class="apple-btn" data-i18n="timer_start">Block starten</button>
+          <button id="timer-reset" class="secondary-btn" data-i18n="timer_reset">Reset</button>
         </div>
       </div>
-
-      <div class="timer-controls">
-        <button id="timer-start" class="primary-btn">START BLOCK</button>
-        <button id="timer-reset" class="ghost-btn">RESET</button>
-      </div>
-
-      <label class="sound-row">
-        <span>AMBIENCE</span>
+      <div class="card form-row">
+        <label for="sound-select" data-i18n="sound_lbl">Umgebung</label>
         <select id="sound-select">
-          <option value="off">Off — Silence</option>
-          <option value="white">White Noise</option>
-          <option value="rain">Rain</option>
-          <option value="synth">Cyberpunk Synth</option>
+          <option value="off" data-i18n="snd_off">Aus — Stille</option>
+          <option value="white" data-i18n="snd_white">Weißes Rauschen</option>
+          <option value="rain" data-i18n="snd_rain">Regen</option>
+          <option value="synth" data-i18n="snd_synth">Cyberpunk Synth</option>
         </select>
-      </label>
-
-      <div class="journal">
-        <label for="focus-input">What is your single focus for this block?</label>
-        <input id="focus-input" type="text" maxlength="120" placeholder="e.g. Ship OutTrack v1…" autocomplete="off" />
-        <p id="focus-saved">Saved ✓</p>
+      </div>
+      <div class="card">
+        <label class="field-label" for="focus-input" data-i18n="focus_q">Was ist dein einzelner Fokus für diesen Block?</label>
+        <input id="focus-input" type="text" maxlength="120" data-i18n-ph="focus_ph" placeholder="z. B. OutTrack v1 fertigstellen" autocomplete="off" />
+        <p id="focus-saved">✓</p>
+      </div>
+      <div class="row2">
+        <button id="exit-focus" class="secondary-btn" data-i18n="focus_exit">Zum Hub</button>
+        <button id="fs-btn" class="secondary-btn" data-i18n="focus_fs">Vollbild</button>
       </div>
     </div>
   </section>
 
-  <!-- ANALYTICS VIEW -->
+  <!-- FOOD -->
+  <section id="view-food" class="view">
+    <header class="navlarge"><p class="nav-eyebrow" data-i18n="eyebrow_energy">Energie</p><h1 data-i18n="nav_food">Food-Tipps</h1></header>
+    <div class="content">
+      <div class="segmented" id="meal-filter">
+        <button data-cat="alle" class="active" data-i18n="mf_all">Alle</button>
+        <button data-cat="protein" data-i18n="mf_protein">Protein</button>
+        <button data-cat="energie" data-i18n="mf_energy">Energie</button>
+        <button data-cat="light" data-i18n="mf_light">Light</button>
+      </div>
+      <div class="card meal-card">
+        <p class="meal-cat" id="meal-cat">—</p>
+        <h2 id="meal-name" data-i18n="meal_hint">Tippen für einen Tipp</h2>
+        <p class="muted" id="meal-desc"></p>
+        <p class="meal-meta" id="meal-meta"></p>
+        <div id="meal-recipe" class="recipe" hidden>
+          <h3 data-i18n="r_ing">Zutaten</h3>
+          <ul id="meal-ing"></ul>
+          <h3 data-i18n="r_steps">Zubereitung</h3>
+          <ol id="meal-steps"></ol>
+        </div>
+        <button id="meal-next" class="apple-btn" data-i18n="meal_new">Neuer Tipp</button>
+      </div>
+      <div class="section-head"><h2 data-i18n="sec_all">Alle Gerichte</h2></div>
+      <ul id="meal-list" class="inset-list"></ul>
+      <p class="footnote" data-i18n="food_foot">Allgemeine Rezeptideen, keine Ernährungsberatung.</p>
+    </div>
+  </section>
+
+  <!-- STATS -->
   <section id="view-analytics" class="view">
-    <header class="topbar">
-      <div>
-        <p class="date-label">CONSISTENCY</p>
-        <h1 class="logo">ANA<span>LYTICS</span></h1>
+    <header class="navlarge"><p class="nav-eyebrow" data-i18n="eyebrow_cons">Konsistenz</p><h1 data-i18n="nav_stats">Stats</h1></header>
+    <div class="content">
+      <div class="card pro-only">
+        <h2 data-i18n="lb_title">Bestenliste</h2>
+        <p class="muted" data-i18n="lb_sub">Deine Rekorde — nur auf diesem Gerät.</p>
+        <div id="leaderboard"></div>
       </div>
-      <div class="streak-pill small">
-        <span id="total-points">0</span><small>PTS</small>
+      <div class="card pro-only">
+        <h2 data-i18n="pg_title">Overload-Progression</h2>
+        <p class="muted" data-i18n="pg_sub">Volumen der letzten Einheiten pro Übung.</p>
+        <div id="progression"></div>
       </div>
-    </header>
-
-    <div class="card">
-      <h3>WEEKLY GRID</h3>
-      <p class="muted">Last 35 days — brightness = completion.</p>
-      <div id="grid" class="grid"></div>
-      <div class="grid-legend"><span>Less</span><i class="sq l0"></i><i class="sq l1"></i><i class="sq l2"></i><i class="sq l3"></i><i class="sq l4"></i><span>More</span></div>
+      <div class="card">
+        <div class="stat-top"><h2 data-i18n="gr_title">Wochenraster</h2><span class="badge" id="total-points">0 PTS</span></div>
+        <p class="muted" data-i18n="gr_sub">Letzte 35 Tage — dunkler = mehr geschafft.</p>
+        <div id="grid" class="grid"></div>
+        <div class="grid-legend"><span data-i18n="lg_less">Wenig</span><i class="sq l0"></i><i class="sq l1"></i><i class="sq l2"></i><i class="sq l3"></i><i class="sq l4"></i><span data-i18n="lg_more">Viel</span></div>
+      </div>
+      <div class="card">
+        <h2 data-i18n="id_title">Identität</h2>
+        <p class="muted" data-i18n="id_sub">Jeder Habit = +10 Punkte im Lebensbereich.</p>
+        <div id="identity"></div>
+      </div>
+      <div class="card">
+        <h2 data-i18n="fl_title">Fokus-Log</h2>
+        <div id="focus-log" class="focus-log"></div>
+      </div>
+      <div class="card">
+        <h2 data-i18n="lg_sec">Rechtliches &amp; Info</h2>
+        <p class="muted">OutTrack v2.3 · Offline</p>
+        <ul class="link-list">
+          <li><button data-legal="privacy" data-i18n="legal_privacy">Datenschutzerklärung</button></li>
+          <li><button data-legal="terms" data-i18n="legal_terms">Nutzungsbedingungen</button></li>
+          <li><button data-legal="refund" data-i18n="legal_refund">Erstattungsrichtlinie</button></li>
+          <li><button data-legal="cookies" data-i18n="legal_cookies">Cookie-Richtlinie</button></li>
+          <li><button data-legal="imprint" data-i18n="legal_imprint">Betreiber &amp; Kontakt</button></li>
+          <li><button data-legal="licenses" data-i18n="legal_licenses">Lizenzen &amp; Hinweise</button></li>
+        </ul>
+      </div>
+      <div class="card danger-zone">
+        <h2 data-i18n="dt_title">Daten</h2>
+        <div class="row2">
+          <button id="export-data" class="secondary-btn" data-i18n="btn_export">Exportieren</button>
+          <button id="reset-data" class="destructive-btn" data-i18n="btn_reset">Alle Daten löschen</button>
+        </div>
+      </div>
     </div>
-
-    <div class="card">
-      <h3>IDENTITY LEVELS</h3>
-      <p class="muted">Every completion = +10 pts in its life area.</p>
-      <div id="identity"></div>
-    </div>
-
-    <div class="card">
-      <h3>FOCUS LOG</h3>
-      <div id="focus-log" class="focus-log"></div>
-    </div>
-
-    <button id="reset-data" class="ghost-btn danger">RESET ALL DATA</button>
   </section>
 
-  <!-- BOTTOM NAV -->
-  <nav id="tabbar">
-    <button data-tab="hub" class="tab active"><i>◈</i><span>Hub</span></button>
-    <button data-tab="focus" class="tab focus-tab"><i>◎</i><span>Outdo</span></button>
-    <button data-tab="analytics" class="tab"><i>▦</i><span>Stats</span></button>
+  <!-- SETTINGS -->
+  <section id="view-settings" class="view">
+    <header class="navlarge"><p class="nav-eyebrow" data-i18n="eyebrow_app">App</p><h1 data-i18n="nav_settings">Einstellungen</h1></header>
+    <div class="content">
+      <div class="card">
+        <h2 data-i18n="set_lang_title">Sprache</h2>
+        <p class="muted" data-i18n="set_lang_sub">Gilt sofort für die gesamte App.</p>
+        <ul class="link-list" id="lang-list"></ul>
+      </div>
+      <div class="card" id="pro-card">
+        <div class="stat-top"><h2 data-i18n="set_pro_title">OutTrack Premium</h2><span class="badge" id="pro-badge">FREE</span></div>
+        <p class="muted" id="pro-note"></p>
+        <ul class="feat-list" id="pro-list"></ul>
+        <div id="pro-unlock-row" class="pro-row">
+          <input id="pro-code" type="text" data-i18n-ph="pro_code_ph" placeholder="Pro-Code" autocapitalize="characters" autocomplete="off" spellcheck="false" />
+          <button id="pro-unlock" class="apple-btn" data-i18n="pro_unlock">Freischalten</button>
+        </div>
+        <button id="pro-lock" class="secondary-btn pro-lock-btn" data-i18n="pro_lock" hidden>Zu Free wechseln</button>
+      </div>
+      <div class="card">
+        <h2 data-i18n="set_store_title">Speicherung</h2>
+        <p class="muted" id="store-state">—</p>
+      </div>
+      <div class="card">
+        <h2 data-i18n="set_info_title">Info</h2>
+        <p class="muted">OutTrack v2.3 · Offline · 0 Tracker · 0 Cookies</p>
+      </div>
+    </div>
+  </section>
+
+  <nav id="tabbar" aria-label="Navigation">
+    <button data-tab="hub" class="tab active" aria-current="page"><i aria-hidden="true">●</i><span data-i18n="tab_hub">Hub</span></button>
+    <button data-tab="journal" class="tab pro-only"><i aria-hidden="true">✎</i><span data-i18n="tab_journal">Journal</span></button>
+    <button data-tab="focus" class="tab center"><i aria-hidden="true">◎</i><span data-i18n="tab_outdo">Outdo</span></button>
+    <button data-tab="food" class="tab pro-only"><i aria-hidden="true">◍</i><span data-i18n="tab_food">Food</span></button>
+    <button data-tab="analytics" class="tab"><i aria-hidden="true">▦</i><span data-i18n="tab_stats">Stats</span></button>
+    <button data-tab="settings" class="tab"><i aria-hidden="true">⚙</i><span data-i18n="tab_settings">Einst.</span></button>
   </nav>
 </div>
 
-<!-- Add-habit sheet -->
 <div id="sheet-backdrop" hidden></div>
 <div id="sheet" hidden>
-  <h3>New non-negotiable</h3>
-  <input id="new-habit-label" type="text" maxlength="28" placeholder="e.g. Deep reading" />
-  <div class="area-pick" id="area-pick">
-    <button data-area="mind" class="active">Mind</button>
-    <button data-area="body">Body</button>
-    <button data-area="craft">Craft</button>
+  <div class="grabber" aria-hidden="true"></div>
+  <h3 data-i18n="sh_title">Neuer Habit</h3>
+  <input id="new-habit-label" type="text" maxlength="28" data-i18n-ph="sh_name_ph" placeholder="z. B. Tief lesen" aria-label="Name" />
+  <div class="segmented" id="area-pick">
+    <button data-area="mind" class="active" data-i18n="area_mind">Mind</button>
+    <button data-area="body" data-i18n="area_body">Body</button>
+    <button data-area="craft" data-i18n="area_craft">Craft</button>
   </div>
   <div class="sheet-row">
-    <button id="sheet-cancel" class="ghost-btn">CANCEL</button>
-    <button id="sheet-save" class="primary-btn">ADD HABIT</button>
+    <button id="sheet-cancel" class="secondary-btn" data-i18n="sh_cancel">Abbrechen</button>
+    <button id="sheet-save" class="apple-btn" data-i18n="sh_add">Hinzufügen</button>
   </div>
 </div>
 
-<div id="toast" hidden></div>
+<div id="toast" role="status" hidden></div>
 
+<div id="redirect-backdrop" hidden></div>
+<div id="redirect-sheet" role="dialog" aria-modal="true" aria-labelledby="redirect-title" hidden>
+  <div class="grabber" aria-hidden="true"></div>
+  <h3 id="redirect-title" data-i18n="rd_title">60 Sekunden — sonst nichts</h3>
+  <p class="muted center" data-i18n="rd_sub">Eine der drei Mikro-Aktionen wählen, dann ist der Impuls vorbei.</p>
+  <div id="redirect-count" class="redirect-count" role="timer">60</div>
+  <div class="redirect-actions">
+    <button data-ra="water">🥛 <span data-i18n="ra_water">Wasser trinken</span></button>
+    <button data-ra="pushups">💪 <span data-i18n="ra_pushups">10 Liegestütze</span></button>
+    <button data-ra="read">📄 <span data-i18n="ra_read">Fokus laut lesen</span></button>
+  </div>
+  <button id="redirect-cancel" class="secondary-btn" data-i18n="rd_cancel">Abbrechen</button>
+</div>
+
+<div id="legal-backdrop" hidden></div>
+<div id="legal-sheet" role="dialog" aria-modal="true" aria-labelledby="legal-title" hidden>
+  <div class="grabber" aria-hidden="true"></div>
+  <h3 id="legal-title">—</h3>
+  <div id="legal-body" class="legal-body"></div>
+  <button id="legal-close" class="apple-btn" data-i18n="legal_close">Schließen</button>
+</div>
+
+<div id="cookie-banner" role="dialog" aria-label="Speicherung" hidden>
+  <p><strong>OutTrack.</strong> <span data-i18n="cb_text">Keine Cookies, keine Tracker — nur lokaler Gerätespeicher.</span></p>
+  <div class="row2">
+    <button id="cookie-decline" class="secondary-btn" data-i18n="cb_decline">Ohne Speichern</button>
+    <button id="cookie-accept" class="apple-btn" data-i18n="cb_accept">Verstanden</button>
+  </div>
+</div>
+
+<script src="meals.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
