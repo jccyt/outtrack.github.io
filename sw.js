@@ -1,4 +1,4 @@
-const CACHE = "outtrack-v5";
+const CACHE = "outtrack-v6";
 const ASSETS = ["./index.html", "./styles.css", "./meals.js", "./app.js", "./manifest.webmanifest", "./icon.svg"];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));

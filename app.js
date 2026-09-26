@@ -62,6 +62,18 @@ feat_redirect: "Fokus-Check (Impuls-Umleitung)", feat_stats: "Bestenliste & Reko
 pro_unlock: "Freischalten", pro_invalid: "Code ungültig", pro_unlocked: "Premium freigeschaltet ✓",
 pro_locked: "Premium-Feature — siehe Einstellungen", pro_lock: "Zu Free wechseln",
 pro_free_note: "Kostenlos: Hub, Outdo-Timer, Basis-Stats",
+greet_m: "Guten Morgen.", greet_d: "Pack's an.", greet_e: "Guten Abend.",
+df_ph: "Heutiger Fokus …", perfect_days: "100% Tage", chart_title: "Tagesverlauf",
+goal_daily: "Täglich", goal_weekly: "Pro Woche", goal_target: "Zielzahl",
+goal_per_week: "× / Woche", goal_target_unit: "gesamt",
+pf_title: "Beweis", pf_note_ph: "Kurze Notiz …", pf_saved: "Beweis gespeichert ✓",
+rv_title: "Wochenrückblick", rv_copy: "Ins Journal", rv_copied: "Im Journal ✓", rv_trained: "Tage aktiv",
+nt_title: "Erinnerungen", nt_sub: "Lokal auf diesem Gerät — kein Server.",
+nt_morning: "Morgens: Habits", nt_evening: "Abends: Journal", nt_enable: "Aktiviert",
+nt_need: "Bitte Mitteilungen erlauben.", nt_m_title: "OutTrack — Zeit für deine Habits",
+nt_m_body: "Kleine Siege summieren sich.", nt_e_title: "OutTrack — Journal-Zeit",
+nt_e_body: "Was war heute dein Fokus?",
+fr_use: "Streak retten", fr_used: "Freeze eingesetzt — Streak gerettet",
 legal_auth: "Hinweis: Verbindlich ist die deutsche Fassung." },
 en: { tab_hub: "Hub", tab_journal: "Journal", tab_outdo: "Outdo", tab_food: "Food", tab_stats: "Stats", tab_settings: "Settings",
 nav_hub: "Hub", streak_days: "day streak", sec_habits: "Habits", add_new: "+ New",
@@ -114,6 +126,18 @@ feat_redirect: "Focus check (impulse redirect)", feat_stats: "Leaderboard & reco
 pro_unlock: "Unlock", pro_invalid: "Invalid code", pro_unlocked: "Premium unlocked ✓",
 pro_locked: "Premium feature — see Settings", pro_lock: "Switch to Free",
 pro_free_note: "Free: Hub, Outdo timer, basic stats",
+greet_m: "Good morning.", greet_d: "Let's go.", greet_e: "Good evening.",
+df_ph: "Today's focus …", perfect_days: "100% days", chart_title: "Daily completion",
+goal_daily: "Daily", goal_weekly: "Per week", goal_target: "Target",
+goal_per_week: "× / week", goal_target_unit: "total",
+pf_title: "Proof", pf_note_ph: "Short note …", pf_saved: "Proof saved ✓",
+rv_title: "Weekly review", rv_copy: "To journal", rv_copied: "In journal ✓", rv_trained: "active days",
+nt_title: "Reminders", nt_sub: "Local on this device — no server.",
+nt_morning: "Morning: habits", nt_evening: "Evening: journal", nt_enable: "Enabled",
+nt_need: "Please allow notifications.", nt_m_title: "OutTrack — time for habits",
+nt_m_body: "Small wins compound.", nt_e_title: "OutTrack — journal time",
+nt_e_body: "What was your focus today?",
+fr_use: "Save streak", fr_used: "Freeze used — streak saved",
 legal_auth: "Note: the German version is authoritative." },
 ru: { tab_hub: "Хаб", tab_journal: "Журнал", tab_outdo: "Аутдо", tab_food: "Еда", tab_stats: "Статы", tab_settings: "Настр.",
 nav_hub: "Хаб", streak_days: "дней серия", sec_habits: "Привычки", add_new: "+ Новая",
@@ -428,6 +452,8 @@ const DEFAULTS = () => ({
   ],
   journal: [], lifts: [], redirects: [], focusLogs: [],
   focusDraft: "", mealCat: "alle", createdAt: new Date().toISOString(),
+  dayFocus: { date: "", text: "" }, frozenDays: [], freezeWeek: "",
+  proofs: {}, notif: { on: false, morning: "08:00", evening: "21:00", fired: {} },
 });
 function load() {
   try {
@@ -438,6 +464,11 @@ function load() {
     if (!d.journal) d.journal = [];
     if (!d.lifts) d.lifts = [];
     if (!d.redirects) d.redirects = [];
+    if (!d.dayFocus) d.dayFocus = { date: "", text: "" };
+    if (!d.frozenDays) d.frozenDays = [];
+    if (!d.proofs) d.proofs = {};
+    if (!d.notif) d.notif = { on: false, morning: "08:00", evening: "21:00", fired: {} };
+    if (!d.notif.fired) d.notif.fired = {};
     if (!d.lang || !STR[d.lang]) d.lang = "de";
     if (!parsed.plan) d.plan = "premium"; // Bestandnutzer behalten alles
     if (d.plan !== "premium") d.plan = "free";
@@ -454,6 +485,36 @@ const todayISO = (offset = 0) => {
   return d.toISOString().slice(0, 10);
 };
 const isDone = (h, day = todayISO()) => !!h.days[day];
+const isFrozen = (day) => db.frozenDays.includes(day);
+function isPerfectDay(day) {
+  if (!db.habits.length) return false;
+  return db.habits.every(h => habitDoneToday(h, day));
+}
+function habitDoneToday(h, day = todayISO()) {
+  return !!h.days[day];
+}
+function weekKey(dayStr) {
+  const d = new Date(dayStr + "T12:00");
+  const onejan = new Date(d.getFullYear(), 0, 1);
+  const week = Math.ceil((((d - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+  return d.getFullYear() + "-W" + week;
+}
+function thisWeekKey() { return weekKey(todayISO()); }
+function weeklyCount(h) {
+  const wk = thisWeekKey();
+  return Object.keys(h.days || {}).filter(d => weekKey(d) === wk && h.days[d]).length;
+}
+function targetCount(h) {
+  return Object.keys(h.days || {}).filter(d => h.days[d]).length;
+}
+function perfectCount() {
+  let n = 0;
+  for (let off = 0; off < 365; off++) {
+    const day = todayISO(-off);
+    if (db.habits.length && db.habits.every(h => isDone(h, day) || isFrozen(day))) n++;
+  }
+  return n;
+}
 
 /* ---------- Language ---------- */
 function applyLang() {
@@ -478,6 +539,7 @@ function renderLangList() {
 function renderAll() {
   document.body.classList.toggle("plan-free", db.plan !== "premium");
   renderHub(); renderLifts(); renderJournal(); renderMeal(true); renderAnalytics(); renderLangList(); renderPremium();
+  renderChart(); renderReview(); syncNotifInputs();
 }
 
 /* ---------- Tabs ---------- */
@@ -496,7 +558,7 @@ function go(tab) {
   if (tab === "hub") { renderHub(); renderLifts(); }
   if (tab === "journal") renderJournal();
   if (tab === "food") renderMeal(true);
-  if (tab === "settings") renderLangList();
+  if (tab === "settings") { renderLangList(); syncNotifInputs(); }
   window.scrollTo({ top: 0 });
 }
 tabs.forEach(x => x.addEventListener("click", () => go(x.dataset.tab)));
@@ -505,14 +567,15 @@ $("#exit-focus").addEventListener("click", () => go("hub"));
 
 /* ---------- Hub ---------- */
 function dayProgress(day = todayISO()) {
-  const done = db.habits.filter(h => isDone(h, day)).length;
+  const done = db.habits.filter(h => habitDoneToday(h, day)).length;
   return { done, total: db.habits.length, pct: db.habits.length ? Math.round(done / db.habits.length * 100) : 0 };
 }
 function calcStreak() {
-  let s = 0, off = dayProgress(todayISO()).pct === 100 ? 0 : -1;
+  let s = 0, off = (dayProgress(todayISO()).pct === 100 || isFrozen(todayISO())) ? 0 : -1;
   while (true) {
-    const p = dayProgress(todayISO(off));
-    if (p.total > 0 && p.pct === 100) { s++; off--; } else break;
+    const day = todayISO(off);
+    const p = dayProgress(day);
+    if (p.total > 0 && (p.pct === 100 || isFrozen(day))) { s++; off--; } else break;
   }
   return s;
 }
@@ -524,25 +587,47 @@ function areaPoints() {
 }
 function renderHub() {
   $("#hub-date").textContent = new Date().toLocaleDateString(loc(), { weekday: "long", day: "numeric", month: "long" });
+  const hr = new Date().getHours();
+  $("#hub-greet").textContent = t(hr < 11 ? "greet_m" : hr < 18 ? "greet_d" : "greet_e");
   const q = QUOTES[db.lang] || QUOTES.de;
   $("#hub-quote").textContent = q[new Date().getDate() % q.length];
   $("#streak-count").textContent = calcStreak();
+  $("#perfect-count").textContent = perfectCount();
   const p = dayProgress();
-  $("#ring-pct").textContent = p.pct + "%";
-  $("#ring-sub").textContent = `${p.done} / ${p.total}`;
+  $("#ring-pct").textContent = p.pct;
   $("#ring-fg").style.strokeDashoffset = 326.7 * (1 - p.pct / 100);
   const pts = areaPoints();
   $("#points-mini").innerHTML = AREAS.map(a => `<span>${t("area_" + a).toUpperCase()} · ${pts[a]}</span>`).join("");
+  // day focus (don't clobber typing)
+  const df = $("#day-focus");
+  const want = (db.dayFocus.date === todayISO() ? db.dayFocus.text : "");
+  if (document.activeElement !== df && df.value !== want) df.value = want;
+  // freeze button: yesterday missed, streak alive, freeze left this week
+  const y = todayISO(-1);
+  const risk = calcStreak() > 0 && db.habits.length > 0 && dayProgress(y).pct !== 100 && !isFrozen(y) && db.freezeWeek !== thisWeekKey();
+  $("#freeze-btn").hidden = !risk;
+  renderChart(chartDays);
   const ul = $("#habit-list"); ul.innerHTML = "";
   db.habits.forEach(h => {
     const label = habitLabel(h);
+    const g = h.goal || { kind: "daily" };
+    const done = isDone(h);
     const li = document.createElement("li");
-    li.className = "habit" + (isDone(h) ? " done" : "");
+    li.className = "habit" + (done ? " done" : "");
     li.tabIndex = 0; li.setAttribute("role", "checkbox");
-    li.setAttribute("aria-checked", isDone(h) ? "true" : "false");
+    li.setAttribute("aria-checked", done ? "true" : "false");
     li.setAttribute("aria-label", `${label}, ${t("area_" + h.area)}`);
+    let sub = "";
+    if (g.kind === "weekly") sub = `<span class="h-sub">${weeklyCount(h)} / ${g.n} ${t("goal_per_week")}</span>`;
+    if (g.kind === "target") sub = `<span class="h-sub">${Math.min(targetCount(h), g.n)} / ${g.n} ${t("goal_target_unit")}</span>`;
+    const pk = h.id + "|" + todayISO();
+    const proof = db.proofs[pk];
+    const thumb = proof && proof.photo ? `<img class="proof-thumb" src="${proof.photo}" alt="" />` : "";
     li.innerHTML = `<span class="check" aria-hidden="true">✓</span>
-      <span class="h-label">${escapeHtml(label)}</span>
+      <span class="h-label">${escapeHtml(label)}${sub}</span>
+      ${thumb}
+      <button class="h-proof${proof ? " has" : ""}" aria-label="${t("pf_title")}">◍</button>
+      ${g.kind === "target" && !done ? `<button class="h-proof" data-plus="1" aria-label="+1">+1</button>` : ""}
       <span class="h-area">${t("area_" + h.area).toUpperCase()}</span>
       <button class="h-del" aria-label="${escapeHtml(t("del_aria", { label }))}">×</button>`;
     const toggle = () => {
@@ -557,15 +642,39 @@ function renderHub() {
         db.habits = db.habits.filter(x => x.id !== h.id);
         save(db); renderHub(); toast(t("ts_habit_del")); return;
       }
+      if (e.target.classList.contains("h-proof") && !e.target.dataset.plus) { openProof(h.id); return; }
       toggle();
     });
     li.addEventListener("keydown", (e) => {
-      if (e.target.classList && e.target.classList.contains("h-del")) return;
+      if (e.target.classList && (e.target.classList.contains("h-del") || e.target.classList.contains("h-proof"))) return;
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
     });
     ul.appendChild(li);
   });
 }
+/* ---------- Chart (7/30 Tage) ---------- */
+let chartDays = 7;
+function renderChart(days = chartDays) {
+  chartDays = days;
+  document.querySelectorAll("#chart-range button").forEach(x => x.classList.toggle("active", +x.dataset.days === days));
+  const svg = $("#chart"); if (!svg) return;
+  const vals = [];
+  for (let off = days - 1; off >= 0; off--) vals.push(dayProgress(todayISO(-off)).pct);
+  const W = 320, H = 150, P = 8;
+  const X = (i) => P + (i * (W - 2 * P)) / Math.max(1, vals.length - 1);
+  const Y = (v) => H - P - (v / 100) * (H - 2 * P - 14);
+  const pts = vals.map((v, i) => `${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(" ");
+  const area = `${P},${H - P} ${pts} ${X(vals.length - 1).toFixed(1)},${H - P}`;
+  let grid = "";
+  [0, 50, 100].forEach(v => {
+    grid += `<line x1="${P}" y1="${Y(v)}" x2="${W - P}" y2="${Y(v)}" stroke="rgba(255,255,255,.08)" stroke-dasharray="3 3"/>`;
+  });
+  svg.innerHTML = `<defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#8b7cf6" stop-opacity=".45"/><stop offset="1" stop-color="#8b7cf6" stop-opacity="0"/>
+    </linearGradient></defs>${grid}<polygon points="${area}" fill="url(#cg)"/>
+    <polyline points="${pts}" fill="none" stroke="#8b7cf6" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+}
+/* ---------- Tagesfokus + Freeze ---------- */
 function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
 
 /* ---------- Premium ---------- */
@@ -598,8 +707,24 @@ $("#pro-lock").addEventListener("click", () => {
   db.plan = "free"; save(db); go("hub"); renderAll();
 });
 
+$("#chart-range").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  renderChart(parseInt(b.dataset.days, 10));
+});
+$("#day-focus").addEventListener("input", (e) => {
+  db.dayFocus = { date: todayISO(), text: e.target.value.slice(0, 80) };
+  save(db);
+});
+$("#freeze-btn").addEventListener("click", () => {
+  const y = todayISO(-1);
+  if (db.freezeWeek === thisWeekKey()) return;
+  db.frozenDays.push(y);
+  db.freezeWeek = thisWeekKey();
+  save(db); renderHub(); toast(t("fr_used") + " 🧊");
+});
+
 /* ---------- Habit sheet ---------- */
-let newArea = "mind";
+let newArea = "mind", newGoal = "daily";
 $("#add-habit-btn").addEventListener("click", () => { $("#sheet").hidden = false; $("#sheet-backdrop").hidden = false; });
 const closeSheet = () => { $("#sheet").hidden = true; $("#sheet-backdrop").hidden = true; };
 $("#sheet-cancel").addEventListener("click", closeSheet);
@@ -609,10 +734,20 @@ $("#area-pick").addEventListener("click", (e) => {
   newArea = b.dataset.area;
   document.querySelectorAll("#area-pick button").forEach(x => x.classList.toggle("active", x === b));
 });
+$("#goal-pick").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  newGoal = b.dataset.goal;
+  document.querySelectorAll("#goal-pick button").forEach(x => x.classList.toggle("active", x === b));
+  const need = newGoal !== "daily";
+  $("#goal-num-row").hidden = !need;
+  $("#goal-unit-lbl").textContent = newGoal === "weekly" ? t("goal_per_week") : t("goal_target_unit");
+});
 $("#sheet-save").addEventListener("click", () => {
   const label = $("#new-habit-label").value.trim();
   if (!label) return toast(t("ts_name_first"));
-  db.habits.push({ id: "h" + Date.now(), label: label.slice(0, 28), icon: "◇", area: newArea, days: {} });
+  const n = Math.max(1, Math.min(99, parseInt($("#goal-num").value, 10) || 3));
+  const goal = newGoal === "daily" ? { kind: "daily" } : { kind: newGoal, n };
+  db.habits.push({ id: "h" + Date.now(), label: label.slice(0, 28), icon: "◇", area: newArea, days: {}, goal });
   $("#new-habit-label").value = "";
   save(db); closeSheet(); renderHub(); toast(t("ts_habit_add"));
 });
@@ -686,6 +821,53 @@ document.querySelectorAll(".redirect-actions button").forEach(b => b.addEventLis
   db.redirects.unshift({ date: new Date().toISOString(), action: b.dataset.ra });
   save(db); closeRedirect(); toast(t("ts_redirected"));
 }));
+
+/* ---------- Beweis (Notiz + Foto) ---------- */
+let proofHabit = null, proofPhoto = null;
+function openProof(habitId) {
+  const h = db.habits.find(x => x.id === habitId); if (!h) return;
+  proofHabit = habitId; proofPhoto = null;
+  $("#proof-title").textContent = t("pf_title") + ": " + habitLabel(h);
+  const key = habitId + "|" + todayISO();
+  const old = db.proofs[key] || {};
+  $("#proof-note").value = old.note || "";
+  $("#proof-photo").value = "";
+  const prev = $("#proof-preview");
+  if (old.photo) { prev.src = old.photo; prev.hidden = false; proofPhoto = old.photo; }
+  else { prev.hidden = true; }
+  $("#sheet-proof").hidden = false; $("#sheet-proof-backdrop").hidden = false;
+}
+function closeProof() { $("#sheet-proof").hidden = true; $("#sheet-proof-backdrop").hidden = true; }
+$("#proof-cancel").addEventListener("click", closeProof);
+$("#sheet-proof-backdrop").addEventListener("click", closeProof);
+$("#proof-photo").addEventListener("change", (e) => {
+  const f = e.target.files && e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const max = 320, k = Math.min(1, max / Math.max(img.width, img.height));
+        const c = document.createElement("canvas");
+        c.width = Math.max(1, Math.round(img.width * k));
+        c.height = Math.max(1, Math.round(img.height * k));
+        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+        proofPhoto = c.toDataURL("image/jpeg", 0.65);
+        const prev = $("#proof-preview");
+        prev.src = proofPhoto; prev.hidden = false;
+      } catch { toast(t("ts_saved")); }
+    };
+    img.src = r.result;
+  };
+  r.readAsDataURL(f);
+});
+$("#proof-save").addEventListener("click", () => {
+  if (!proofHabit) return closeProof();
+  const note = $("#proof-note").value.trim().slice(0, 280);
+  if (!note && !proofPhoto) return closeProof();
+  db.proofs[proofHabit + "|" + todayISO()] = { note, photo: proofPhoto };
+  save(db); closeProof(); renderHub(); toast(t("pf_saved"));
+});
 
 /* ---------- Journal ---------- */
 function renderJournal() {
@@ -929,6 +1111,62 @@ function renderAnalytics() {
   });
 }
 
+/* ---------- Wochenrückblick ---------- */
+function renderReview() {
+  const el = $("#review-text"); if (!el) return;
+  let active = 0, perfect = 0;
+  for (let off = 0; off < 7; off++) {
+    const p = dayProgress(todayISO(-off));
+    if (p.done) active++;
+    if (p.total && p.pct === 100) perfect++;
+  }
+  const wk = thisWeekKey();
+  const prs = db.lifts.filter(l => l.pr && weekKey(l.date.slice(0, 10)) === wk).length;
+  const red = db.redirects.filter(r => weekKey(r.date.slice(0, 10)) === wk).length;
+  el.textContent = `${active}/7 ${t("rv_trained")} · ${perfect}× 100% · ${prs} PR · ${red} ${t("lb_red")}`;
+}
+$("#review-copy").addEventListener("click", () => {
+  db.journal.push({ id: "j" + Date.now(), date: new Date().toISOString(),
+    title: t("rv_title") + " " + new Date().toLocaleDateString(loc()),
+    text: $("#review-text").textContent });
+  save(db); toast(t("rv_copied"));
+});
+
+/* ---------- Erinnerungen (lokal) ---------- */
+function syncNotifInputs() {
+  $("#notif-morning").value = db.notif.morning || "08:00";
+  $("#notif-evening").value = db.notif.evening || "21:00";
+  $("#notif-enable").checked = !!db.notif.on;
+}
+$("#notif-morning").addEventListener("change", (e) => { db.notif.morning = e.target.value; save(db); });
+$("#notif-evening").addEventListener("change", (e) => { db.notif.evening = e.target.value; save(db); });
+$("#notif-enable").addEventListener("change", async (e) => {
+  if (e.target.checked) {
+    if (!("Notification" in window)) { e.target.checked = false; return toast(t("nt_need")); }
+    try {
+      const res = await Notification.requestPermission();
+      if (res !== "granted") { e.target.checked = false; db.notif.on = false; save(db); return toast(t("nt_need")); }
+    } catch { e.target.checked = false; return; }
+  }
+  db.notif.on = e.target.checked; save(db);
+});
+function checkNotif() {
+  try {
+    if (!db.notif.on || !("Notification" in window) || Notification.permission !== "granted") return;
+    const now = new Date();
+    const hm = String(now.getHours()).padStart(2, "0") + ":" + String(now.getMinutes()).padStart(2, "0");
+    const day = todayISO();
+    [["morning", db.notif.morning, "nt_m_title", "nt_m_body"],
+     ["evening", db.notif.evening, "nt_e_title", "nt_e_body"]].forEach(([slot, tm, kt, kb]) => {
+      if (hm >= tm && !db.notif.fired[day + slot]) {
+        db.notif.fired[day + slot] = true; save(db);
+        try { new Notification(t(kt), { body: t(kb) }); } catch {}
+      }
+    });
+  } catch {}
+}
+setInterval(checkNotif, 30000);
+
 /* ---------- Legal ---------- */
 const LEGAL_BODY = {
   privacy: `
@@ -969,7 +1207,7 @@ document.querySelectorAll("[data-legal]").forEach(b => b.addEventListener("click
 $("#legal-close").addEventListener("click", closeLegal);
 $("#legal-backdrop").addEventListener("click", closeLegal);
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") { closeLegal(); closeSheet(); closeRedirect(); }
+  if (e.key === "Escape") { closeLegal(); closeSheet(); closeRedirect(); closeProof(); }
 });
 
 /* ---------- Export / Reset ---------- */
