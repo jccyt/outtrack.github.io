@@ -374,6 +374,7 @@ body.is-mobile .install-only{display:block !important}
 #summit-svg circle{transition:cx .8s ease,cy .8s ease}
 /* Press-Feedback überall */
 .apple-btn,.secondary-btn{transition:transform .12s ease,filter .15s ease}
+.apple-btn,.secondary-btn,.destructive-btn,.freeze-btn,.file-btn{margin-top:3px;margin-bottom:3px}
 .apple-btn:active,.secondary-btn:active{transform:scale(.97)}
 .habit,.meal-row{transition:transform .12s ease,background .15s ease}
 .habit:active,.meal-row:active{transform:scale(.985)}
