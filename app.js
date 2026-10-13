@@ -77,11 +77,14 @@ de: {
   eyebrow_app: "App", set_lang_title: "Sprache", set_lang_sub: "Gilt sofort für die gesamte App.",
   theme_title: "Erscheinungsbild", theme_sub: "Wird lokal auf dem Gerät gespeichert.",
   theme_light: "Hell", theme_dark: "Dunkel",
-  set_pro_title: "OutTrack Premium", pro_code_ph: "Pro-Code, z. B. OT-…", pro_unlock: "Freischalten",
-  pro_lock: "Zu Free wechseln", pro_free: "FREE", pro_on: "PREMIUM",
+  set_pro_title: "OutTrack Premium", pro_code_ph: "Code, z. B. OPT-768", pro_unlock: "Freischalten",
+  pro_lock: "Zu Free wechseln", pro_free: "GESPERRT", pro_on: "PREMIUM",
+  pay_title: "OutTrack Premium", pay_sub: "Alles. Offline. Für immer deins.",
+  pay_buy: "Kaufen", pay_soon: "Kauf folgt in Kürze — nutze solange deinen Code. 🚀",
+  pay_code_ph: "Code eingeben, z. B. OPT-768",
   feat_journal: "Journal & Rückblick", feat_food: "Alle Food-Rezepte", feat_lifts: "Overload & PRs",
   feat_redirect: "Fokus-Check (Impuls-Umleitung)", feat_stats: "Bestenliste & Rekorde",
-  pro_note_free: "Free: Hub, Outdo, Basis-Stats. Premium schaltet den Rest frei.",
+  pro_note_free: "Gesperrt — gib deinen Code ein, um alles freizuschalten.",
   pro_note_pro: "Premium aktiv — viel Spaß auf der Reise. 🚀",
   code_ok: "Premium aktiv — viel Spaß! 🚀", code_bad: "Code ungültig — prüfe die Eingabe.",
   pro_locked: "Premium-Bereich — schalte ihn in den Einstellungen frei. 🔒",
@@ -159,11 +162,14 @@ en: {
   eyebrow_app: "App", set_lang_title: "Language", set_lang_sub: "Applies instantly across the app.",
   theme_title: "Appearance", theme_sub: "Stored locally on this device.",
   theme_light: "Light", theme_dark: "Dark",
-  set_pro_title: "OutTrack Premium", pro_code_ph: "Pro code, e.g. OT-…", pro_unlock: "Unlock",
-  pro_lock: "Switch to Free", pro_free: "FREE", pro_on: "PREMIUM",
+  set_pro_title: "OutTrack Premium", pro_code_ph: "Code, e.g. OPT-768", pro_unlock: "Unlock",
+  pro_lock: "Switch to Free", pro_free: "LOCKED", pro_on: "PREMIUM",
+  pay_title: "OutTrack Premium", pay_sub: "Everything. Offline. Forever yours.",
+  pay_buy: "Buy", pay_soon: "Checkout coming soon — use your code for now. 🚀",
+  pay_code_ph: "Enter code, e.g. OPT-768",
   feat_journal: "Journal & review", feat_food: "All food recipes", feat_lifts: "Overload & PRs",
   feat_redirect: "Focus check (impulse redirect)", feat_stats: "Leaderboard & records",
-  pro_note_free: "Free: Hub, Outdo, basic stats. Premium unlocks the rest.",
+  pro_note_free: "Locked — enter your code to unlock everything.",
   pro_note_pro: "Premium active — enjoy the journey. 🚀",
   code_ok: "Premium active — have fun! 🚀", code_bad: "Invalid code — check the input.",
   pro_locked: "Premium area — unlock it in Settings. 🔒",
@@ -330,7 +336,7 @@ const DEFAULT_HABITS = () => ([
   { id: uid(), label: { de: "Etwas erschaffen", en: "Make something", ru: "Создать что-то", es: "Crear algo", fr: "Créer quelque chose" }, area: "craft", goal: "weekly", count: 3, days: {}, proofs: {} },
 ]);
 const DEFAULTS = () => ({
-  v: 3, lang: "de", plan: "free", theme: "light", habits: DEFAULT_HABITS(),
+  v: 3, lang: "de", plan: "locked", theme: "light", habits: DEFAULT_HABITS(),
   lifts: [], journal: [], redirects: [], focusLog: [],
   frozenDays: {}, freezeWeek: "", quest: { date: "", text: "" },
   remind: { on: false, morning: "07:30", evening: "21:00", fired: {} },
@@ -345,6 +351,7 @@ function load() {
     const d = JSON.parse(raw);
     db = Object.assign(DEFAULTS(), d);
     if (d.plan === undefined) db.plan = "premium"; // Bestandnutzer ohne plan = Premium
+    else if (d.plan !== "premium") db.plan = "locked"; // Free ist entfernt: alles außer Premium ist gesperrt
     db.habits.forEach((h) => {
       if (typeof h.label === "string") h.label = { de: h.label };
       if (!h.goal) h.goal = "daily";
@@ -464,6 +471,7 @@ function renderAll() {
   applyTheme();
   renderLangList();
   renderPremium();
+  renderPaywall();
   renderHub();
   renderJournal();
   renderLifts();
@@ -1357,6 +1365,7 @@ setInterval(checkReminders, 30000);
 const PRO_ALPHA = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 function proKeyValid(k) {
   k = String(k || "").trim().toUpperCase();
+  if (k === "OPT-768") return true;
   const m = k.match(/^OT-([A-Z2-9]{5})-([A-Z2-9])$/);
   if (!m) return false;
   let sum = 0;
@@ -1375,21 +1384,31 @@ function renderPremium() {
   $("#pro-list").innerHTML = PRO_FEATS.map((f) =>
     "<li class=\"feat\"><span>" + esc(t(f)) + "</span><span class=\"" + (on ? "feat-yes\">✓" : "feat-no\">—") + "</span></li>").join("");
   $("#pro-unlock-row").hidden = on;
-  $("#pro-lock").hidden = !on;
 }
-$("#pro-unlock").addEventListener("click", () => {
-  const v = $("#pro-code").value;
+function unlockWith(inputId) {
+  const el = document.getElementById(inputId);
+  const v = el ? el.value : "";
   if (proKeyValid(v)) {
     db.plan = "premium";
-    $("#pro-code").value = "";
+    if (el) el.value = "";
     save(); renderAll();
     toast(t("code_ok"));
   } else toast(t("code_bad"));
+}
+function renderPaywall() {
+  const locked = db.plan !== "premium";
+  $("#paywall").hidden = !locked;
+  if (locked) {
+    $("#pay-list").innerHTML = PRO_FEATS.map((f) =>
+      "<li class=\"feat\"><span>" + esc(t(f)) + "</span><span class=\"feat-yes\">✓</span></li>").join("");
+  }
+}
+$("#pro-unlock").addEventListener("click", () => unlockWith("pro-code"));
+$("#pay-unlock").addEventListener("click", () => unlockWith("pay-code"));
+$("#pay-code").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") { e.preventDefault(); unlockWith("pay-code"); }
 });
-$("#pro-lock").addEventListener("click", () => {
-  db.plan = "free";
-  save(); renderAll(); go("hub");
-});
+$("#pay-buy").addEventListener("click", () => toast(t("pay_soon")));
 
 /* ---------- Rechtliches (maßgeblich Deutsch) ---------- */
 const LEGAL_TITLE = { privacy: "legal_privacy", terms: "legal_terms", refund: "legal_refund", cookies: "legal_cookies", imprint: "legal_imprint", licenses: "legal_licenses" };
@@ -1400,7 +1419,7 @@ de: {
   refund: "<h4>Erstattung</h4><p>Da es aktuell keinen App-Store-Verkauf mit Zahlungsabwicklung gibt, findet keine Abbuchung statt. Sollte künftig ein Store-Kauf angeboten werden, gelten die Erstattungsregeln des jeweiligen Stores (Apple/Google) bzw. das gesetzliche Widerrufsrecht.</p>",
   cookies: "<h4>Cookie-Richtlinie</h4><p>OutTrack setzt keine Cookies und keine vergleichbaren Tracker ein. Der Hinweis beim Erststart betrifft ausschließlich den lokalen Gerätespeicher (Zustimmung = Speichern erlaubt, „Ohne Speichern“ = Memory-only-Modus).</p>",
   imprint: "<h4>Betreiber (Platzhalter — vor Store-Release ersetzen)</h4><p>[VORNAME NACHNAME / FIRMA]<br>[STRASSE NR, PLZ ORT]<br>[E-MAIL]<br>[TELEFON optional]</p>",
-  licenses: "<h4>Lizenzen & Hinweise</h4><p>OutTrack v3.6 — eigener Code, Systemschrift, eigenes SVG-Icon, live synthetisierte WebAudio-Klänge. Keine Frameworks, keine CDNs, keine externen Schriften oder Bilder. Alle Inhalte (Texte, Rezepte) sind eigene redaktionelle Inhalte.</p>",
+  licenses: "<h4>Lizenzen & Hinweise</h4><p>OutTrack v3.7 — eigener Code, Systemschrift, eigenes SVG-Icon, live synthetisierte WebAudio-Klänge. Keine Frameworks, keine CDNs, keine externen Schriften oder Bilder. Alle Inhalte (Texte, Rezepte) sind eigene redaktionelle Inhalte.</p>",
 },
 en: {
   privacy: "<h4>1. No servers, no trackers</h4><p>OutTrack stores all data exclusively locally on your device (localStorage). No accounts, no cookies, no analytics, no transfer to us or third parties.</p><h4>2. Photos</h4><p>Proof photos are downscaled (320 px JPEG) and also stored only locally — never uploaded.</p><h4>3. Your rights</h4><p>Export your data anytime, or wipe it via “Delete all data”.</p>",
@@ -1408,7 +1427,7 @@ en: {
   refund: "<h4>Refunds</h4><p>There is currently no store sale with payment processing, so no charge occurs. If a store purchase is offered later, that store's refund rules (Apple/Google) and statutory withdrawal rights apply.</p>",
   cookies: "<h4>Cookie policy</h4><p>OutTrack sets no cookies and no similar trackers. The first-start notice only concerns local device storage (consent = saving allowed, “Without saving” = memory-only mode).</p>",
   imprint: "<h4>Operator (placeholder — replace before store release)</h4><p>[NAME / COMPANY]<br>[STREET, ZIP CITY]<br>[EMAIL]<br>[PHONE optional]</p>",
-  licenses: "<h4>Licenses & notices</h4><p>OutTrack v3.6 — own code, system font, own SVG icon, live-synthesized WebAudio sounds. No frameworks, no CDNs, no external fonts or images.</p>",
+  licenses: "<h4>Licenses & notices</h4><p>OutTrack v3.7 — own code, system font, own SVG icon, live-synthesized WebAudio sounds. No frameworks, no CDNs, no external fonts or images.</p>",
 },
 };
 $$("[data-legal]").forEach((b) => b.addEventListener("click", () => {

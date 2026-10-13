@@ -224,7 +224,6 @@ body.plan-free .pro-only{display:none !important}
 .pro-row{display:flex;gap:8px;margin-top:12px}
 .pro-row input{flex:1.4;text-transform:uppercase;min-width:0}
 .pro-row .apple-btn{flex:1;width:auto}
-.pro-lock-btn{width:100%;margin-top:10px}
 /* overload */
 .form-grid{display:flex;flex-direction:column;gap:10px;margin:8px 0 12px}
 .form-row3{display:flex;gap:8px}
@@ -285,7 +284,7 @@ body.plan-free .pro-only{display:none !important}
 .file-btn input{width:auto;max-width:60%;padding:0;background:none;border:none;font-size:13px}
 /* cookie banner */
 #cookie-banner{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--tab-h) + 12px + env(safe-area-inset-bottom));
-  width:calc(100% - 24px);max-width:496px;z-index:32;background:var(--glass);
+  width:calc(100% - 24px);max-width:496px;z-index:60;background:var(--glass);
   -webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);border:1px solid var(--line);border-radius:20px;
   box-shadow:0 8px 30px rgba(0,0,0,.12);padding:16px}
 #cookie-banner p{margin:0 0 12px;font-size:14px;line-height:1.5}
@@ -390,6 +389,18 @@ body.is-mobile .install-only{display:block !important}
 @keyframes toastIn{from{opacity:0;transform:translate(-50%,8px) scale(.9)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
 .timer-card.done{animation:doneFlash .65s ease}
 @keyframes doneFlash{0%{transform:scale(1)}30%{transform:scale(1.03)}60%{transform:scale(.99)}100%{transform:scale(1)}}
+/* Paywall (Fake-Paywall: Feature-Liste + Buy-Platzhalter + Code) */
+#paywall{position:fixed;inset:0;z-index:35;overflow-y:auto;overscroll-behavior:contain;
+  background:var(--bg);padding:calc(24px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom));
+  display:flex;justify-content:center;align-items:flex-start;animation:fadeIn .25s ease}
+.pay-card{width:100%;max-width:520px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);padding:24px 18px;display:flex;flex-direction:column;gap:12px;text-align:center;
+  animation:riseIn .45s ease both}
+.pay-card img{width:72px;height:72px;margin:0 auto;animation:splashPop .6s cubic-bezier(.34,1.56,.64,1) both}
+.pay-card .nav-eyebrow{text-align:center}
+.pay-card h2{margin:0;font-size:26px;font-weight:800;letter-spacing:-.02em}
+.pay-card .feat-list{text-align:left}
+#paywall .pro-row{margin-top:4px}
 /* Theme-Toggle mit Sliding-Knob (animiert, 44px-Targets) */
 .theme-toggle{position:relative;display:flex;background:var(--fill);border:1px solid var(--line);
   border-radius:999px;padding:3px;margin-top:12px}

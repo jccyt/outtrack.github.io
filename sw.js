@@ -1,5 +1,5 @@
-/* OutTrack v3.6 — Cache-First. Bei jedem Release CACHE bumpen, alte Caches löschen. */
-const CACHE = "outtrack-v3.6";
+/* OutTrack v3.7 — Cache-First. Bei jedem Release CACHE bumpen, alte Caches löschen. */
+const CACHE = "outtrack-v3.7";
 const ASSETS = ["./index.html", "./styles.css", "./meals.js", "./app.js", "./manifest.webmanifest", "./icon.svg", "./icon.png"];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));

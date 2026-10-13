@@ -15,7 +15,7 @@ function boot(lang) {
   const dom = new JSDOM(html, { url: "http://localhost/", runScripts: "outside-only", pretendToBeVisual: true });
   const { window } = dom;
   live.push(window);
-  if (lang) window.localStorage.setItem("outtrack_v2", JSON.stringify({ v: 3, lang, plan: "free" }));
+  if (lang) window.localStorage.setItem("outtrack_v2", JSON.stringify({ v: 3, lang, plan: "locked" }));
   window.eval(mealsSrc + "\n;window.__MEALS=MEALS;\n" + appSrc);
   return { window, doc: window.document, ot: window.__ot };
 }
@@ -56,18 +56,32 @@ test("i18n: 5 Sprachen schalten um", () => {
   assert.match(doc.querySelector("[data-i18n='nav_hub']").textContent, /Hub/);
 });
 
-test("Free-Gating: Journal/Food abgefangen", () => {
-  const { window, doc, ot } = boot();
-  assert.equal(ot.db.plan, "free");
+test("Paywall: gesperrt ohne Code, OPT-768 schaltet frei", () => {
+  const { doc, ot } = boot();
+  assert.equal(ot.db.plan, "locked", "Free ist entfernt — Standard ist gesperrt");
+  assert.equal(doc.getElementById("paywall").hidden, false, "Paywall sichtbar");
   assert.ok(doc.body.classList.contains("plan-free"));
+  assert.equal(doc.querySelectorAll("#pay-list .feat").length, 5, "alle 5 Features gelistet");
   ot.go("journal");
   assert.ok(doc.getElementById("view-hub").classList.contains("active"), "deep-link muss auf Hub fallen");
-  ot.go("food");
-  assert.ok(doc.getElementById("view-hub").classList.contains("active"));
+  doc.getElementById("pay-code").value = "falsch";
+  doc.getElementById("pay-unlock").click();
+  assert.equal(ot.db.plan, "locked", "falscher Code bleibt gesperrt");
+  assert.match(doc.getElementById("toast").textContent, /ungültig|Invalid/);
+  doc.getElementById("pay-buy").click();
+  assert.match(doc.getElementById("toast").textContent, /Kürze|soon/);
+  doc.getElementById("pay-code").value = "Opt-768";
+  doc.getElementById("pay-unlock").click();
+  assert.equal(ot.db.plan, "premium");
+  assert.equal(doc.getElementById("paywall").hidden, true, "Paywall weg nach Unlock");
+  ot.go("journal");
+  assert.ok(doc.getElementById("view-journal").classList.contains("active"), "Journal nach Unlock erreichbar");
 });
 
-test("Pro-Code: Demo-Code gültig, Müll ungültig", () => {
+test("Pro-Code: OPT-768 + Demo-Code gültig, Müll ungültig", () => {
   const { ot } = boot();
+  assert.equal(ot.proKeyValid("OPT-768"), true);
+  assert.equal(ot.proKeyValid("opt-768"), true);
   assert.equal(ot.proKeyValid("OT-PRSEV-B"), true);
   assert.equal(ot.proKeyValid("OT-AAAAA-B"), false);
   assert.equal(ot.proKeyValid("falsch"), false);
