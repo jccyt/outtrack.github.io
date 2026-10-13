@@ -34,7 +34,7 @@ const MEAL_KIND = {
   },
   fresh: {
     d: ["Frisch, schnell — kein Herd nötig.", "Fresh, fast — no stove needed."],
-    g: [(m, n) => [m, sideDE(n), "1 EL Olivenöl oder Joghurt", "Salz, Pfeffer, Zitrone"], (m, n) => [m, sideEN(n), "1 tbsp olive oil or yogurt", "Salt, pepper, lemon"]],
+    g: [(m, n) => [m, sideDE(n), fatDE(n), "Salz", "Pfeffer", "Zitrone"], (m, n) => [m, sideEN(n), fatEN(n), "Salt", "pepper", "lemon"]],
     s: [() => ["Alles mundgerecht schneiden.", "Anrichten, Dressing darüber.", "Kurz ziehen lassen, genießen."],
         () => ["Cut everything bite-size.", "Plate up, add dressing.", "Rest briefly, enjoy."]],
   },
@@ -206,13 +206,13 @@ const MEAL_RAW = [
    (Ersetzt den alten Platzhalter "Gemüse oder Obst nach Wahl".) */
 const FRESH_SIDE = {
 "Thunfisch-Salat mit Ei": ["1/2 Gurke und 1 Tomate", "1/2 cucumber and 1 tomato"],
-"Quark mit Honig & Nüssen": ["1 Apfel in Stücken", "1 apple, diced"],
+"Quark mit Honig & Nüssen": ["1 Apfel in Stücken", "1 diced apple"],
 "Hüttenkäse-Brot mit Kresse": ["1 Tomate und 1/2 Gurke", "1 tomato and 1/2 cucumber"],
-"Skyr mit Granola & Beeren": ["1/2 Banane in Scheiben", "1/2 banana, sliced"],
+"Skyr mit Granola & Beeren": ["1/2 Banane in Scheiben", "1/2 sliced banana"],
 "Thunfisch-Wrap": ["2 Salatblätter und 1/2 Paprika", "2 lettuce leaves and 1/2 pepper"],
 "Chicken-Wrap": ["1 Karotte in Stiften und Gurkenscheiben", "1 carrot in sticks and cucumber slices"],
 "Eiersalat proteinreich": ["1 Stange Staudensellerie und 4 Radieschen", "1 celery stalk and 4 radishes"],
-"Cottage-Bowl süß-salzig": ["1/2 Birne in Würfeln", "1/2 pear, diced"],
+"Cottage-Bowl süß-salzig": ["1/2 Birne in Würfeln", "1/2 diced pear"],
 "Harzer mit Brot": ["1 Gewürzgurke und 1/2 Zwiebel in Ringen", "1 pickle and 1/2 onion in rings"],
 "Kichererbsen-Salat": ["1 Tomate und Petersilie", "1 tomato and parsley"],
 "Overnight Oats mit Apfel": ["1 EL Rosinen", "1 tbsp raisins"],
@@ -230,15 +230,15 @@ const FRESH_SIDE = {
 "Tomate-Mozzarella leicht": ["1 Scheibe Vollkornbrot", "1 slice whole-grain bread"],
 "Blattsalat mit Hähnchen": ["1 geraspelte Karotte und 2 EL Mais", "1 grated carrot and 2 tbsp corn"],
 "Caesar Salat light": ["30 g Parmesan und Croûtons", "30 g parmesan and croutons"],
-"Rote-Bete-Salat": ["1 Apfel in Würfeln", "1 apple, diced"],
+"Rote-Bete-Salat": ["1 Apfel in Würfeln", "1 diced apple"],
 "Karottensalat mit Apfel": ["1 EL Walnüsse gehackt", "1 tbsp chopped walnuts"],
-"Krautsalat": ["1 Apfel geraspelt", "1 apple, grated"],
+"Krautsalat": ["1 Apfel geraspelt", "1 grated apple"],
 "Asiatischer Gurkensalat": ["1 Karotte in Streifen und Koriander", "1 carrot in strips and cilantro"],
 "Salat-Wraps mit Pute": ["1/2 Paprika und 1 Karotte", "1/2 pepper and 1 carrot"],
 "Chia-Pudding mit Mango": ["2 EL Kokoschips", "2 tbsp coconut chips"],
 "Beeren-Quark": ["1 EL Haferflocken", "1 tbsp oats"],
 "Apfel mit Zimt & Joghurt": ["1 EL gehackte Mandeln", "1 tbsp chopped almonds"],
-"Melonensalat mit Feta": ["1/2 Gurke in Würfeln", "1/2 cucumber, diced"],
+"Melonensalat mit Feta": ["1/2 Gurke in Würfeln", "1/2 diced cucumber"],
 "Gurken-Hüttenkäse-Snack": ["1 Tomate und Dill", "1 tomato and dill"],
 "Paprika mit Frischkäse": ["1/2 Gurke in Sticks", "1/2 cucumber in sticks"],
 "Tomaten-Thunfisch-Salat": ["1 Handvoll Rucola", "1 handful arugula"],
@@ -247,12 +247,57 @@ const FRESH_SIDE = {
 };
 const sideDE = (n) => (FRESH_SIDE[n] && FRESH_SIDE[n][0]) || "1 Karotte und 1 Apfel";
 const sideEN = (n) => (FRESH_SIDE[n] && FRESH_SIDE[n][1]) || "1 carrot and 1 apple";
+/* Feste Dressing-/Gewürz-Zeile je fresh-Gericht — statt "Olivenöl oder Joghurt". */
+const FRESH_FAT = {
+"Thunfisch-Salat mit Ei": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Quark mit Honig & Nüssen": ["1 TL Zimt", "1 tsp cinnamon"],
+"Hüttenkäse-Brot mit Kresse": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Skyr mit Granola & Beeren": ["1 TL Honig", "1 tsp honey"],
+"Thunfisch-Wrap": ["1 EL Zitronensaft", "1 tbsp lemon juice"],
+"Chicken-Wrap": ["1 TL Currypulver", "1 tsp curry powder"],
+"Eiersalat proteinreich": ["1 TL Senf", "1 tsp mustard"],
+"Cottage-Bowl süß-salzig": ["1 TL Honig", "1 tsp honey"],
+"Harzer mit Brot": ["1 EL Apfelessig", "1 tbsp apple cider vinegar"],
+"Kichererbsen-Salat": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Overnight Oats mit Apfel": ["1 TL Leinsamen", "1 tsp flaxseed"],
+"Avocado-Toast deluxe": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Müsli mit Joghurt & Banane": ["1 TL Zimt", "1 tsp cinnamon"],
+"Banane mit Erdnussbutter": ["1 Prise Salz", "1 pinch of salt"],
+"Datteln mit Walnüssen": ["1 Prise Zimt", "1 pinch of cinnamon"],
+"Vollkornbrot mit Ei & Avocado": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Couscous-Salat": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Falafel-Wrap": ["1 TL Kreuzkümmel", "1 tsp cumin"],
+"Hummus-Brot mit Gemüse": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Energy Balls": ["1 Prise Salz", "1 pinch of salt"],
+"Nuss-Frucht-Mix": ["1 TL Zimt", "1 tsp cinnamon"],
+"Gurkensalat mit Joghurt": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Tomate-Mozzarella leicht": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Blattsalat mit Hähnchen": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Caesar Salat light": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Rote-Bete-Salat": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Karottensalat mit Apfel": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Krautsalat": ["1 EL Rapsöl", "1 tbsp canola oil"],
+"Asiatischer Gurkensalat": ["1 TL Sesamöl", "1 tsp sesame oil"],
+"Salat-Wraps mit Pute": ["1 TL Sesam", "1 tsp sesame"],
+"Chia-Pudding mit Mango": ["1 TL Ahornsirup", "1 tsp maple syrup"],
+"Beeren-Quark": ["1 TL Honig", "1 tsp honey"],
+"Apfel mit Zimt & Joghurt": ["1 TL Honig", "1 tsp honey"],
+"Melonensalat mit Feta": ["1 EL Limettensaft", "1 tbsp lime juice"],
+"Gurken-Hüttenkäse-Snack": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Paprika mit Frischkäse": ["1 TL Paprikapulver", "1 tsp paprika powder"],
+"Tomaten-Thunfisch-Salat": ["1 EL Olivenöl", "1 tbsp olive oil"],
+"Wakame-Salat": ["1 TL Sesamöl", "1 tsp sesame oil"],
+"Gemüsesticks mit Dip": ["1 TL Curry für den Dip", "1 tsp curry for the dip"],
+};
+const fatDE = (n) => (FRESH_FAT[n] && FRESH_FAT[n][0]) || "1 EL Olivenöl";
+const fatEN = (n) => (FRESH_FAT[n] && FRESH_FAT[n][1]) || "1 tbsp olive oil";
 const MEALS = MEAL_RAW.map((r) => {
   const k = MEAL_KIND[r[5]] || MEAL_KIND.fresh;
+  const split = (arr) => arr.flatMap((s) => String(s).split(/,\s*/).map((x) => x.trim()).filter(Boolean));
   return {
-    cat: r[0], kcal: r[1], mins: r[2], mac: macroFor(r[1], r[0], r[3]),
-    name: r[3], desc: k.d[0], ing: k.g[0](r[6], r[3]), steps: k.s[0](),
-    en: { name: r[4], desc: k.d[1], ing: k.g[1](r[7], r[3]), steps: k.s[1]() },
+    cat: r[0], kcal: r[1], mins: r[2], kind: r[5], mac: macroFor(r[1], r[0], r[3]),
+    name: r[3], desc: k.d[0], ing: split(k.g[0](r[6], r[3])), steps: k.s[0](),
+    en: { name: r[4], desc: k.d[1], ing: split(k.g[1](r[7], r[3])), steps: k.s[1]() },
   };
 });
 /* Stabile Makro-Schätzung (Protein/KH/Fett in g) aus kcal + Kategorie.
