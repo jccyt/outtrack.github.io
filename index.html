@@ -184,11 +184,15 @@
       <div class="card meal-card">
         <p class="meal-cat" id="meal-cat">—</p>
         <h2 id="meal-name" data-i18n="meal_hint">Tippen für einen Tipp</h2>
+        <div class="macro-hero">
+          <div class="kcal-block"><strong id="meal-kcal">—</strong><span>kcal</span></div>
+          <div class="macro-bars" id="meal-macros"></div>
+        </div>
         <p class="muted" id="meal-desc"></p>
         <p class="meal-meta" id="meal-meta"></p>
         <div id="meal-recipe" class="recipe" hidden>
           <h3 data-i18n="r_ing">Zutaten</h3>
-          <ul id="meal-ing"></ul>
+          <ul id="meal-ing" class="checklist"></ul>
           <h3 data-i18n="r_steps">Zubereitung</h3>
           <ol id="meal-steps"></ol>
         </div>
@@ -243,7 +247,7 @@
       </div>
       <div class="card">
         <h2 data-i18n="lg_sec">Rechtliches &amp; Info</h2>
-        <p class="muted">OutTrack v3.7 · Offline</p>
+        <p class="muted">OutTrack v3.8 · Offline</p>
         <ul class="link-list">
           <li><button data-legal="privacy" data-i18n="legal_privacy">Datenschutzerklärung</button></li>
           <li><button data-legal="terms" data-i18n="legal_terms">Nutzungsbedingungen</button></li>
@@ -312,7 +316,7 @@
       </div>
       <div class="card">
         <h2 data-i18n="set_info_title">Info</h2>
-        <p class="muted">OutTrack v3.7 · Offline · 0 Tracker · 0 Cookies</p>
+        <p class="muted">OutTrack v3.8 · Offline · 0 Tracker · 0 Cookies</p>
       </div>
     </div>
   </section>
@@ -338,6 +342,21 @@
     <div class="pro-row">
       <input id="pay-code" type="text" data-i18n-ph="pay_code_ph" placeholder="Code eingeben, z. B. OPT-768" autocapitalize="characters" autocomplete="off" spellcheck="false" />
       <button id="pay-unlock" class="apple-btn" data-i18n="pro_unlock">Freischalten</button>
+    </div>
+  </div>
+</div>
+
+<div id="tutorial" hidden>
+  <div class="tut-card">
+    <button id="tut-skip" class="link-btn" data-i18n="tut_skip">Überspringen</button>
+    <div id="tut-body">
+      <h2 id="tut-title"></h2>
+      <p class="muted" id="tut-text"></p>
+    </div>
+    <div id="tut-dots" role="tablist" aria-label="Tutorial"></div>
+    <div class="sheet-row">
+      <button id="tut-back" class="secondary-btn" data-i18n="tut_back">Zurück</button>
+      <button id="tut-next" class="apple-btn" data-i18n="tut_next">Weiter</button>
     </div>
   </div>
 </div>

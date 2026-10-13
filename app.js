@@ -57,6 +57,13 @@ de: {
   focus_exit: "Zum Hub", focus_fs: "Vollbild",
   eyebrow_energy: "Energie", mf_all: "Alle", mf_protein: "Protein", mf_energy: "Energie", mf_light: "Light",
   meal_hint: "Tippen für einen Tipp", meal_new: "Neuer Tipp", r_ing: "Zutaten", r_steps: "Zubereitung",
+  m_protein: "Protein", m_carbs: "Kohlenhydrate", m_fat: "Fett",
+  tut_skip: "Überspringen", tut_back: "Zurück", tut_next: "Weiter", tut_start: "Los geht's",
+  tut_1t: "Deine tägliche Quest", tut_1d: "Lege Habits fest, hake sie ab und baue deinen Streak auf — ein Schritt nach dem anderen.",
+  tut_2t: "Fokus ohne Ablenkung", tut_2d: "Der Outdo Mode blendet alles aus: Timer stellen, einen Satz Fokus fassen, durchziehen.",
+  tut_3t: "Essen ohne Nachdenken", tut_3d: "136 Rezepte mit Kalorien und Nährwerten — tippen, kochen, fertig.",
+  tut_4t: "Sieh deinen Weg", tut_4d: "Stats, Gipfel und Streak-Freeze zeigen deinen Fortschritt — ohne Schuld, nur die Reise.",
+  tut_5t: "Deine Daten bleiben bei dir", tut_5d: "Kein Konto, kein Server, keine Tracker. Alles liegt nur auf deinem Gerät.",
   sec_all: "Alle Gerichte", food_foot: "Allgemeine Rezeptideen, keine Ernährungsberatung.",
   meta_line: "{kcal} kcal · {mins} Min.", cat_protein: "Protein", cat_energie: "Energie", cat_light: "Light",
   eyebrow_cons: "Konsistenz", weekly_title: "Wochenrückblick",
@@ -142,6 +149,13 @@ en: {
   focus_exit: "To Hub", focus_fs: "Fullscreen",
   eyebrow_energy: "Energy", mf_all: "All", mf_protein: "Protein", mf_energy: "Energy", mf_light: "Light",
   meal_hint: "Tap for a tip", meal_new: "New tip", r_ing: "Ingredients", r_steps: "Steps",
+  m_protein: "Protein", m_carbs: "Carbs", m_fat: "Fat",
+  tut_skip: "Skip", tut_back: "Back", tut_next: "Next", tut_start: "Let's go",
+  tut_1t: "Your daily quest", tut_1d: "Set habits, check them off and build your streak — one step at a time.",
+  tut_2t: "Focus without distraction", tut_2d: "Outdo Mode fades everything out: set a timer, name one focus, follow through.",
+  tut_3t: "Eating without overthinking", tut_3d: "136 recipes with calories and macros — tap, cook, done.",
+  tut_4t: "See your journey", tut_4d: "Stats, summit and streak freeze show your progress — no guilt, just the journey.",
+  tut_5t: "Your data stays with you", tut_5d: "No account, no server, no trackers. Everything lives only on your device.",
   sec_all: "All meals", food_foot: "General recipe ideas, no nutrition advice.",
   meta_line: "{kcal} kcal · {mins} min", cat_protein: "Protein", cat_energie: "Energy", cat_light: "Light",
   eyebrow_cons: "Consistency", weekly_title: "Weekly review",
@@ -340,7 +354,7 @@ const DEFAULTS = () => ({
   lifts: [], journal: [], redirects: [], focusLog: [],
   frozenDays: {}, freezeWeek: "", quest: { date: "", text: "" },
   remind: { on: false, morning: "07:30", evening: "21:00", fired: {} },
-  chartRange: 7, mealIdx: 0, mealCat: "alle", focusText: "",
+  chartRange: 7, mealIdx: 0, mealCat: "alle", focusText: "", tutorialSeen: false,
 });
 let db = DEFAULTS();
 function load() {
@@ -966,12 +980,24 @@ function paintMeal(i) {
   $("#meal-cat").textContent = t("cat_" + m.cat);
   $("#meal-name").textContent = v.name;
   $("#meal-name").removeAttribute("data-i18n");
+  $("#meal-kcal").textContent = m.kcal;
+  const macros = macroRows(m);
+  $("#meal-macros").innerHTML = macros;
   $("#meal-desc").textContent = v.desc;
   $("#meal-meta").textContent = t("meta_line", { kcal: m.kcal, mins: m.mins });
   const box = $("#meal-recipe");
   box.hidden = false;
-  $("#meal-ing").innerHTML = v.ing.map((x) => "<li>" + esc(x) + "</li>").join("");
+  $("#meal-ing").innerHTML = v.ing.map((x) => "<li tabindex=\"0\">" + esc(x) + "</li>").join("");
   $("#meal-steps").innerHTML = v.steps.map((x) => "<li>" + esc(x) + "</li>").join("");
+}
+function macroRows(m) {
+  const [p, c, f] = m.mac;
+  const rows = [[t("m_protein"), p, 4], [t("m_carbs"), c, 4], [t("m_fat"), f, 9]];
+  return rows.map(([label, g, per]) => {
+    const w = Math.max(4, Math.min(100, Math.round((g * per / m.kcal) * 100)));
+    return "<div class=\"macro\"><span>" + esc(label) + "</span><span>" + g + " g</span>" +
+      "<div class=\"bar\"><i style=\"width:" + w + "%\"></i></div></div>";
+  }).join("");
 }
 function renderMeal(keep) {
   const pool = filteredMeals();
@@ -990,7 +1016,9 @@ function renderMealList() {
     const li = document.createElement("li");
     li.className = "meal-row" + (i === db.mealIdx ? " selected" : "");
     li.setAttribute("tabindex", "0");
-    li.innerHTML = "<span class=\"h-main\"><span class=\"h-label\">" + esc(v.name) + "</span></span><span class=\"meal-kcal\">" + m.kcal + " kcal</span>";
+    li.innerHTML = "<span class=\"h-main\"><span class=\"h-label\">" + esc(v.name) + "</span>" +
+      "<span class=\"h-sub\">" + m.mins + " Min. · " + m.mac[0] + " g " + esc(t("m_protein")) + "</span></span>" +
+      "<span class=\"meal-kcal\">" + m.kcal + " kcal</span>";
     const pick = () => { paintMeal(i); renderMealList(); };
     li.addEventListener("click", pick);
     li.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } });
@@ -1005,6 +1033,55 @@ $("#meal-filter").addEventListener("click", (e) => {
   save(); renderMeal(false);
 });
 $("#meal-next").addEventListener("click", () => renderMeal(false));
+$("#meal-ing").addEventListener("click", (e) => {
+  const li = e.target.closest("li");
+  if (li) li.classList.toggle("off");
+});
+$("#meal-ing").addEventListener("keydown", (e) => {
+  const li = e.target.closest("li");
+  if (li && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); li.classList.toggle("off"); }
+});
+
+/* ---------- Tutorial (First-Run): was die App kann + wie sie geht ---------- */
+const TUTS = [["tut_1t", "tut_1d"], ["tut_2t", "tut_2d"], ["tut_3t", "tut_3d"], ["tut_4t", "tut_4d"], ["tut_5t", "tut_5d"]];
+let tutIdx = 0;
+function renderTut() {
+  const last = tutIdx === TUTS.length - 1;
+  $("#tut-title").textContent = t(TUTS[tutIdx][0]);
+  $("#tut-text").textContent = t(TUTS[tutIdx][1]);
+  $("#tut-back").hidden = tutIdx === 0;
+  $("#tut-next").textContent = t(last ? "tut_start" : "tut_next");
+  $("#tut-next").removeAttribute("data-i18n");
+  const dots = $("#tut-dots");
+  dots.innerHTML = "";
+  TUTS.forEach((_, n) => {
+    const b = document.createElement("button");
+    if (n === tutIdx) b.className = "on";
+    b.setAttribute("role", "tab");
+    b.setAttribute("aria-label", (n + 1) + " / " + TUTS.length);
+    b.addEventListener("click", () => { tutIdx = n; renderTut(); });
+    dots.appendChild(b);
+  });
+  const body = $("#tut-body");
+  body.style.animation = "none";
+  void body.offsetWidth;
+  body.style.animation = "";
+}
+function showTutorial() {
+  tutIdx = 0;
+  renderTut();
+  $("#tutorial").hidden = false;
+}
+function closeTutorial() {
+  $("#tutorial").hidden = true;
+  if (!db.tutorialSeen) { db.tutorialSeen = true; save(); }
+}
+$("#tut-skip").addEventListener("click", closeTutorial);
+$("#tut-back").addEventListener("click", () => { if (tutIdx > 0) { tutIdx--; renderTut(); } });
+$("#tut-next").addEventListener("click", () => {
+  if (tutIdx < TUTS.length - 1) { tutIdx++; renderTut(); }
+  else closeTutorial();
+});
 
 /* ---------- Outdo Timer ---------- */
 const CIRC = 552.9;
@@ -1419,7 +1496,7 @@ de: {
   refund: "<h4>Erstattung</h4><p>Da es aktuell keinen App-Store-Verkauf mit Zahlungsabwicklung gibt, findet keine Abbuchung statt. Sollte künftig ein Store-Kauf angeboten werden, gelten die Erstattungsregeln des jeweiligen Stores (Apple/Google) bzw. das gesetzliche Widerrufsrecht.</p>",
   cookies: "<h4>Cookie-Richtlinie</h4><p>OutTrack setzt keine Cookies und keine vergleichbaren Tracker ein. Der Hinweis beim Erststart betrifft ausschließlich den lokalen Gerätespeicher (Zustimmung = Speichern erlaubt, „Ohne Speichern“ = Memory-only-Modus).</p>",
   imprint: "<h4>Betreiber (Platzhalter — vor Store-Release ersetzen)</h4><p>[VORNAME NACHNAME / FIRMA]<br>[STRASSE NR, PLZ ORT]<br>[E-MAIL]<br>[TELEFON optional]</p>",
-  licenses: "<h4>Lizenzen & Hinweise</h4><p>OutTrack v3.7 — eigener Code, Systemschrift, eigenes SVG-Icon, live synthetisierte WebAudio-Klänge. Keine Frameworks, keine CDNs, keine externen Schriften oder Bilder. Alle Inhalte (Texte, Rezepte) sind eigene redaktionelle Inhalte.</p>",
+  licenses: "<h4>Lizenzen & Hinweise</h4><p>OutTrack v3.8 — eigener Code, Systemschrift, eigenes SVG-Icon, live synthetisierte WebAudio-Klänge. Keine Frameworks, keine CDNs, keine externen Schriften oder Bilder. Alle Inhalte (Texte, Rezepte) sind eigene redaktionelle Inhalte.</p>",
 },
 en: {
   privacy: "<h4>1. No servers, no trackers</h4><p>OutTrack stores all data exclusively locally on your device (localStorage). No accounts, no cookies, no analytics, no transfer to us or third parties.</p><h4>2. Photos</h4><p>Proof photos are downscaled (320 px JPEG) and also stored only locally — never uploaded.</p><h4>3. Your rights</h4><p>Export your data anytime, or wipe it via “Delete all data”.</p>",
@@ -1427,7 +1504,7 @@ en: {
   refund: "<h4>Refunds</h4><p>There is currently no store sale with payment processing, so no charge occurs. If a store purchase is offered later, that store's refund rules (Apple/Google) and statutory withdrawal rights apply.</p>",
   cookies: "<h4>Cookie policy</h4><p>OutTrack sets no cookies and no similar trackers. The first-start notice only concerns local device storage (consent = saving allowed, “Without saving” = memory-only mode).</p>",
   imprint: "<h4>Operator (placeholder — replace before store release)</h4><p>[NAME / COMPANY]<br>[STREET, ZIP CITY]<br>[EMAIL]<br>[PHONE optional]</p>",
-  licenses: "<h4>Licenses & notices</h4><p>OutTrack v3.7 — own code, system font, own SVG icon, live-synthesized WebAudio sounds. No frameworks, no CDNs, no external fonts or images.</p>",
+  licenses: "<h4>Licenses & notices</h4><p>OutTrack v3.8 — own code, system font, own SVG icon, live-synthesized WebAudio sounds. No frameworks, no CDNs, no external fonts or images.</p>",
 },
 };
 $$("[data-legal]").forEach((b) => b.addEventListener("click", () => {
@@ -1494,6 +1571,7 @@ try { // Widgets-Hinweis nur mobil/installiert — nicht auf GitHub-Pages-Deskto
 initConsent();
 renderAll();
 go("hub");
+if (!db.tutorialSeen) showTutorial();
 drawTimer(); syncCustomFields();
 try { // Splash: kurz, skippbar, Reduced-Motion-sicher
   const sp = $("#splash");

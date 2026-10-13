@@ -205,8 +205,22 @@ const MEAL_RAW = [
 const MEALS = MEAL_RAW.map((r) => {
   const k = MEAL_KIND[r[5]] || MEAL_KIND.fresh;
   return {
-    cat: r[0], kcal: r[1], mins: r[2],
+    cat: r[0], kcal: r[1], mins: r[2], mac: macroFor(r[1], r[0], r[3]),
     name: r[3], desc: k.d[0], ing: k.g[0](r[6]), steps: k.s[0](),
     en: { name: r[4], desc: k.d[1], ing: k.g[1](r[7]), steps: k.s[1]() },
   };
 });
+/* Stabile Makro-Schätzung (Protein/KH/Fett in g) aus kcal + Kategorie.
+   Deterministisch aus dem Namen gehasht — keine Laufzeit-Zufälle, keine Server. */
+function macroFor(kcal, cat, name) {
+  let h = 0;
+  for (const ch of name) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  const jit = (n) => (((h >> (n * 5)) & 31) / 31) - 0.5;
+  const pShare = cat === "protein" ? 0.38 : cat === "light" ? 0.28 : 0.14;
+  const p = Math.max(2, Math.round((kcal * (pShare + jit(0) * 0.06)) / 4));
+  const rest = kcal - p * 4;
+  const cShare = cat === "energie" ? 0.62 : 0.5;
+  const c = Math.max(2, Math.round((rest * (cShare + jit(1) * 0.1)) / 4));
+  const f = Math.max(1, Math.round((rest - c * 4) / 9));
+  return [p, c, f];
+}

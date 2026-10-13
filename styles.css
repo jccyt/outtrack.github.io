@@ -200,13 +200,28 @@ input[type="number"]{font-variant-numeric:tabular-nums}
 .j-entry time{font-size:12px;color:var(--mut)}
 .j-entry p{margin:6px 0 8px;font-size:15px;white-space:pre-wrap;overflow-wrap:anywhere}
 .j-entry button{background:none;border:none;color:#ff3b30;font-size:14px;font-weight:700;cursor:pointer;padding:10px 14px;min-height:44px}
-/* meal */
+/* meal — Yazio-Stil: kcal-Hero, Makro-Balken, Checkliste */
 .meal-card h2{margin:6px 0;font-size:22px;font-weight:800;letter-spacing:-.01em}
 .meal-cat{margin:0;font-size:12px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.macro-hero{display:flex;gap:16px;align-items:center;margin:12px 0 4px;min-width:0}
+.kcal-block{flex:none;text-align:center;min-width:76px}
+.kcal-block strong{display:block;font-size:34px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1}
+.kcal-block span{font-size:12px;font-weight:700;color:var(--mut)}
+.macro-bars{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+.macro{display:grid;grid-template-columns:1fr auto;gap:2px 8px;font-size:12px;min-width:0}
+.macro span:first-child{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.macro span:last-child{font-weight:800;font-variant-numeric:tabular-nums}
+.macro .bar{grid-column:1/-1;height:6px}
 .meal-meta{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
 .recipe{margin:6px 0 12px;border-top:1px solid var(--line);padding-top:10px}
 .recipe h3{margin:10px 0 6px;font-size:15px}
 .recipe ul,.recipe ol{margin:0;padding-left:20px;font-size:15px;display:flex;flex-direction:column;gap:5px}
+.checklist{list-style:none;padding-left:0}
+.checklist li{display:flex;gap:10px;align-items:baseline;padding:9px 10px;border-radius:10px;cursor:pointer;min-height:44px}
+.checklist li:active{background:var(--fill)}
+.checklist li::before{content:"";flex:none;width:18px;height:18px;border-radius:50%;border:2px solid var(--mut);transform:translateY(3px)}
+.checklist li.off{color:var(--mut);text-decoration:line-through}
+.checklist li.off::before{background:var(--accent);border-color:var(--accent)}
 .meal-row{display:flex;align-items:center;gap:12px;padding:13px 14px;cursor:pointer;border-bottom:1px solid var(--line);min-width:0}
 .meal-row:last-child{border-bottom:none}
 .meal-row:active{background:var(--accent-soft)}
@@ -401,6 +416,21 @@ body.is-mobile .install-only{display:block !important}
 .pay-card h2{margin:0;font-size:26px;font-weight:800;letter-spacing:-.02em}
 .pay-card .feat-list{text-align:left}
 #paywall .pro-row{margin-top:4px}
+/* Tutorial (First-Run): läuft als erstes, über allem außer Splash */
+#tutorial{position:fixed;inset:0;z-index:90;overflow-y:auto;overscroll-behavior:contain;
+  background:rgba(0,0,0,.3);padding:calc(24px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom));
+  display:flex;justify-content:center;align-items:center;animation:fadeIn .25s ease}
+.tut-card{width:100%;max-width:520px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);padding:18px;display:flex;flex-direction:column;gap:12px;
+  animation:riseIn .4s ease both}
+#tut-skip{align-self:flex-end}
+#tut-body h2{margin:0 0 6px;font-size:24px;font-weight:800;letter-spacing:-.02em}
+#tut-body p{margin:0;font-size:16px;line-height:1.5}
+#tut-body{animation:fadeUp .25s ease}
+#tut-dots{display:flex;gap:8px;justify-content:center;margin:2px 0}
+#tut-dots button{width:44px;height:44px;background:none;border:none;cursor:pointer;display:grid;place-items:center}
+#tut-dots button::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--line);transition:transform .2s ease,background .2s ease}
+#tut-dots button.on::after{background:var(--accent);transform:scale(1.35)}
 /* Theme-Toggle mit Sliding-Knob (animiert, 44px-Targets) */
 .theme-toggle{position:relative;display:flex;background:var(--fill);border:1px solid var(--line);
   border-radius:999px;padding:3px;margin-top:12px}
