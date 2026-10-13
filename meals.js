@@ -34,7 +34,7 @@ const MEAL_KIND = {
   },
   fresh: {
     d: ["Frisch, schnell — kein Herd nötig.", "Fresh, fast — no stove needed."],
-    g: [(m) => [m, "Gemüse oder Obst nach Wahl", "1 EL Olivenöl oder Joghurt", "Salz, Pfeffer, Zitrone"], (m) => [m, "Veggies or fruit of choice", "1 tbsp olive oil or yogurt", "Salt, pepper, lemon"]],
+    g: [(m, n) => [m, sideDE(n), "1 EL Olivenöl oder Joghurt", "Salz, Pfeffer, Zitrone"], (m, n) => [m, sideEN(n), "1 tbsp olive oil or yogurt", "Salt, pepper, lemon"]],
     s: [() => ["Alles mundgerecht schneiden.", "Anrichten, Dressing darüber.", "Kurz ziehen lassen, genießen."],
         () => ["Cut everything bite-size.", "Plate up, add dressing.", "Rest briefly, enjoy."]],
   },
@@ -139,7 +139,7 @@ const MEAL_RAW = [
 ["energie",420,15,"Couscous-Salat","Couscous salad","fresh","100 g Couscous, Paprika, Gurke, Minze","100 g couscous, pepper, cucumber, mint"],
 ["energie",440,20,"Bulgur-Bowl","Bulgur bowl","bowl","100 g Bulgur, Gemüse, 50 g Feta","100 g bulgur, veggies, 50 g feta"],
 ["energie",520,20,"Falafel-Wrap","Falafel wrap","fresh","6 Falafel, Tortilla, Salat, Joghurt","6 falafel, tortilla, salad, yogurt"],
-["energie",380,8,"Hummus-Brot mit Gemüse","Hummus bread with veggies","fresh","4 EL Hummus, Vollkornbrot, Gemüse","4 tbsp hummus, whole-grain bread, veggies"],
+["energie",380,8,"Hummus-Brot mit Gemüse","Hummus bread with veggies","fresh","4 EL Hummus, 2 Scheiben Vollkornbrot, 1 Tomate","4 tbsp hummus, 2 whole-grain slices, 1 tomato"],
 ["energie",540,15,"Erdnuss-Nudeln","Peanut noodles","pasta","120 g Nudeln, 2 EL Erdnussbutter, Sojasauce","120 g noodles, 2 tbsp peanut butter, soy sauce"],
 ["energie",450,12,"Schnelles Ramen","Quick ramen","pot","1 Portion Ramen-Nudeln, 1 Ei, Frühlingszwiebeln","1 pack ramen noodles, 1 egg, spring onions"],
 ["energie",500,15,"Udon-Pfanne","Udon stir-fry","pan","200 g Udon, Gemüse, Sesam","200 g udon, veggies, sesame"],
@@ -197,17 +197,62 @@ const MEAL_RAW = [
 ["light",200,8,"Paprika mit Frischkäse","Peppers with cream cheese","fresh","2 Paprika, 100 g Frischkäse, Kräuter","2 peppers, 100 g cream cheese, herbs"],
 ["light",280,10,"Tomaten-Thunfisch-Salat","Tomato tuna salad","fresh","1 Dose Thunfisch, Tomaten, Zwiebeln","1 can tuna, tomatoes, onions"],
 ["light",150,10,"Wakame-Salat","Wakame salad","fresh","20 g Wakame, Sesam-Dressing","20 g wakame, sesame dressing"],
-["light",180,10,"Gemüsesticks mit Dip","Veggie sticks with dip","fresh","Gemüse, 150 g Joghurt-Dip","veggies, 150 g yogurt dip"],
+["light",180,10,"Gemüsesticks mit Dip","Veggie sticks with dip","fresh","1 Karotte, 1/2 Paprika, 1 Stange Sellerie, 150 g Joghurt-Dip","1 carrot, 1/2 pepper, 1 celery stalk, 150 g yogurt dip"],
 ["light",150,10,"Brühe mit Ei","Broth with egg","pot","500 ml Brühe, 1 Ei, Schnittlauch","500 ml broth, 1 egg, chives"],
 ["light",260,20,"Zucchini-Puffer light","Light zucchini fritters","pan","2 Zucchini, 1 Ei, 2 EL Mehl, Joghurt-Dip","2 zucchini, 1 egg, 2 tbsp flour, yogurt dip"],
 ["light",280,25,"Kürbis aus dem Ofen","Oven pumpkin","oven","1 Hokkaido, Honig, Thymian","1 pumpkin, honey, thyme"]
 ];
+/* Feste Beilagen für fresh-Gerichte — je Gericht passend, DE + EN.
+   (Ersetzt den alten Platzhalter "Gemüse oder Obst nach Wahl".) */
+const FRESH_SIDE = {
+"Thunfisch-Salat mit Ei": ["1/2 Gurke und 1 Tomate", "1/2 cucumber and 1 tomato"],
+"Quark mit Honig & Nüssen": ["1 Apfel in Stücken", "1 apple, diced"],
+"Hüttenkäse-Brot mit Kresse": ["1 Tomate und 1/2 Gurke", "1 tomato and 1/2 cucumber"],
+"Skyr mit Granola & Beeren": ["1/2 Banane in Scheiben", "1/2 banana, sliced"],
+"Thunfisch-Wrap": ["2 Salatblätter und 1/2 Paprika", "2 lettuce leaves and 1/2 pepper"],
+"Chicken-Wrap": ["1 Karotte in Stiften und Gurkenscheiben", "1 carrot in sticks and cucumber slices"],
+"Eiersalat proteinreich": ["1 Stange Staudensellerie und 4 Radieschen", "1 celery stalk and 4 radishes"],
+"Cottage-Bowl süß-salzig": ["1/2 Birne in Würfeln", "1/2 pear, diced"],
+"Harzer mit Brot": ["1 Gewürzgurke und 1/2 Zwiebel in Ringen", "1 pickle and 1/2 onion in rings"],
+"Kichererbsen-Salat": ["1 Tomate und Petersilie", "1 tomato and parsley"],
+"Overnight Oats mit Apfel": ["1 EL Rosinen", "1 tbsp raisins"],
+"Avocado-Toast deluxe": ["1 Handvoll Rucola und Kresse", "1 handful arugula and cress"],
+"Müsli mit Joghurt & Banane": ["1 Handvoll Heidelbeeren", "1 handful blueberries"],
+"Banane mit Erdnussbutter": ["1 TL Kakaonibs", "1 tsp cacao nibs"],
+"Datteln mit Walnüssen": ["1 Apfel in Spalten", "1 apple in wedges"],
+"Vollkornbrot mit Ei & Avocado": ["1 Tomate und Schnittlauch", "1 tomato and chives"],
+"Couscous-Salat": ["3 EL Granatapfelkerne", "3 tbsp pomegranate seeds"],
+"Falafel-Wrap": ["50 g Rotkraut und 1 Tomate", "50 g red cabbage and 1 tomato"],
+"Hummus-Brot mit Gemüse": ["1 Karotte und 1/2 Gurke in Sticks", "1 carrot and 1/2 cucumber in sticks"],
+"Energy Balls": ["1 EL Kokosraspeln zum Wälzen", "1 tbsp desiccated coconut for rolling"],
+"Nuss-Frucht-Mix": ["1 Birne", "1 pear"],
+"Gurkensalat mit Joghurt": ["1 Bund Radieschen", "1 bunch radishes"],
+"Tomate-Mozzarella leicht": ["1 Scheibe Vollkornbrot", "1 slice whole-grain bread"],
+"Blattsalat mit Hähnchen": ["1 geraspelte Karotte und 2 EL Mais", "1 grated carrot and 2 tbsp corn"],
+"Caesar Salat light": ["30 g Parmesan und Croûtons", "30 g parmesan and croutons"],
+"Rote-Bete-Salat": ["1 Apfel in Würfeln", "1 apple, diced"],
+"Karottensalat mit Apfel": ["1 EL Walnüsse gehackt", "1 tbsp chopped walnuts"],
+"Krautsalat": ["1 Apfel geraspelt", "1 apple, grated"],
+"Asiatischer Gurkensalat": ["1 Karotte in Streifen und Koriander", "1 carrot in strips and cilantro"],
+"Salat-Wraps mit Pute": ["1/2 Paprika und 1 Karotte", "1/2 pepper and 1 carrot"],
+"Chia-Pudding mit Mango": ["2 EL Kokoschips", "2 tbsp coconut chips"],
+"Beeren-Quark": ["1 EL Haferflocken", "1 tbsp oats"],
+"Apfel mit Zimt & Joghurt": ["1 EL gehackte Mandeln", "1 tbsp chopped almonds"],
+"Melonensalat mit Feta": ["1/2 Gurke in Würfeln", "1/2 cucumber, diced"],
+"Gurken-Hüttenkäse-Snack": ["1 Tomate und Dill", "1 tomato and dill"],
+"Paprika mit Frischkäse": ["1/2 Gurke in Sticks", "1/2 cucumber in sticks"],
+"Tomaten-Thunfisch-Salat": ["1 Handvoll Rucola", "1 handful arugula"],
+"Wakame-Salat": ["1 Frühlingszwiebel und Sesam", "1 spring onion and sesame"],
+"Gemüsesticks mit Dip": ["1/2 Gurke und 4 Radieschen", "1/2 cucumber and 4 radishes"],
+};
+const sideDE = (n) => (FRESH_SIDE[n] && FRESH_SIDE[n][0]) || "1 Karotte und 1 Apfel";
+const sideEN = (n) => (FRESH_SIDE[n] && FRESH_SIDE[n][1]) || "1 carrot and 1 apple";
 const MEALS = MEAL_RAW.map((r) => {
   const k = MEAL_KIND[r[5]] || MEAL_KIND.fresh;
   return {
     cat: r[0], kcal: r[1], mins: r[2], mac: macroFor(r[1], r[0], r[3]),
-    name: r[3], desc: k.d[0], ing: k.g[0](r[6]), steps: k.s[0](),
-    en: { name: r[4], desc: k.d[1], ing: k.g[1](r[7]), steps: k.s[1]() },
+    name: r[3], desc: k.d[0], ing: k.g[0](r[6], r[3]), steps: k.s[0](),
+    en: { name: r[4], desc: k.d[1], ing: k.g[1](r[7], r[3]), steps: k.s[1]() },
   };
 });
 /* Stabile Makro-Schätzung (Protein/KH/Fett in g) aus kcal + Kategorie.
