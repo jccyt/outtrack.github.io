@@ -1,14 +1,15 @@
 {
-  "name": "OutTrack — Outdo Hub",
+  "name": "OutTrack — Personal Growth & Habits",
   "short_name": "OutTrack",
-  "description": "Personal growth + habit tracking with Outdo Mode deep work.",
+  "description": "Offline-first Habit-Tracking, Journal, Food-Tipps + Outdo Mode. Deine Daten bleiben bei dir.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#08090c",
-  "theme_color": "#08090c",
+  "background_color": "#f2f2f7",
+  "theme_color": "#f2f2f7",
   "icons": [
-    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
   ]
 }

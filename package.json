@@ -1,0 +1,13 @@
+{
+  "name": "outtrack",
+  "version": "3.5.0",
+  "private": true,
+  "description": "OutTrack v3.5 — offline-first habit & growth PWA (no runtime dependencies)",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "smoke": "node --test test/smoke.test.js"
+  },
+  "devDependencies": {
+    "jsdom": "^24.1.3"
+  }
+}

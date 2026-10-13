@@ -4,75 +4,72 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>OutTrack</title>
-<meta name="theme-color" content="#0a0a0e" />
-<meta name="description" content="OutTrack — Habits, Journal, Food-Tipps + Outdo Mode." />
+<meta name="description" content="OutTrack — offline-first Habit-Tracking, Journal, Food-Tipps + Outdo Mode. Deine Daten bleiben bei dir." />
+<meta name="theme-color" content="#f2f2f7" />
 <link rel="manifest" href="manifest.webmanifest" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="OutTrack" />
-<link rel="apple-touch-icon" href="icon.svg" />
+<link rel="apple-touch-icon" href="icon.png" />
 <link rel="icon" type="image/svg+xml" href="icon.svg" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+<div id="splash" role="status" aria-label="OutTrack"><img src="icon.svg" alt="" /><strong>OutTrack</strong></div>
 <div id="app">
 
   <!-- HUB -->
   <section id="view-hub" class="view active">
     <header class="navlarge">
-      <div class="nav-mark" aria-hidden="true">◍</div>
-      <p class="nav-eyebrow" id="hub-greet">Hey.</p>
-      <h1 id="hub-quote">Kleine Siege summieren sich.</h1>
+      <p id="hub-date" class="nav-eyebrow">—</p>
+      <h1 data-i18n="nav_hub">Hub</h1>
     </header>
     <div class="content">
-      <p class="nav-eyebrow" id="hub-date">—</p>
-      <div class="focus-day">
-        <input id="day-focus" type="text" maxlength="80" data-i18n-ph="df_ph" placeholder="Heutiger Fokus …" aria-label="Tagesfokus" />
-        <button id="freeze-btn" class="freeze-btn" hidden>🧊 Freeze</button>
-      </div>
-
-      <div class="hero">
-        <div class="hero-stats">
-          <div class="hero-side">
-            <div class="hero-num"><span id="streak-count">0</span><span class="bolt">⚡</span></div>
-            <div class="hero-lbl" data-i18n="streak_days">Streak</div>
-          </div>
-          <div class="hero-ring">
-            <svg viewBox="0 0 120 120" class="ring" role="img" aria-label="Tagesfortschritt">
-              <circle cx="60" cy="60" r="52" class="ring-bg"/>
-              <circle cx="60" cy="60" r="52" class="ring-fg" id="ring-fg"/>
-              <text x="60" y="62" text-anchor="middle" class="ring-pct" id="ring-pct">0</text>
-              <text x="60" y="80" text-anchor="middle" class="ring-sub">OVERALL</text>
-            </svg>
-          </div>
-          <div class="hero-side right">
-            <div class="hero-num" id="perfect-count">0</div>
-            <div class="hero-lbl" data-i18n="perfect_days">100% Tage</div>
+      <div class="card hero-card" id="hero-card">
+        <p id="hero-greet" class="hero-greet">—</p>
+        <div id="week-strip" class="week-strip" role="img" aria-label="Woche"></div>
+        <div class="gauge-wrap">
+          <svg viewBox="0 0 200 118" class="gauge" role="img" aria-label="Tagesfortschritt" aria-hidden="true">
+            <path d="M 20 100 A 80 80 0 0 1 180 100" class="gauge-bg" pathLength="100"/>
+            <path d="M 20 100 A 80 80 0 0 1 180 100" class="gauge-fg" id="ring-fg" pathLength="100"/>
+            <g id="gauge-needle"><polygon points="12,100 26,94 26,106" class="needle"/></g>
+          </svg>
+          <div class="gauge-text">
+            <div class="gauge-pct" id="ring-pct">0%</div>
+            <div class="gauge-sub muted" id="ring-sub">0 / 0</div>
           </div>
         </div>
+        <p class="goal-line muted"><span data-i18n="hero_goal">Tagesziel: 100 %</span> <span id="hero-done" hidden>· 🎉</span></p>
+        <div class="hero-pills">
+          <span class="pill" style="--d:0"><span aria-hidden="true">⚡</span><strong id="streak-count">0</strong><small data-i18n="streak_days">Tage Streak</small></span>
+          <span class="pill" style="--d:1"><span aria-hidden="true">🏆</span><strong id="perfect-count">0</strong><small data-i18n="perfect_label">100 %-Tage</small></span>
+          <span class="pill" style="--d:2"><span aria-hidden="true">◆</span><strong id="hero-pts">0</strong><small>PTS</small></span>
+        </div>
+        <button id="freeze-btn" class="freeze-btn" data-i18n="freeze_btn" hidden>🧊 Streak retten</button>
+        <p id="hub-quote" class="muted">Kleine Siege summieren sich.</p>
         <div class="points-mini" id="points-mini"></div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div>
-        <div class="chart-head"><h2 data-i18n="chart_title">Tagesverlauf</h2>
-          <div class="pills" id="chart-range">
-            <button data-days="7" class="active">7 Tage</button>
-            <button data-days="30">30 Tage</button>
-          </div>
+        <label class="field-label" for="focus-goal" data-i18n="quest_title">Heutige Quest</label>
+        <input id="focus-goal" type="text" maxlength="120" data-i18n-ph="quest_ph" placeholder="Ein Satz: Was zählt heute?" autocomplete="off" />
+        <div class="segmented" id="chart-range" role="group" aria-label="Chart">
+          <button data-range="7" class="active" data-i18n="chart_7">7 Tage</button>
+          <button data-range="30" data-i18n="chart_30">30 Tage</button>
         </div>
-        <svg id="chart" viewBox="0 0 320 150" preserveAspectRatio="none" role="img" aria-label="Verlauf"></svg>
+        <svg id="chart-svg" viewBox="0 0 300 90" class="chart" role="img" aria-label="Verlauf"></svg>
       </div>
-
-      <div class="divider"></div>
 
       <div class="section-head"><h2 data-i18n="sec_habits">Habits</h2><button id="add-habit-btn" class="link-btn" data-i18n="add_new">+ Neu</button></div>
       <ul id="habit-list" class="inset-list"></ul>
+      <p id="habits-empty" class="empty-note" hidden data-i18n="empty_habits">Noch keine Quest aktiv — leg deine erste fest. 🌱</p>
+
+      <div class="card" id="routine-card">
+        <h2 data-i18n="routine_title">Deine Routine</h2>
+        <div id="routine-rows"></div>
+        <button id="routine-go" class="secondary-btn review-btn" data-i18n="remind_title">Erinnerungen</button>
+      </div>
 
       <div class="card pro-only">
-        <div class="stat-top"><h2 data-i18n="ov_title">Progressive Overload</h2><span class="badge" id="pr-count">0 PR</span></div>
+        <div class="stat-top"><h2 data-i18n="ov_title">Progressive Overload</h2><span class="badge" id="pr-count">0 PRs</span></div>
         <p class="muted" data-i18n="ov_sub">Kraft loggen — die App meldet PRs und zeigt Progression.</p>
         <div class="form-grid">
           <input id="lift-ex" type="text" list="lift-ex-list" maxlength="30" data-i18n-ph="ex_ph" placeholder="Übung, z. B. Bankdrücken" aria-label="Übung" />
@@ -95,18 +92,19 @@
       </div>
 
       <button id="launch-focus" class="apple-btn"><span class="btn-main" data-i18n="launch_title">Outdo Mode starten</span><span class="btn-sub" data-i18n="launch_sub">45 Min. Deep Work</span></button>
-      <p class="footnote" data-i18n="hub_foot">Antippen zum Abhaken. Alles wird offline gespeichert.</p>
+      <p class="footnote" data-i18n="hub_foot">Antippen zum Abhaken. Deine Daten bleiben bei dir — alles offline.</p>
     </div>
   </section>
 
   <!-- JOURNAL -->
   <section id="view-journal" class="view">
-    <header class="navlarge"><div class="nav-mark" aria-hidden="true">✎</div><p class="nav-eyebrow" data-i18n="eyebrow_reflexion">Reflexion</p><h1 data-i18n="nav_journal">Journal</h1></header>
+    <header class="navlarge"><p class="nav-eyebrow" data-i18n="eyebrow_reflexion">Reflexion</p><h1 data-i18n="nav_journal">Journal</h1></header>
     <div class="content">
       <div class="card">
         <input id="journal-title" type="text" maxlength="60" data-i18n-ph="j_title_ph" placeholder="Titel (optional)" aria-label="Titel" />
         <textarea id="journal-text" rows="4" maxlength="2000" data-i18n-ph="j_text_ph" placeholder="Was beschäftigt dich gerade? …" aria-label="Journaltext"></textarea>
         <button id="journal-save" class="apple-btn" data-i18n="j_save">Eintrag speichern</button>
+        <button id="journal-review-btn" class="secondary-btn review-btn" data-i18n="journal_review">Wochenrückblick übernehmen</button>
         <p class="consent-note">🔒 <span data-i18n="j_consent">Wird nur lokal auf deinem Gerät gespeichert.</span></p>
       </div>
       <div class="section-head"><h2 data-i18n="sec_entries">Einträge</h2><button id="journal-search-clear" class="link-btn" hidden>×</button></div>
@@ -117,8 +115,13 @@
 
   <!-- OUTDO MODE -->
   <section id="view-focus" class="view">
-    <header class="navlarge"><div class="nav-mark" aria-hidden="true">◎</div><p class="nav-eyebrow" data-i18n="eyebrow_deep">Deep Work</p><h1 data-i18n="nav_focus">Outdo Mode</h1></header>
+    <header class="navlarge"><p class="nav-eyebrow" data-i18n="eyebrow_deep">Deep Work</p><h1 data-i18n="nav_focus">Outdo Mode</h1></header>
     <div class="content" id="focus-stage">
+      <div class="card">
+        <h2 data-i18n="wg_title">Widgets</h2>
+        <div class="wg-grid" id="wg-grid"></div>
+        <p class="wg-hint install-only" data-i18n="wg_hint"></p>
+      </div>
       <div class="segmented" id="presets" role="group" aria-label="Dauer">
         <button data-min="25">25</button>
         <button data-min="45" class="active">45</button>
@@ -153,12 +156,12 @@
           <option value="off" data-i18n="snd_off">Aus — Stille</option>
           <option value="white" data-i18n="snd_white">Weißes Rauschen</option>
           <option value="rain" data-i18n="snd_rain">Regen</option>
-          <option value="synth" data-i18n="snd_synth">Cyberpunk Synth</option>
+          <option value="synth" data-i18n="snd_synth">Synth-Fläche</option>
         </select>
       </div>
       <div class="card">
         <label class="field-label" for="focus-input" data-i18n="focus_q">Was ist dein einzelner Fokus für diesen Block?</label>
-        <input id="focus-input" type="text" maxlength="120" data-i18n-ph="focus_ph" placeholder="z. B. OutTrack v1 fertigstellen" autocomplete="off" />
+        <input id="focus-input" type="text" maxlength="120" data-i18n-ph="focus_ph" placeholder="z. B. OutTrack v3 fertigstellen" autocomplete="off" />
         <p id="focus-saved">✓</p>
       </div>
       <div class="row2">
@@ -170,7 +173,7 @@
 
   <!-- FOOD -->
   <section id="view-food" class="view">
-    <header class="navlarge"><div class="nav-mark" aria-hidden="true">◍</div><p class="nav-eyebrow" data-i18n="eyebrow_energy">Energie</p><h1 data-i18n="nav_food">Food-Tipps</h1></header>
+    <header class="navlarge"><p class="nav-eyebrow" data-i18n="eyebrow_energy">Energie</p><h1 data-i18n="nav_food">Food-Tipps</h1></header>
     <div class="content">
       <div class="segmented" id="meal-filter">
         <button data-cat="alle" class="active" data-i18n="mf_all">Alle</button>
@@ -199,11 +202,19 @@
 
   <!-- STATS -->
   <section id="view-analytics" class="view">
-    <header class="navlarge"><div class="nav-mark" aria-hidden="true">▦</div><p class="nav-eyebrow" data-i18n="eyebrow_cons">Konsistenz</p><h1 data-i18n="nav_stats">Stats</h1></header>
+    <header class="navlarge"><p class="nav-eyebrow" data-i18n="eyebrow_cons">Konsistenz</p><h1 data-i18n="nav_stats">Stats</h1></header>
     <div class="content">
       <div class="card pro-only">
-        <div class="stat-top"><h2 data-i18n="rv_title">Wochenrückblick</h2><button id="review-copy" class="link-btn" data-i18n="rv_copy">Ins Journal</button></div>
-        <p class="review-text" id="review-text">—</p>
+        <h2 data-i18n="weekly_title">Wochenrückblick</h2>
+        <p class="muted" id="weekly-review" data-i18n="weekly_empty">Noch zu wenig Daten — the journey continues.</p>
+      </div>
+      <div class="card pro-only">
+        <div class="tiles" id="week-tiles"></div>
+      </div>
+      <div class="card pro-only">
+        <div class="stat-top"><h2 data-i18n="summit_title">Der Gipfel</h2><span class="badge" id="summit-pct">0 %</span></div>
+        <p class="muted" data-i18n="summit_sub">Dein Weg als Reise — jeder Schritt zählt.</p>
+        <svg id="summit-svg" viewBox="0 0 300 130" class="summit" role="img" aria-label="Gipfel"></svg>
       </div>
       <div class="card pro-only">
         <h2 data-i18n="lb_title">Bestenliste</h2>
@@ -223,7 +234,7 @@
       </div>
       <div class="card">
         <h2 data-i18n="id_title">Identität</h2>
-        <p class="muted" data-i18n="id_sub">Jeder Habit = +10 Punkte im Lebensbereich.</p>
+        <p class="muted" data-i18n="id_sub">Jeder Habit = +10 Punkte im Lebensbereich. 70 Punkte = Levelaufstieg.</p>
         <div id="identity"></div>
       </div>
       <div class="card">
@@ -232,7 +243,7 @@
       </div>
       <div class="card">
         <h2 data-i18n="lg_sec">Rechtliches &amp; Info</h2>
-        <p class="muted">OutTrack v3.0 · Offline</p>
+        <p class="muted">OutTrack v3.5 · Offline</p>
         <ul class="link-list">
           <li><button data-legal="privacy" data-i18n="legal_privacy">Datenschutzerklärung</button></li>
           <li><button data-legal="terms" data-i18n="legal_terms">Nutzungsbedingungen</button></li>
@@ -254,12 +265,21 @@
 
   <!-- SETTINGS -->
   <section id="view-settings" class="view">
-    <header class="navlarge"><div class="nav-mark" aria-hidden="true">⚙</div><p class="nav-eyebrow" data-i18n="eyebrow_app">App</p><h1 data-i18n="nav_settings">Einstellungen</h1></header>
+    <header class="navlarge"><p class="nav-eyebrow" data-i18n="eyebrow_app">App</p><h1 data-i18n="nav_settings">Einstellungen</h1></header>
     <div class="content">
       <div class="card">
         <h2 data-i18n="set_lang_title">Sprache</h2>
         <p class="muted" data-i18n="set_lang_sub">Gilt sofort für die gesamte App.</p>
         <ul class="link-list" id="lang-list"></ul>
+      </div>
+      <div class="card">
+        <h2 data-i18n="theme_title">Erscheinungsbild</h2>
+        <p class="muted" data-i18n="theme_sub">Wird lokal auf dem Gerät gespeichert.</p>
+        <div class="theme-toggle" id="theme-toggle" data-v="light" role="group">
+          <span class="tt-knob" aria-hidden="true"></span>
+          <button data-theme="light" class="active">☀️ <span data-i18n="theme_light">Hell</span></button>
+          <button data-theme="dark">🌙 <span data-i18n="theme_dark">Dunkel</span></button>
+        </div>
       </div>
       <div class="card" id="pro-card">
         <div class="stat-top"><h2 data-i18n="set_pro_title">OutTrack Premium</h2><span class="badge" id="pro-badge">FREE</span></div>
@@ -272,12 +292,19 @@
         <button id="pro-lock" class="secondary-btn pro-lock-btn" data-i18n="pro_lock" hidden>Zu Free wechseln</button>
       </div>
       <div class="card">
-        <h2 data-i18n="nt_title">Erinnerungen</h2>
-        <p class="muted" data-i18n="nt_sub">Lokal auf diesem Gerät — kein Server.</p>
-        <div class="link-list">
-          <div class="notif-row"><span data-i18n="nt_morning">Morgens: Habits</span><input type="time" id="notif-morning" value="08:00" aria-label="Morgens" /></div>
-          <div class="notif-row"><span data-i18n="nt_evening">Abends: Journal</span><input type="time" id="notif-evening" value="21:00" aria-label="Abends" /></div>
-          <div class="notif-row"><span data-i18n="nt_enable">Aktiviert</span><input type="checkbox" id="notif-enable" class="switch" role="switch" aria-label="Erinnerungen" /></div>
+        <h2 data-i18n="remind_title">Erinnerungen</h2>
+        <p class="muted" data-i18n="remind_sub">Lokal auf diesem Gerät — kein Server.</p>
+        <div class="form-row">
+          <label for="remind-toggle" data-i18n="remind_enable">Erinnern</label>
+          <input id="remind-toggle" type="checkbox" class="switch" />
+        </div>
+        <div class="form-row">
+          <label for="remind-morning" data-i18n="remind_morning">Morgens</label>
+          <input id="remind-morning" type="time" value="07:30" />
+        </div>
+        <div class="form-row">
+          <label for="remind-evening" data-i18n="remind_evening">Abends</label>
+          <input id="remind-evening" type="time" value="21:00" />
         </div>
       </div>
       <div class="card">
@@ -286,7 +313,7 @@
       </div>
       <div class="card">
         <h2 data-i18n="set_info_title">Info</h2>
-        <p class="muted">OutTrack v3.0 · Offline · 0 Tracker · 0 Cookies</p>
+        <p class="muted">OutTrack v3.5 · Offline · 0 Tracker · 0 Cookies</p>
       </div>
     </div>
   </section>
@@ -302,9 +329,9 @@
 </div>
 
 <div id="sheet-backdrop" hidden></div>
-<div id="sheet" hidden>
+<div id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
   <div class="grabber" aria-hidden="true"></div>
-  <h3 data-i18n="sh_title">Neuer Habit</h3>
+  <h3 id="sheet-title" data-i18n="sh_title">Neuer Habit</h3>
   <input id="new-habit-label" type="text" maxlength="28" data-i18n-ph="sh_name_ph" placeholder="z. B. Tief lesen" aria-label="Name" />
   <div class="segmented" id="area-pick">
     <button data-area="mind" class="active" data-i18n="area_mind">Mind</button>
@@ -313,29 +340,26 @@
   </div>
   <div class="segmented" id="goal-pick">
     <button data-goal="daily" class="active" data-i18n="goal_daily">Täglich</button>
-    <button data-goal="weekly" data-i18n="goal_weekly">Pro Woche</button>
+    <button data-goal="weekly" data-i18n="goal_weekly">×/Woche</button>
     <button data-goal="target" data-i18n="goal_target">Zielzahl</button>
   </div>
-  <div class="goal-row" id="goal-num-row" hidden>
-    <input id="goal-num" type="number" min="1" max="99" value="3" aria-label="Anzahl" />
-    <span class="muted" id="goal-unit-lbl">× / Woche</span>
-  </div>
+  <label id="goal-count-row" class="goal-row" hidden><span data-i18n="goal_count_lbl">Anzahl</span><input id="goal-count" type="number" inputmode="numeric" min="1" max="99" value="3" aria-label="Anzahl" /></label>
   <div class="sheet-row">
     <button id="sheet-cancel" class="secondary-btn" data-i18n="sh_cancel">Abbrechen</button>
     <button id="sheet-save" class="apple-btn" data-i18n="sh_add">Hinzufügen</button>
   </div>
 </div>
 
-<div id="sheet-proof-backdrop" hidden></div>
-<div id="sheet-proof" hidden>
+<div id="proof-backdrop" hidden></div>
+<div id="proof-sheet" role="dialog" aria-modal="true" aria-labelledby="proof-title" hidden>
   <div class="grabber" aria-hidden="true"></div>
-  <h3 id="proof-title">Beweis</h3>
-  <textarea id="proof-note" rows="2" maxlength="280" data-i18n-ph="pf_note_ph" placeholder="Kurze Notiz …" aria-label="Notiz"></textarea>
-  <input id="proof-photo" type="file" accept="image/*" aria-label="Foto" />
+  <h3 id="proof-title" data-i18n="proof_title">Beweis festhalten</h3>
   <img id="proof-preview" class="proof-preview" alt="" hidden />
+  <input id="proof-note" type="text" maxlength="140" data-i18n-ph="proof_note_ph" placeholder="Notiz zum Beweis …" aria-label="Notiz" />
+  <label class="file-btn"><span data-i18n="proof_photo_lbl">Foto</span><input id="proof-photo" type="file" accept="image/*" /></label>
   <div class="sheet-row">
     <button id="proof-cancel" class="secondary-btn" data-i18n="sh_cancel">Abbrechen</button>
-    <button id="proof-save" class="apple-btn" data-i18n="j_save">Speichern</button>
+    <button id="proof-save" class="apple-btn" data-i18n="proof_save">Beweis speichern</button>
   </div>
 </div>
 
