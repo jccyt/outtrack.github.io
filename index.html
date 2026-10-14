@@ -50,13 +50,13 @@
             <div class="gauge-sub muted" id="ring-sub">0 / 0</div>
           </div>
         </div>
-        <p class="goal-line muted"><span data-i18n="hero_goal">Tagesziel: 100 %</span> <span id="hero-done" hidden>· 🎉</span></p>
+        <p class="goal-line muted"><span data-i18n="hero_goal">Tagesziel: 100 %</span> <span id="hero-done" hidden>· ✓</span></p>
         <div class="hero-pills">
-          <span class="pill" style="--d:0"><span aria-hidden="true">⚡</span><strong id="streak-count">0</strong><small data-i18n="streak_days">Tage Streak</small></span>
-          <span class="pill" style="--d:1"><span aria-hidden="true">🏆</span><strong id="perfect-count">0</strong><small data-i18n="perfect_label">100 %-Tage</small></span>
-          <span class="pill" style="--d:2"><span aria-hidden="true">◆</span><strong id="hero-pts">0</strong><small>PTS</small></span>
+          <span class="pill" style="--d:0"><strong id="streak-count">0</strong><small data-i18n="streak_days">Tage Streak</small></span>
+          <span class="pill" style="--d:1"><strong id="perfect-count">0</strong><small data-i18n="perfect_label">100 %-Tage</small></span>
+          <span class="pill" style="--d:2"><strong id="hero-pts">0</strong><small>PTS</small></span>
         </div>
-        <button id="freeze-btn" class="freeze-btn" data-i18n="freeze_btn" hidden>🧊 Streak retten</button>
+        <button id="freeze-btn" class="freeze-btn" data-i18n="freeze_btn" hidden>Streak retten</button>
         <p id="hub-quote" class="muted">Kleine Siege summieren sich.</p>
         <div class="points-mini" id="points-mini"></div>
         <label class="field-label" for="focus-goal" data-i18n="quest_title">Heutige Quest</label>
@@ -70,7 +70,7 @@
 
       <div class="section-head"><h2 data-i18n="sec_habits">Habits</h2><button id="add-habit-btn" class="link-btn" data-i18n="add_new">+ Neu</button></div>
       <ul id="habit-list" class="inset-list"></ul>
-      <p id="habits-empty" class="empty-note" hidden data-i18n="empty_habits">Noch keine Quest aktiv — leg deine erste fest. 🌱</p>
+      <p id="habits-empty" class="empty-note" hidden data-i18n="empty_habits">Noch keine Quest aktiv — leg deine erste fest.</p>
 
       <div class="card" id="routine-card">
         <h2 data-i18n="routine_title">Deine Routine</h2>
@@ -98,7 +98,7 @@
         <textarea id="journal-text" rows="4" maxlength="2000" data-i18n-ph="j_text_ph" placeholder="Was beschäftigt dich gerade? …" aria-label="Journaltext"></textarea>
         <button id="journal-save" class="apple-btn" data-i18n="j_save">Eintrag speichern</button>
         <button id="journal-review-btn" class="secondary-btn review-btn" data-i18n="journal_review">Wochenrückblick übernehmen</button>
-        <p class="consent-note">🔒 <span data-i18n="j_consent">Wird nur lokal auf deinem Gerät gespeichert.</span></p>
+        <p class="consent-note"><span data-i18n="j_consent">Wird nur lokal auf deinem Gerät gespeichert.</span></p>
       </div>
       <div class="section-head"><h2 data-i18n="sec_entries">Einträge</h2><button id="journal-search-clear" class="link-btn" hidden>×</button></div>
       <input id="journal-search" type="search" data-i18n-ph="j_search_ph" placeholder="Suchen" aria-label="Suchen" />
@@ -229,7 +229,7 @@
       </div>
       <div class="card">
         <h2 data-i18n="lg_sec">Rechtliches &amp; Info</h2>
-        <p class="muted">OutTrack v3.19 · Offline</p>
+        <p class="muted">OutTrack v3.20 · Offline</p>
         <ul class="link-list">
           <li><button data-legal="privacy" data-i18n="legal_privacy">Datenschutzerklärung</button></li>
           <li><button data-legal="terms" data-i18n="legal_terms">Nutzungsbedingungen</button></li>
@@ -263,8 +263,8 @@
         <p class="muted" data-i18n="theme_sub">Wird lokal auf dem Gerät gespeichert.</p>
         <div class="theme-toggle" id="theme-toggle" data-v="light" role="group">
           <span class="tt-knob" aria-hidden="true"></span>
-          <button data-theme="light" class="active">☀️ <span data-i18n="theme_light">Hell</span></button>
-          <button data-theme="dark">🌙 <span data-i18n="theme_dark">Dunkel</span></button>
+          <button data-theme="light" class="active"><span data-i18n="theme_light">Hell</span></button>
+          <button data-theme="dark"><span data-i18n="theme_dark">Dunkel</span></button>
         </div>
       </div>
       <div class="card">
@@ -289,7 +289,7 @@
       </div>
       <div class="card">
         <h2 data-i18n="set_info_title">Info</h2>
-        <p class="muted">OutTrack v3.19 · Offline · 0 Tracker · 0 Cookies</p>
+        <p class="muted">OutTrack v3.20 · Offline · 0 Tracker · 0 Cookies</p>
       </div>
     </div>
   </section>
@@ -363,9 +363,9 @@
   <p class="muted center" data-i18n="rd_sub">Eine der drei Mikro-Aktionen wählen, dann ist der Impuls vorbei.</p>
   <div id="redirect-count" class="redirect-count" role="timer">60</div>
   <div class="redirect-actions">
-    <button data-ra="water">🥛 <span data-i18n="ra_water">Wasser trinken</span></button>
-    <button data-ra="pushups">💪 <span data-i18n="ra_pushups">10 Liegestütze</span></button>
-    <button data-ra="read">📄 <span data-i18n="ra_read">Fokus laut lesen</span></button>
+    <button data-ra="water"><span data-i18n="ra_water">Wasser trinken</span></button>
+    <button data-ra="pushups"><span data-i18n="ra_pushups">10 Liegestütze</span></button>
+    <button data-ra="read"><span data-i18n="ra_read">Fokus laut lesen</span></button>
   </div>
   <button id="redirect-cancel" class="secondary-btn" data-i18n="rd_cancel">Abbrechen</button>
 </div>

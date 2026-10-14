@@ -23,30 +23,30 @@ de: {
   wg_hint: "Auf iPhone & Android: OutTrack installieren — Widgets gibt's nur in der App, nicht im Browser.",
   summit_title: "Der Gipfel", summit_sub: "Dein Weg als Reise — jeder Schritt zählt.",
   wk_checkins: "Check-ins", wk_pts: "PTS · 7 Tage",
-  streak_days: "Tage Streak", perfect_label: "100 %-Tage", freeze_btn: "🧊 Streak retten",
+  streak_days: "Tage Streak", perfect_label: "100 %-Tage", freeze_btn: "Streak retten",
   freeze_ok: "Streak gerettet — the journey continues.", freeze_limit: "Freeze geht erst nächste Woche wieder.",
   chart_7: "7 Tage", chart_30: "30 Tage",
-  sec_habits: "Habits", add_new: "+ Neu", empty_habits: "Noch keine Quest aktiv — leg deine erste fest. 🌱",
+  sec_habits: "Habits", add_new: "+ Neu", empty_habits: "Noch keine Quest aktiv — leg deine erste fest. ",
   sh_title: "Neuer Habit", sh_name_ph: "z. B. Tief lesen", sh_cancel: "Abbrechen", sh_add: "Hinzufügen",
   area_mind: "Mind", area_body: "Body", area_craft: "Craft",
   goal_daily: "Täglich", goal_weekly: "×/Woche", goal_target: "Zielzahl", goal_count_lbl: "Anzahl",
-  habit_added: "Quest angenommen. Viel Spaß! 🎯", habit_deleted: "Habit gelöscht.", habit_done: "+1 — stark!",
+ habit_added: "Quest angenommen. Viel Spaß!", habit_deleted: "Habit gelöscht.", habit_done: "+1 — stark!",
   proof_btn: "Beweis", proof_title: "Beweis festhalten", proof_note_ph: "Notiz zum Beweis …",
-  proof_photo_lbl: "Foto", proof_save: "Beweis speichern", proof_saved: "Beweis gespeichert. 📸",
+  proof_photo_lbl: "Foto", proof_save: "Beweis speichern", proof_saved: "Beweis gespeichert. ",
   rc_title: "Fokus-Check", rc_sub: "Greifst du gerade zum Handy, obwohl du arbeiten wolltest? 60 Sekunden Pause statt Autopilot.",
   rc_open: "Impuls umleiten", rd_title: "60 Sekunden — sonst nichts",
   rd_sub: "Eine der drei Mikro-Aktionen wählen, dann ist der Impuls vorbei.",
   ra_water: "Wasser trinken", ra_pushups: "10 Liegestütze", ra_read: "Fokus laut lesen", rd_cancel: "Abbrechen",
-  redirect_done: "Umgeleitet +5 MIND. Stark! 💧",
+ redirect_done: "Umgeleitet +5 MIND. Stark!",
   launch_title: "Outdo Mode starten", launch_sub: "45 Min. Deep Work",
   hub_foot: "Antippen zum Abhaken. Deine Daten bleiben bei dir — alles offline.",
   eyebrow_reflexion: "Reflexion", j_title_ph: "Titel (optional)", j_text_ph: "Was beschäftigt dich gerade? …",
   j_save: "Eintrag speichern", j_consent: "Wird nur lokal auf deinem Gerät gespeichert.",
   journal_review: "Wochenrückblick übernehmen", journal_empty: "Schreib erst ein paar Worte.",
-  entry_saved: "Eintrag gespeichert. ✍️", entry_deleted: "Eintrag gelöscht.", review_inserted: "Rückblick eingefügt.",
+ entry_saved: "Eintrag gespeichert.", entry_deleted: "Eintrag gelöscht.", review_inserted: "Rückblick eingefügt.",
   sec_entries: "Einträge", j_search_ph: "Suchen",
   eyebrow_deep: "Deep Work", t_hours: "Std.", t_minutes: "Min.", t_seconds: "Sek.", custom_apply: "Eigene Zeit übernehmen",
-  st_ready: "Bereit", st_running: "Läuft …", st_paused: "Pausiert", st_done: "Geschafft 🎉",
+  st_ready: "Bereit", st_running: "Läuft …", st_paused: "Pausiert", st_done: "Geschafft ",
   timer_start: "Block starten", timer_pause: "Pause", timer_resume: "Weiter", timer_reset: "Reset",
   focus_done: "Fokus-Block geschafft. +{mins} Min. im Log.",
   sound_lbl: "Umgebung", snd_off: "Aus — Stille", snd_white: "Weißes Rauschen", snd_rain: "Regen", snd_synth: "Synth-Fläche",
@@ -74,15 +74,15 @@ de: {
   legal_refund: "Erstattungsrichtlinie", legal_cookies: "Cookie-Richtlinie", legal_imprint: "Betreiber & Kontakt",
   legal_licenses: "Lizenzen & Hinweise", legal_close: "Schließen",
   dt_title: "Daten", btn_export: "Exportieren", btn_reset: "Alle Daten löschen",
-  export_ok: "Export heruntergeladen. 📦", reset_confirm: "Wirklich alle Daten auf diesem Gerät löschen?",
-  reset_done: "Alles gelöscht. Neustart wartet. 🌱",
+ export_ok: "Export heruntergeladen.", reset_confirm: "Wirklich alle Daten auf diesem Gerät löschen?",
+ reset_done: "Alles gelöscht. Neustart wartet.",
   eyebrow_app: "App", set_lang_title: "Sprache", set_lang_sub: "Gilt sofort für die gesamte App.",
   theme_title: "Erscheinungsbild", theme_sub: "Wird lokal auf dem Gerät gespeichert.",
   theme_light: "Hell", theme_dark: "Dunkel",
   remind_title: "Erinnerungen", remind_sub: "Lokal auf diesem Gerät — kein Server.",
   remind_enable: "Erinnern", remind_morning: "Morgens", remind_evening: "Abends",
   remind_denied: "Mitteilungen blockiert — bitte in den Systemeinstellungen erlauben.",
-  remind_saved: "Erinnerungen gespeichert. 🔔",
+ remind_saved: "Erinnerungen gespeichert.",
   set_store_title: "Speicherung", store_local: "Lokal gespeichert — alles offline auf diesem Gerät.",
   store_memory: "Memory-only — nichts wird gespeichert.",
   set_info_title: "Info", cb_text: "Keine Cookies, keine Tracker — nur lokaler Gerätespeicher.",
@@ -99,30 +99,30 @@ en: {
   wg_hint: "On iPhone & Android: install OutTrack — widgets live in the app, not the browser.",
   summit_title: "The Summit", summit_sub: "Your path as a journey — every step counts.",
   wk_checkins: "Check-ins", wk_pts: "PTS · 7 days",
-  streak_days: "day streak", perfect_label: "100% days", freeze_btn: "🧊 Save streak",
+  streak_days: "day streak", perfect_label: "100% days", freeze_btn: "Save streak",
   freeze_ok: "Streak saved — the journey continues.", freeze_limit: "Freeze returns next week.",
   chart_7: "7 days", chart_30: "30 days",
-  sec_habits: "Habits", add_new: "+ New", empty_habits: "No active quest yet — set your first one. 🌱",
+  sec_habits: "Habits", add_new: "+ New", empty_habits: "No active quest yet — set your first one. ",
   sh_title: "New habit", sh_name_ph: "e.g. Deep reading", sh_cancel: "Cancel", sh_add: "Add",
   area_mind: "Mind", area_body: "Body", area_craft: "Craft",
   goal_daily: "Daily", goal_weekly: "×/week", goal_target: "Target", goal_count_lbl: "Count",
-  habit_added: "Quest accepted. Have fun! 🎯", habit_deleted: "Habit deleted.", habit_done: "+1 — strong!",
+ habit_added: "Quest accepted. Have fun!", habit_deleted: "Habit deleted.", habit_done: "+1 — strong!",
   proof_btn: "Proof", proof_title: "Log proof", proof_note_ph: "Note for this proof…",
-  proof_photo_lbl: "Photo", proof_save: "Save proof", proof_saved: "Proof saved. 📸",
+  proof_photo_lbl: "Photo", proof_save: "Save proof", proof_saved: "Proof saved. ",
   rc_title: "Focus check", rc_sub: "Reaching for your phone although you meant to work? 60 seconds off instead of autopilot.",
   rc_open: "Redirect impulse", rd_title: "60 seconds — nothing else",
   rd_sub: "Pick one of three micro-actions, then the impulse is gone.",
   ra_water: "Drink water", ra_pushups: "10 push-ups", ra_read: "Read focus aloud", rd_cancel: "Cancel",
-  redirect_done: "Redirected +5 MIND. Strong! 💧",
+ redirect_done: "Redirected +5 MIND. Strong!",
   launch_title: "Start Outdo Mode", launch_sub: "45 min deep work",
   hub_foot: "Tap to check off. Your data stays with you — all offline.",
   eyebrow_reflexion: "Reflection", j_title_ph: "Title (optional)", j_text_ph: "What's on your mind? …",
   j_save: "Save entry", j_consent: "Stored only locally on your device.",
   journal_review: "Insert weekly review", journal_empty: "Write a few words first.",
-  entry_saved: "Entry saved. ✍️", entry_deleted: "Entry deleted.", review_inserted: "Review inserted.",
+ entry_saved: "Entry saved.", entry_deleted: "Entry deleted.", review_inserted: "Review inserted.",
   sec_entries: "Entries", j_search_ph: "Search",
   eyebrow_deep: "Deep work", t_hours: "Hrs", t_minutes: "Min", t_seconds: "Sec", custom_apply: "Apply custom time",
-  st_ready: "Ready", st_running: "Running…", st_paused: "Paused", st_done: "Done 🎉",
+  st_ready: "Ready", st_running: "Running…", st_paused: "Paused", st_done: "Done ",
   timer_start: "Start block", timer_pause: "Pause", timer_resume: "Resume", timer_reset: "Reset",
   focus_done: "Focus block done. +{mins} min in the log.",
   sound_lbl: "Ambience", snd_off: "Off — silence", snd_white: "White noise", snd_rain: "Rain", snd_synth: "Synth pad",
@@ -150,15 +150,15 @@ en: {
   legal_refund: "Refund policy", legal_cookies: "Cookie policy", legal_imprint: "Operator & contact",
   legal_licenses: "Licenses & notices", legal_close: "Close",
   dt_title: "Data", btn_export: "Export", btn_reset: "Delete all data",
-  export_ok: "Export downloaded. 📦", reset_confirm: "Really delete all data on this device?",
-  reset_done: "All deleted. A fresh start awaits. 🌱",
+ export_ok: "Export downloaded.", reset_confirm: "Really delete all data on this device?",
+ reset_done: "All deleted. A fresh start awaits.",
   eyebrow_app: "App", set_lang_title: "Language", set_lang_sub: "Applies instantly across the app.",
   theme_title: "Appearance", theme_sub: "Stored locally on this device.",
   theme_light: "Light", theme_dark: "Dark",
   remind_title: "Reminders", remind_sub: "Local on this device — no server.",
   remind_enable: "Remind me", remind_morning: "Morning", remind_evening: "Evening",
   remind_denied: "Notifications blocked — please allow them in system settings.",
-  remind_saved: "Reminders saved. 🔔",
+ remind_saved: "Reminders saved.",
   set_store_title: "Storage", store_local: "Stored locally — all offline on this device.",
   store_memory: "Memory-only — nothing is stored.",
   set_info_title: "Info", cb_text: "No cookies, no trackers — only local device storage.",
@@ -169,7 +169,7 @@ ru: {
   tab_hub: "Хаб", tab_journal: "Дневник", tab_outdo: "Outdo", tab_food: "Еда", tab_stats: "Статы", tab_settings: "Настр.",
   greet_morning: "Доброе утро", greet_day: "Добрый день", greet_evening: "Добрый вечер", greet_night: "Не спится? Путь продолжается.",
   quest_title: "Квест дня", quest_ph: "Одна фраза: что важно сегодня?",
-  streak_days: "дней streak", perfect_label: "дней на 100 %", freeze_btn: "🧊 Спасти streak",
+  streak_days: "дней streak", perfect_label: "дней на 100 %", freeze_btn: "Спасти streak",
   chart_7: "7 дней", chart_30: "30 дней",
   sec_habits: "Привычки", add_new: "+ Нов.", sh_title: "Новая привычка", sh_cancel: "Отмена", sh_add: "Добавить",
   area_mind: "Mind", area_body: "Body", area_craft: "Craft",
@@ -178,7 +178,7 @@ ru: {
   rc_title: "Фокус-проверка", rc_open: "Перенаправить импульс",
   rd_title: "60 секунд — и всё", ra_water: "Выпить воды", ra_pushups: "10 отжиманий", ra_read: "Прочитать фокус вслух", rd_cancel: "Отмена",
   launch_title: "Запустить Outdo", timer_start: "Старт", timer_pause: "Пауза", timer_resume: "Дальше", timer_reset: "Сброс",
-  st_ready: "Готов", st_running: "Идёт…", st_paused: "Пауза", st_done: "Готово 🎉",
+  st_ready: "Готов", st_running: "Идёт…", st_paused: "Пауза", st_done: "Готово ",
   mf_all: "Все", mf_protein: "Белок", mf_energy: "Энергия", mf_light: "Лёгкое", meal_new: "Новый совет", meal_hint: "Нажми для совета",
   r_ing: "Ингредиенты", r_steps: "Приготовление", sec_all: "Все блюда",
   gr_title: "Сетка недель", id_title: "Идентичность", fl_title: "Фокус-лог",
@@ -201,18 +201,18 @@ ru: {
   summit_title: "Вершина", summit_sub: "Твой путь как путешествие — важен каждый шаг.",
   wk_checkins: "Чекины", wk_pts: "PTS · 7 дней",
   freeze_ok: "streak спасён — путь продолжается.", freeze_limit: "Заморозка вернётся на следующей неделе.",
-  empty_habits: "Пока нет активного квеста — задай первый. 🌱", sh_name_ph: "напр. глубокое чтение",
-  habit_added: "Квест принят. Удачи! 🎯", habit_deleted: "Привычка удалена.", habit_done: "+1 — так держать!",
-  proof_note_ph: "Заметка к пруфу…", proof_saved: "Пруф сохранён. 📸",
+ empty_habits: "Пока нет активного квеста — задай первый.", sh_name_ph: "напр. глубокое чтение",
+ habit_added: "Квест принят. Удачи!", habit_deleted: "Привычка удалена.", habit_done: "+1 — так держать!",
+  proof_note_ph: "Заметка к пруфу…", proof_saved: "Пруф сохранён. ",
   rc_sub: "Снова тянешься к телефону, хотя хотел работать? 60 секунд паузы вместо автопилота.",
   rd_sub: "Выбери одно из трёх микродействий — и импульс пройдёт.",
-  redirect_done: "Перенаправлено +5 MIND. Так держать! 💧",
+ redirect_done: "Перенаправлено +5 MIND. Так держать!",
   launch_sub: "45 мин глубокой работы",
   hub_foot: "Нажимай, чтобы отмечать. Твои данные остаются у тебя — всё офлайн.",
   eyebrow_reflexion: "Рефлексия", j_title_ph: "Заголовок (необязательно)", j_text_ph: "Что у тебя на уме? …",
   j_consent: "Хранится только локально на твоём устройстве.",
   journal_empty: "Сначала напиши пару слов.",
-  entry_saved: "Запись сохранена. ✍️", entry_deleted: "Запись удалена.", review_inserted: "Обзор вставлен.",
+ entry_saved: "Запись сохранена.", entry_deleted: "Запись удалена.", review_inserted: "Обзор вставлен.",
   j_search_ph: "Поиск",
   eyebrow_deep: "Глубокая работа", focus_done: "Фокус-блок готов. +{mins} мин в логе.",
   focus_q: "Какой у тебя один фокус на этот блок?", focus_ph: "напр. закончить OutTrack v3",
@@ -232,14 +232,14 @@ ru: {
   id_sub: "Каждая привычка = +10 очков в сфере жизни. 70 очков = новый уровень.",
   fl_empty: "Пока нет блоков — запусти первый Outdo. ◎",
   lg_sec: "Право и инфо",
-  export_ok: "Экспорт скачан. 📦", reset_confirm: "Точно удалить все данные на этом устройстве?",
-  reset_done: "Всё удалено. Чистый старт ждёт. 🌱",
+ export_ok: "Экспорт скачан.", reset_confirm: "Точно удалить все данные на этом устройстве?",
+ reset_done: "Всё удалено. Чистый старт ждёт.",
   eyebrow_app: "Приложение", set_lang_sub: "Применяется сразу ко всему приложению.",
   theme_title: "Внешний вид", theme_sub: "Хранится локально на этом устройстве.",
   theme_light: "Светлая", theme_dark: "Тёмная",
   remind_sub: "Локально на этом устройстве — без сервера.",
   remind_denied: "Уведомления заблокированы — разреши их в системных настройках.",
-  remind_saved: "Напоминания сохранены. 🔔",
+ remind_saved: "Напоминания сохранены.",
   store_local: "Хранится локально — всё офлайн на этом устройстве.",
   store_memory: "Только в памяти — ничего не сохраняется.",
   cb_text: "Никаких куки и трекеров — только локальное хранилище устройства.",
@@ -249,7 +249,7 @@ es: {
   tab_hub: "Hub", tab_journal: "Diario", tab_outdo: "Outdo", tab_food: "Comida", tab_stats: "Stats", tab_settings: "Ajust.",
   greet_morning: "Buenos días", greet_day: "Buenas tardes", greet_evening: "Buenas noches", greet_night: "¿Despierto? El viaje continúa.",
   quest_title: "Misión de hoy", quest_ph: "Una frase: ¿qué cuenta hoy?",
-  streak_days: "días de racha", perfect_label: "días al 100 %", freeze_btn: "🧊 Salvar racha",
+  streak_days: "días de racha", perfect_label: "días al 100 %", freeze_btn: "Salvar racha",
   chart_7: "7 días", chart_30: "30 días",
   sec_habits: "Hábitos", add_new: "+ Nuevo", sh_title: "Nuevo hábito", sh_cancel: "Cancelar", sh_add: "Añadir",
   area_mind: "Mente", area_body: "Cuerpo", area_craft: "Oficio",
@@ -258,7 +258,7 @@ es: {
   rc_title: "Chequeo de foco", rc_open: "Redirigir impulso",
   rd_title: "60 segundos — nada más", ra_water: "Beber agua", ra_pushups: "10 flexiones", ra_read: "Leer el foco en voz alta", rd_cancel: "Cancelar",
   launch_title: "Iniciar Outdo", timer_start: "Empezar", timer_pause: "Pausa", timer_resume: "Seguir", timer_reset: "Reset",
-  st_ready: "Listo", st_running: "En marcha…", st_paused: "En pausa", st_done: "¡Hecho! 🎉",
+  st_ready: "Listo", st_running: "En marcha…", st_paused: "En pausa", st_done: "¡Hecho! ",
   mf_all: "Todo", mf_protein: "Proteína", mf_energy: "Energía", mf_light: "Light", meal_new: "Nuevo tip", meal_hint: "Toca para un tip",
   r_ing: "Ingredientes", r_steps: "Preparación", sec_all: "Todos los platos",
   gr_title: "Cuadrícula", id_title: "Identidad", fl_title: "Registro de foco",
@@ -281,18 +281,18 @@ es: {
   summit_title: "La cima", summit_sub: "Tu camino como un viaje — cada paso cuenta.",
   wk_checkins: "Check-ins", wk_pts: "PTS · 7 días",
   freeze_ok: "Racha salvada — el viaje continúa.", freeze_limit: "El freeze vuelve la próxima semana.",
-  empty_habits: "Aún no hay misión activa — crea la primera. 🌱", sh_name_ph: "p. ej. lectura profunda",
-  habit_added: "Misión aceptada. ¡Diviértete! 🎯", habit_deleted: "Hábito eliminado.", habit_done: "+1 — ¡fuerte!",
-  proof_note_ph: "Nota para esta prueba…", proof_saved: "Prueba guardada. 📸",
+ empty_habits: "Aún no hay misión activa — crea la primera.", sh_name_ph: "p. ej. lectura profunda",
+ habit_added: "Misión aceptada. ¡Diviértete!", habit_deleted: "Hábito eliminado.", habit_done: "+1 — ¡fuerte!",
+  proof_note_ph: "Nota para esta prueba…", proof_saved: "Prueba guardada. ",
   rc_sub: "¿Agarras el móvil aunque querías trabajar? 60 segundos de pausa en vez de piloto automático.",
   rd_sub: "Elige una de las tres micro-acciones y el impulso pasará.",
-  redirect_done: "Redirigido +5 MIND. ¡Fuerte! 💧",
+ redirect_done: "Redirigido +5 MIND. ¡Fuerte!",
   launch_sub: "45 min de trabajo profundo",
   hub_foot: "Toca para tachar. Tus datos se quedan contigo — todo offline.",
   eyebrow_reflexion: "Reflexión", j_title_ph: "Título (opcional)", j_text_ph: "¿Qué tienes en mente? …",
   j_consent: "Se guarda solo localmente en tu dispositivo.",
   journal_empty: "Escribe unas palabras primero.",
-  entry_saved: "Entrada guardada. ✍️", entry_deleted: "Entrada eliminada.", review_inserted: "Resumen insertado.",
+ entry_saved: "Entrada guardada.", entry_deleted: "Entrada eliminada.", review_inserted: "Resumen insertado.",
   j_search_ph: "Buscar",
   eyebrow_deep: "Trabajo profundo", focus_done: "Bloque de foco listo. +{mins} min en el registro.",
   focus_q: "¿Cuál es tu único foco para este bloque?", focus_ph: "p. ej. terminar OutTrack v3",
@@ -312,14 +312,14 @@ es: {
   id_sub: "Cada hábito = +10 puntos en su área. 70 puntos = subir de nivel.",
   fl_empty: "Aún no hay bloques — empieza tu primer Outdo. ◎",
   lg_sec: "Legal e info",
-  export_ok: "Exportación descargada. 📦", reset_confirm: "¿Borrar todos los datos de este dispositivo?",
-  reset_done: "Todo borrado. Un nuevo comienzo espera. 🌱",
+ export_ok: "Exportación descargada.", reset_confirm: "¿Borrar todos los datos de este dispositivo?",
+ reset_done: "Todo borrado. Un nuevo comienzo espera.",
   eyebrow_app: "App", set_lang_sub: "Se aplica al instante en toda la app.",
   theme_title: "Apariencia", theme_sub: "Se guarda localmente en este dispositivo.",
   theme_light: "Claro", theme_dark: "Oscuro",
   remind_sub: "Local en este dispositivo — sin servidor.",
   remind_denied: "Notificaciones bloqueadas — permítelas en ajustes del sistema.",
-  remind_saved: "Recordatorios guardados. 🔔",
+ remind_saved: "Recordatorios guardados.",
   store_local: "Guardado localmente — todo offline en este dispositivo.",
   store_memory: "Solo en memoria — no se guarda nada.",
   cb_text: "Sin cookies ni rastreadores — solo almacenamiento local del dispositivo.",
@@ -329,7 +329,7 @@ fr: {
   tab_hub: "Hub", tab_journal: "Journal", tab_outdo: "Outdo", tab_food: "Repas", tab_stats: "Stats", tab_settings: "Régl.",
   greet_morning: "Bonjour", greet_day: "Bonjour", greet_evening: "Bonsoir", greet_night: "Debout ? Le voyage continue.",
   quest_title: "Quête du jour", quest_ph: "Une phrase : quoi d'essentiel aujourd'hui ?",
-  streak_days: "jours de série", perfect_label: "jours à 100 %", freeze_btn: "🧊 Sauver la série",
+  streak_days: "jours de série", perfect_label: "jours à 100 %", freeze_btn: "Sauver la série",
   chart_7: "7 jours", chart_30: "30 jours",
   sec_habits: "Habitudes", add_new: "+ Nouv.", sh_title: "Nouvelle habitude", sh_cancel: "Annuler", sh_add: "Ajouter",
   area_mind: "Esprit", area_body: "Corps", area_craft: "Art",
@@ -338,7 +338,7 @@ fr: {
   rc_title: "Contrôle focus", rc_open: "Rediriger l'impulsion",
   rd_title: "60 secondes — rien d'autre", ra_water: "Boire de l'eau", ra_pushups: "10 pompes", ra_read: "Lire le focus à voix haute", rd_cancel: "Annuler",
   launch_title: "Lancer Outdo", timer_start: "Démarrer", timer_pause: "Pause", timer_resume: "Reprendre", timer_reset: "Reset",
-  st_ready: "Prêt", st_running: "En cours…", st_paused: "En pause", st_done: "Bravo 🎉",
+  st_ready: "Prêt", st_running: "En cours…", st_paused: "En pause", st_done: "Bravo ",
   mf_all: "Tout", mf_protein: "Protéines", mf_energy: "Énergie", mf_light: "Light", meal_new: "Nouvelle idée", meal_hint: "Toucher pour une idée",
   r_ing: "Ingrédients", r_steps: "Préparation", sec_all: "Tous les plats",
   gr_title: "Grille", id_title: "Identité", fl_title: "Log focus",
@@ -361,18 +361,18 @@ fr: {
   summit_title: "Le sommet", summit_sub: "Ton chemin comme un voyage — chaque pas compte.",
   wk_checkins: "Check-ins", wk_pts: "PTS · 7 jours",
   freeze_ok: "Série sauvée — le voyage continue.", freeze_limit: "Le freeze revient la semaine prochaine.",
-  empty_habits: "Pas encore de quête active — crée la première. 🌱", sh_name_ph: "p. ex. lecture profonde",
-  habit_added: "Quête acceptée. Amuse-toi ! 🎯", habit_deleted: "Habitude supprimée.", habit_done: "+1 — fort !",
-  proof_note_ph: "Note pour cette preuve…", proof_saved: "Preuve enregistrée. 📸",
+ empty_habits: "Pas encore de quête active — crée la première.", sh_name_ph: "p. ex. lecture profonde",
+ habit_added: "Quête acceptée. Amuse-toi !", habit_deleted: "Habitude supprimée.", habit_done: "+1 — fort !",
+  proof_note_ph: "Note pour cette preuve…", proof_saved: "Preuve enregistrée. ",
   rc_sub: "Tu attrapes ton téléphone alors que tu voulais travailler ? 60 secondes de pause au lieu du pilote automatique.",
   rd_sub: "Choisis l'une des trois micro-actions, et l'impulsion passera.",
-  redirect_done: "Redirigé +5 MIND. Fort ! 💧",
+ redirect_done: "Redirigé +5 MIND. Fort !",
   launch_sub: "45 min de travail profond",
   hub_foot: "Touche pour cocher. Tes données restent avec toi — tout hors ligne.",
   eyebrow_reflexion: "Réflexion", j_title_ph: "Titre (facultatif)", j_text_ph: "À quoi penses-tu ? …",
   j_consent: "Stocké uniquement en local sur ton appareil.",
   journal_empty: "Écris d'abord quelques mots.",
-  entry_saved: "Entrée enregistrée. ✍️", entry_deleted: "Entrée supprimée.", review_inserted: "Bilan inséré.",
+ entry_saved: "Entrée enregistrée.", entry_deleted: "Entrée supprimée.", review_inserted: "Bilan inséré.",
   j_search_ph: "Rechercher",
   eyebrow_deep: "Travail profond", focus_done: "Bloc de focus terminé. +{mins} min dans le journal.",
   focus_q: "Quel est ton unique focus pour ce bloc ?", focus_ph: "p. ex. finir OutTrack v3",
@@ -392,14 +392,14 @@ fr: {
   id_sub: "Chaque habitude = +10 points dans sa sphère. 70 points = niveau supérieur.",
   fl_empty: "Pas encore de blocs — lance ton premier Outdo. ◎",
   lg_sec: "Légal & infos",
-  export_ok: "Export téléchargé. 📦", reset_confirm: "Supprimer toutes les données de cet appareil ?",
-  reset_done: "Tout effacé. Un nouveau départ t'attend. 🌱",
+ export_ok: "Export téléchargé.", reset_confirm: "Supprimer toutes les données de cet appareil ?",
+ reset_done: "Tout effacé. Un nouveau départ t'attend.",
   eyebrow_app: "App", set_lang_sub: "S'applique instantanément à toute l'app.",
   theme_title: "Apparence", theme_sub: "Stocké en local sur cet appareil.",
   theme_light: "Clair", theme_dark: "Sombre",
   remind_sub: "En local sur cet appareil — sans serveur.",
   remind_denied: "Notifications bloquées — autorise-les dans les réglages système.",
-  remind_saved: "Rappels enregistrés. 🔔",
+ remind_saved: "Rappels enregistrés.",
   store_local: "Stocké en local — tout hors ligne sur cet appareil.",
   store_memory: "En mémoire uniquement — rien n'est enregistré.",
   cb_text: "Ni cookies ni traqueurs — uniquement le stockage local de l'appareil.",
@@ -576,9 +576,9 @@ function renderWidgets() {
   db.focusLog.forEach((f) => { if ((f.date || "").slice(0, 10) === todayISO()) mins += f.mins || 0; });
   const w = (v, l, d) => "<div class=\"wg\" style=\"--d:" + d + "\"><strong>" + v + "</strong><small>" + esc(l) + "</small></div>";
   box.innerHTML =
-    w("⚡ " + calcStreak(), t("lb_streak"), 0) +
+    w(calcStreak(), t("lb_streak"), 0) +
     w("◎ " + mins, t("wg_today"), 1) +
-    w("🏆 " + perfectDays(), t("lb_perfect"), 2);
+    w(perfectDays(), t("lb_perfect"), 2);
 }
 tabs.forEach((x) => x.addEventListener("click", () => go(x.dataset.tab)));
 go._seen = new Set();
@@ -672,7 +672,7 @@ function renderWeek() {
     try { wd = d.toLocaleDateString(loc(), { weekday: "narrow" }); } catch { wd = "·"; }
     const cls = p >= 100 ? "" : p > 0 ? "part" : "off";
     html += "<div class=\"wday " + cls + (isToday ? " today" : "") + "\" style=\"--d:" + i + "\">" +
-      "<span>" + esc(wd) + "</span><span class=\"fl\">🔥</span>" +
+      "<span>" + esc(wd) + "</span><span class=\"fl\">●</span>" +
       "<span class=\"dn\">" + String(d.getDate()).padStart(2, "0") + "</span>" +
       "<span class=\"dot" + (isToday ? "" : " ghost") + "\"></span></div>";
   }
@@ -745,9 +745,9 @@ function renderRoutine() {
   const q = db.quest.date === todayISO() && db.quest.text ? db.quest.text : "—";
   const doneN = db.habits.filter((h) => isDone(h)).length;
   box.innerHTML =
-    "<div class=\"lb-row\"><span>☀️ " + esc(t("routine_morning")) + "</span><strong>" + esc(db.remind.morning || "07:30") + "</strong></div>" +
-    "<div class=\"lb-row\"><span>🎯 " + esc(t("quest_title")) + " · " + doneN + "/" + db.habits.length + "</span><strong>" + esc(q.length > 24 ? q.slice(0, 24) + "…" : q) + "</strong></div>" +
-    "<div class=\"lb-row\"><span>🌙 " + esc(t("routine_evening")) + "</span><strong>" + esc(db.remind.evening || "21:00") + "</strong></div>";
+    "<div class=\"lb-row\"><span>" + esc(t("routine_morning")) + "</span><strong>" + esc(db.remind.morning || "07:30") + "</strong></div>" +
+    "<div class=\"lb-row\"><span>" + esc(t("quest_title")) + " · " + doneN + "/" + db.habits.length + "</span><strong>" + esc(q.length > 24 ? q.slice(0, 24) + "…" : q) + "</strong></div>" +
+    "<div class=\"lb-row\"><span>" + esc(t("routine_evening")) + "</span><strong>" + esc(db.remind.evening || "21:00") + "</strong></div>";
 }
 function drawChart() {
   const svg = $("#chart-svg");
@@ -809,7 +809,7 @@ function renderHabits() {
     const proof = h.proofs && h.proofs[today];
     li.innerHTML = "<span class=\"check\">✓</span>" +
       "<span class=\"h-main\"><span class=\"h-label\">" + esc(habitLabel(h)) + "</span>" +
-      "<span class=\"h-sub\">" + esc(habitSub(h)) + (proof && proof.note ? " · 📝" : "") + "</span></span>" +
+      "<span class=\"h-sub\">" + esc(habitSub(h)) + "</span></span>" +
       (proof && proof.img ? "<img class=\"proof-thumb\" alt=\"\" />" : "") +
       "<button class=\"h-proof" + (proof ? " has" : "") + "\">" + esc(t("proof_btn")) + (proof ? " ✓" : "") + "</button>" +
       "<button class=\"h-del\" aria-label=\"×\">×</button>";
@@ -1291,14 +1291,14 @@ function renderWeekly() {
   try { bestStr = new Date((best || todayISO()) + "T12:00:00").toLocaleDateString(loc(), { day: "numeric", month: "numeric" }) + " · " + bestP + " %"; }
   catch { bestStr = (best || "—").slice(5) + " · " + bestP + " %"; }
   let ri = 0;
-  const row = (ic, k, v) => "<div class=\"lb-row\" style=\"--d:" + (ri++) + "\"><span>" + ic + " " + esc(k) + "</span><strong>" + v + "</strong></div>";
+  const row = (k, v) => "<div class=\"lb-row\" style=\"--d:" + (ri++) + "\"><span>" + esc(k) + "</span><strong>" + v + "</strong></div>";
   $("#weekly-review").innerHTML =
     "<p class=\"muted wr-range\">" + esc(todayISO(-6)) + " – " + esc(todayISO()) + "</p>" +
-    row("✓", t("wk_checkins"), done) +
-    row("🏆", t("lb_perfect"), perfect) +
-    row("⚡", t("lb_streak"), bestStreak()) +
-    row("★", t("wr_bestday"), esc(bestStr)) +
-    row("💧", t("lb_redirects"), red) +
+    row(t("wk_checkins"), done) +
+    row(t("lb_perfect"), perfect) +
+    row(t("lb_streak"), bestStreak()) +
+    row(t("wr_bestday"), esc(bestStr)) +
+    row(t("lb_redirects"), red) +
     "<p class=\"muted center wr-foot\">The journey continues.</p>";
 }
 function weeklyText() {
@@ -1360,7 +1360,7 @@ function renderStats() {
   const fl = $("#focus-log");
   fl.innerHTML = "";
   const items = db.focusLog.map((f) => ({ d: f.date, html: "◎ " + f.mins + " Min." + (f.text ? " — " + esc(f.text) : "") }))
-    .concat(db.redirects.map((r) => ({ d: r.date, html: "💧 " + esc(RA_KEYS[r.action] ? t(RA_KEYS[r.action]) : r.action) })))
+    .concat(db.redirects.map((r) => ({ d: r.date, html: esc(RA_KEYS[r.action] ? t(RA_KEYS[r.action]) : r.action) })))
     .sort((a, b) => (a.d < b.d ? 1 : -1)).slice(0, 10);
   if (!items.length) fl.innerHTML = "<p class=\"muted\">" + esc(t("fl_empty")) + "</p>";
   items.forEach((it, fidx) => {
@@ -1387,7 +1387,7 @@ function renderTiles() {
   if (!box) return;
   const tile = (v, l, d) => "<div class=\"tile\" style=\"--d:" + d + "\"><strong>" + v + "</strong><small>" + esc(l) + "</small></div>";
   box.innerHTML =
-    tile("⚡ " + calcStreak(), t("lb_streak"), 0) +
+    tile(calcStreak(), t("lb_streak"), 0) +
     tile("✓ " + weekCheckins(), t("wk_checkins"), 1) +
     tile("◆ " + weekPTS(), t("wk_pts"), 2);
 }
@@ -1465,7 +1465,7 @@ de: {
   refund: "<h4>Erstattung</h4><p>Da es aktuell keinen App-Store-Verkauf mit Zahlungsabwicklung gibt, findet keine Abbuchung statt. Sollte künftig ein Store-Kauf angeboten werden, gelten die Erstattungsregeln des jeweiligen Stores (Apple/Google) bzw. das gesetzliche Widerrufsrecht.</p>",
   cookies: "<h4>Cookie-Richtlinie</h4><p>OutTrack setzt keine Cookies und keine vergleichbaren Tracker ein. Der Hinweis beim Erststart betrifft ausschließlich den lokalen Gerätespeicher (Zustimmung = Speichern erlaubt, „Ohne Speichern“ = Memory-only-Modus).</p>",
   imprint: "<h4>Betreiber (Platzhalter — vor Store-Release ersetzen)</h4><p>[VORNAME NACHNAME / FIRMA]<br>[STRASSE NR, PLZ ORT]<br>[E-MAIL]<br>[TELEFON optional]</p>",
-  licenses: "<h4>Lizenzen & Hinweise</h4><p>OutTrack v3.19 — eigener Code, Systemschrift, eigenes SVG-Icon, live synthetisierte WebAudio-Klänge. Keine Frameworks, keine CDNs, keine externen Schriften oder Bilder. Alle Inhalte (Texte, Rezepte) sind eigene redaktionelle Inhalte.</p>",
+  licenses: "<h4>Lizenzen & Hinweise</h4><p>OutTrack v3.20 — eigener Code, Systemschrift, eigenes SVG-Icon, live synthetisierte WebAudio-Klänge. Keine Frameworks, keine CDNs, keine externen Schriften oder Bilder. Alle Inhalte (Texte, Rezepte) sind eigene redaktionelle Inhalte.</p>",
 },
 en: {
   privacy: "<h4>1. No servers, no trackers</h4><p>OutTrack stores all data exclusively locally on your device (localStorage). No accounts, no cookies, no analytics, no transfer to us or third parties.</p><h4>2. Photos</h4><p>Proof photos are downscaled (320 px JPEG) and also stored only locally — never uploaded.</p><h4>3. Your rights</h4><p>Export your data anytime, or wipe it via “Delete all data”.</p>",
@@ -1473,7 +1473,7 @@ en: {
   refund: "<h4>Refunds</h4><p>There is currently no store sale with payment processing, so no charge occurs. If a store purchase is offered later, that store's refund rules (Apple/Google) and statutory withdrawal rights apply.</p>",
   cookies: "<h4>Cookie policy</h4><p>OutTrack sets no cookies and no similar trackers. The first-start notice only concerns local device storage (consent = saving allowed, “Without saving” = memory-only mode).</p>",
   imprint: "<h4>Operator (placeholder — replace before store release)</h4><p>[NAME / COMPANY]<br>[STREET, ZIP CITY]<br>[EMAIL]<br>[PHONE optional]</p>",
-  licenses: "<h4>Licenses & notices</h4><p>OutTrack v3.19 — own code, system font, own SVG icon, live-synthesized WebAudio sounds. No frameworks, no CDNs, no external fonts or images.</p>",
+  licenses: "<h4>Licenses & notices</h4><p>OutTrack v3.20 — own code, system font, own SVG icon, live-synthesized WebAudio sounds. No frameworks, no CDNs, no external fonts or images.</p>",
 },
 };
 $$("[data-legal]").forEach((b) => b.addEventListener("click", () => {
