@@ -199,6 +199,7 @@ input[type="number"]{font-variant-numeric:tabular-nums}
 #focus-saved.show{opacity:1}
 /* journal */
 #journal-search{margin-top:2px}
+#meal-search{margin-top:2px}
 .j-entry{padding:13px 14px;border-bottom:1px solid var(--line)}
 .j-entry:last-child{border-bottom:none}
 .j-entry h4{margin:0 0 4px;font-size:16px}
