@@ -67,10 +67,8 @@ de: {
   sec_all: "Alle Gerichte", food_foot: "Allgemeine Rezeptideen, keine Ernährungsberatung.",
   meta_line: "{kcal} kcal · {mins} Min.", cat_protein: "Protein", cat_energie: "Energie", cat_light: "Light",
   eyebrow_cons: "Konsistenz", weekly_title: "Wochenrückblick",
-  weekly_empty: "Noch zu wenig Daten — the journey continues.",
-  lb_title: "Bestenliste", lb_sub: "Deine Rekorde — nur auf diesem Gerät.",
-  lb_topdays: "Top-Tage", lb_prs: "PRs gesamt", lb_redirects: "Umleitungen", lb_streak: "Bester Streak", lb_perfect: "100 %-Tage",
-  pg_title: "Overload-Progression", pg_sub: "Volumen der letzten Einheiten pro Übung.",
+  lb_redirects: "Umleitungen", lb_streak: "Bester Streak", lb_perfect: "100 %-Tage",
+  wr_bestday: "Bester Tag", wr_sessions: "Kraft-Einheiten",
   gr_title: "Wochenraster", gr_sub: "Letzte 35 Tage — dunkler = mehr geschafft.",
   lg_less: "Wenig", lg_more: "Viel", id_title: "Identität",
   id_sub: "Jeder Habit = +10 Punkte im Lebensbereich. 70 Punkte = Levelaufstieg.",
@@ -148,10 +146,8 @@ en: {
   sec_all: "All meals", food_foot: "General recipe ideas, no nutrition advice.",
   meta_line: "{kcal} kcal · {mins} min", cat_protein: "Protein", cat_energie: "Energy", cat_light: "Light",
   eyebrow_cons: "Consistency", weekly_title: "Weekly review",
-  weekly_empty: "Not enough data yet — the journey continues.",
-  lb_title: "Leaderboard", lb_sub: "Your records — on this device only.",
-  lb_topdays: "Top days", lb_prs: "Total PRs", lb_redirects: "Redirects", lb_streak: "Best streak", lb_perfect: "100% days",
-  pg_title: "Overload progression", pg_sub: "Volume of recent sessions per exercise.",
+  lb_redirects: "Redirects", lb_streak: "Best streak", lb_perfect: "100% days",
+  wr_bestday: "Best day", wr_sessions: "Strength sessions",
   gr_title: "Week grid", gr_sub: "Last 35 days — darker = more done.",
   lg_less: "Less", lg_more: "More", id_title: "Identity",
   id_sub: "Each habit = +10 points in its area. 70 points = level up.",
@@ -193,7 +189,7 @@ ru: {
   st_ready: "Готов", st_running: "Идёт…", st_paused: "Пауза", st_done: "Готово 🎉",
   mf_all: "Все", mf_protein: "Белок", mf_energy: "Энергия", mf_light: "Лёгкое", meal_new: "Новый совет", meal_hint: "Нажми для совета",
   r_ing: "Ингредиенты", r_steps: "Приготовление", sec_all: "Все блюда",
-  lb_title: "Рекорды", gr_title: "Сетка недель", id_title: "Идентичность", fl_title: "Фокус-лог",
+  gr_title: "Сетка недель", id_title: "Идентичность", fl_title: "Фокус-лог",
   weekly_title: "Обзор недели", lg_less: "Меньше", lg_more: "Больше",
   set_lang_title: "Язык",
   remind_title: "Напоминания", remind_enable: "Напоминать", remind_morning: "Утром", remind_evening: "Вечером",
@@ -226,7 +222,7 @@ es: {
   st_ready: "Listo", st_running: "En marcha…", st_paused: "En pausa", st_done: "¡Hecho! 🎉",
   mf_all: "Todo", mf_protein: "Proteína", mf_energy: "Energía", mf_light: "Light", meal_new: "Nuevo tip", meal_hint: "Toca para un tip",
   r_ing: "Ingredientes", r_steps: "Preparación", sec_all: "Todos los platos",
-  lb_title: "Récords", gr_title: "Cuadrícula", id_title: "Identidad", fl_title: "Registro de foco",
+  gr_title: "Cuadrícula", id_title: "Identidad", fl_title: "Registro de foco",
   weekly_title: "Resumen semanal", lg_less: "Menos", lg_more: "Más",
   set_lang_title: "Idioma",
   remind_title: "Recordatorios", remind_enable: "Recordarme", remind_morning: "Mañana", remind_evening: "Noche",
@@ -259,7 +255,7 @@ fr: {
   st_ready: "Prêt", st_running: "En cours…", st_paused: "En pause", st_done: "Bravo 🎉",
   mf_all: "Tout", mf_protein: "Protéines", mf_energy: "Énergie", mf_light: "Light", meal_new: "Nouvelle idée", meal_hint: "Toucher pour une idée",
   r_ing: "Ingrédients", r_steps: "Préparation", sec_all: "Tous les plats",
-  lb_title: "Records", gr_title: "Grille", id_title: "Identité", fl_title: "Log focus",
+  gr_title: "Grille", id_title: "Identité", fl_title: "Log focus",
   weekly_title: "Bilan hebdo", lg_less: "Moins", lg_more: "Plus",
   set_lang_title: "Langue",
   remind_title: "Rappels", remind_enable: "Me rappeler", remind_morning: "Matin", remind_evening: "Soir",
@@ -796,7 +792,6 @@ $("#proof-save").addEventListener("click", () => {
 });
 
 /* ---------- Progressive Overload ---------- */
-const liftVol = (l) => l.kg * l.reps * l.sets;
 function bestFor(ex) {
   let b = 0;
   db.lifts.forEach((l) => { if (l.ex === ex && l.kg > b) b = l.kg; });
@@ -1207,14 +1202,31 @@ function blip() {
 }
 
 /* ---------- Stats ---------- */
-function countPRs() {
-  const seen = {};
-  let prs = 0;
-  db.lifts.forEach((l) => {
-    if (seen[l.ex] === undefined) seen[l.ex] = l.kg;
-    else if (l.kg > seen[l.ex]) { seen[l.ex] = l.kg; prs++; }
-  });
-  return { total: prs, bests: seen };
+function renderWeekly() {
+  let done = 0, perfect = 0, best = null, bestP = -1;
+  for (let i = 0; i < 7; i++) {
+    const d = todayISO(-i);
+    const p = dayProgress(d);
+    done += db.habits.filter((h) => isDone(h, d)).length;
+    if (p === 100) perfect++;
+    if (p > bestP) { bestP = p; best = d; }
+  }
+  const sess = db.lifts.filter((l) => (l.date || "").slice(0, 10) >= todayISO(-6)).length;
+  const red = db.redirects.filter((r) => (r.date || "").slice(0, 10) >= todayISO(-6)).length;
+  let bestStr = "—";
+  try { bestStr = new Date((best || todayISO()) + "T12:00:00").toLocaleDateString(loc(), { day: "numeric", month: "numeric" }) + " · " + bestP + " %"; }
+  catch { bestStr = (best || "—").slice(5) + " · " + bestP + " %"; }
+  let ri = 0;
+  const row = (ic, k, v) => "<div class=\"lb-row\" style=\"--d:" + (ri++) + "\"><span>" + ic + " " + esc(k) + "</span><strong>" + v + "</strong></div>";
+  $("#weekly-review").innerHTML =
+    "<p class=\"muted wr-range\">" + esc(todayISO(-6)) + " – " + esc(todayISO()) + "</p>" +
+    row("✓", t("wk_checkins"), done) +
+    row("🏆", t("lb_perfect"), perfect) +
+    row("⚡", t("lb_streak"), bestStreak()) +
+    row("★", t("wr_bestday"), esc(bestStr)) +
+    row("💪", t("wr_sessions"), sess) +
+    row("💧", t("lb_redirects"), red) +
+    "<p class=\"muted center wr-foot\">The journey continues.</p>";
 }
 function weeklyText() {
   let done = 0, perfect = 0, best = null, bestP = -1;
@@ -1239,43 +1251,9 @@ function weeklyText() {
     "• Kraft-Einheiten: " + sess + " · Umleitungen: " + red + "\nThe journey continues.";
 }
 function renderStats() {
-  $("#weekly-review").textContent = weeklyText();
+  renderWeekly();
   renderTiles();
   renderSummit();
-  // Bestenliste
-  const lb = $("#leaderboard");
-  const days = [];
-  for (let i = 0; i < 35; i++) {
-    const d = todayISO(-i);
-    days.push({ d, p: dayProgress(d) });
-  }
-  days.sort((a, b) => b.p - a.p);
-  const top = days.slice(0, 3).map((x) => x.d.slice(5) + " · " + x.p + "%").join("<br>");
-  const prs = countPRs();
-  let ri = 0;
-  lb.innerHTML =
-    row(t("lb_topdays"), top) +
-    row(t("lb_prs"), String(prs.total)) +
-    row(t("lb_redirects"), String(db.redirects.length)) +
-    row(t("lb_streak"), String(bestStreak())) +
-    row(t("lb_perfect"), String(perfectDays()));
-  function row(k, v) { return "<div class=\"lb-row\" style=\"--d:" + (ri++) + "\"><span>" + esc(k) + "</span><strong>" + v + "</strong></div>"; }
-  // Progression
-  const pg = $("#progression");
-  pg.innerHTML = "";
-  const byEx = {};
-  db.lifts.forEach((l) => { (byEx[l.ex] = byEx[l.ex] || []).push(l); });
-  Object.keys(byEx).sort().slice(-3).forEach((ex, pidx) => {
-    const arr = byEx[ex].slice(-8);
-    const max = Math.max.apply(null, arr.map(liftVol).concat([1]));
-    const div = document.createElement("div");
-    div.className = "prog-row";
-    div.style.setProperty("--d", pidx);
-    div.innerHTML = "<p>" + esc(ex) + "</p><div class=\"vol-bars\">" +
-      arr.map((l) => "<div class=\"vol-bar\" style=\"height:" + Math.max(6, Math.round((liftVol(l) / max) * 100)) + "%\" title=\"" + l.kg + "×" + l.reps + "×" + l.sets + "\"></div>").join("") + "</div>";
-    pg.appendChild(div);
-  });
-  if (!Object.keys(byEx).length) pg.innerHTML = "<p class=\"muted\">—</p>";
   // 35-Tage-Raster
   const grid = $("#grid");
   grid.innerHTML = "";
@@ -1415,7 +1393,7 @@ de: {
   refund: "<h4>Erstattung</h4><p>Da es aktuell keinen App-Store-Verkauf mit Zahlungsabwicklung gibt, findet keine Abbuchung statt. Sollte künftig ein Store-Kauf angeboten werden, gelten die Erstattungsregeln des jeweiligen Stores (Apple/Google) bzw. das gesetzliche Widerrufsrecht.</p>",
   cookies: "<h4>Cookie-Richtlinie</h4><p>OutTrack setzt keine Cookies und keine vergleichbaren Tracker ein. Der Hinweis beim Erststart betrifft ausschließlich den lokalen Gerätespeicher (Zustimmung = Speichern erlaubt, „Ohne Speichern“ = Memory-only-Modus).</p>",
   imprint: "<h4>Betreiber (Platzhalter — vor Store-Release ersetzen)</h4><p>[VORNAME NACHNAME / FIRMA]<br>[STRASSE NR, PLZ ORT]<br>[E-MAIL]<br>[TELEFON optional]</p>",
-  licenses: "<h4>Lizenzen & Hinweise</h4><p>OutTrack v3.14 — eigener Code, Systemschrift, eigenes SVG-Icon, live synthetisierte WebAudio-Klänge. Keine Frameworks, keine CDNs, keine externen Schriften oder Bilder. Alle Inhalte (Texte, Rezepte) sind eigene redaktionelle Inhalte.</p>",
+  licenses: "<h4>Lizenzen & Hinweise</h4><p>OutTrack v3.15 — eigener Code, Systemschrift, eigenes SVG-Icon, live synthetisierte WebAudio-Klänge. Keine Frameworks, keine CDNs, keine externen Schriften oder Bilder. Alle Inhalte (Texte, Rezepte) sind eigene redaktionelle Inhalte.</p>",
 },
 en: {
   privacy: "<h4>1. No servers, no trackers</h4><p>OutTrack stores all data exclusively locally on your device (localStorage). No accounts, no cookies, no analytics, no transfer to us or third parties.</p><h4>2. Photos</h4><p>Proof photos are downscaled (320 px JPEG) and also stored only locally — never uploaded.</p><h4>3. Your rights</h4><p>Export your data anytime, or wipe it via “Delete all data”.</p>",
@@ -1423,7 +1401,7 @@ en: {
   refund: "<h4>Refunds</h4><p>There is currently no store sale with payment processing, so no charge occurs. If a store purchase is offered later, that store's refund rules (Apple/Google) and statutory withdrawal rights apply.</p>",
   cookies: "<h4>Cookie policy</h4><p>OutTrack sets no cookies and no similar trackers. The first-start notice only concerns local device storage (consent = saving allowed, “Without saving” = memory-only mode).</p>",
   imprint: "<h4>Operator (placeholder — replace before store release)</h4><p>[NAME / COMPANY]<br>[STREET, ZIP CITY]<br>[EMAIL]<br>[PHONE optional]</p>",
-  licenses: "<h4>Licenses & notices</h4><p>OutTrack v3.14 — own code, system font, own SVG icon, live-synthesized WebAudio sounds. No frameworks, no CDNs, no external fonts or images.</p>",
+  licenses: "<h4>Licenses & notices</h4><p>OutTrack v3.15 — own code, system font, own SVG icon, live-synthesized WebAudio sounds. No frameworks, no CDNs, no external fonts or images.</p>",
 },
 };
 $$("[data-legal]").forEach((b) => b.addEventListener("click", () => {

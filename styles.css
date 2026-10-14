@@ -255,13 +255,9 @@ input[type="number"]{font-variant-numeric:tabular-nums}
 .redirect-actions{display:flex;flex-direction:column;gap:8px}
 .redirect-actions button{background:var(--accent-soft);color:var(--txt);border:1px solid var(--accent-line);
   border-radius:14px;padding:14px;font-size:16px;font-weight:700;cursor:pointer}
-/* leaderboard + progression */
+/* stat rows */
 .lb-row{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:15px;padding:9px 0;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
 .lb-row:first-child{border-top:none}
-.prog-row{margin:12px 0}
-.prog-row p{margin:0 0 4px;font-size:14px;font-weight:700}
-.vol-bars{display:flex;align-items:flex-end;gap:6px;height:70px;padding-top:6px}
-.vol-bar{flex:1;background:var(--accent-grad);border-radius:4px 4px 0 0;opacity:.85;min-width:14px;min-height:4px}
 /* legal lists with chevrons */
 .link-list{list-style:none;margin:6px 0 0;padding:0;background:var(--fill);border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .link-list li{border-bottom:1px solid var(--line)}
@@ -298,6 +294,8 @@ input[type="number"]{font-variant-numeric:tabular-nums}
   box-shadow:0 8px 30px rgba(0,0,0,.12);padding:16px}
 #cookie-banner p{margin:0 0 12px;font-size:14px;line-height:1.5}
 /* stats */
+.wr-range{margin:0 0 4px;font-size:12px;font-variant-numeric:tabular-nums}
+.wr-foot{margin:10px 0 0}
 .stat-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .stat-top h2,.card h2{margin:0;font-size:18px;font-weight:800;letter-spacing:-.01em}
 .badge{font-size:12px;font-weight:800;color:var(--accent);background:var(--accent-soft);
@@ -369,7 +367,7 @@ body.is-mobile .install-only{display:block !important}
 .view.active.fresh .content > :nth-child(8){animation-delay:.37s}
 /* Zeilen-/Kachel-Stagger (Index kommt per --d aus JS) */
 .view.active.fresh .tile,.view.active.fresh .wg,.view.active.fresh .lb-row,.view.active.fresh .fl-row,
-.view.active.fresh .id-row,.view.active.fresh .prog-row{animation:riseIn .45s ease both;
+.view.active.fresh .id-row{animation:riseIn .45s ease both;
   animation-delay:calc(.15s + var(--d,0)*.06s)}
 .view.active.fresh .sq{animation:popIn .3s cubic-bezier(.34,1.56,.64,1) both;
   animation-delay:calc(.1s + var(--d,0)*.012s)}
@@ -377,7 +375,6 @@ body.is-mobile .install-only{display:block !important}
 #chart-svg rect{transform-box:fill-box;transform-origin:50% 100%}
 .hero-card.play .chart rect{animation:barGrow .5s ease both;animation-delay:calc(.5s + var(--d,0)*.03s)}
 @keyframes barGrow{from{opacity:0;transform:scaleY(.2)}to{opacity:1;transform:scaleY(1)}}
-.vol-bar{transform-origin:50% 100%;animation:barGrow .5s ease both}
 /* Gipfel-Kletterer gleitet den Hang hoch */
 #summit-svg circle{transition:cx .8s ease,cy .8s ease}
 /* Press-Feedback überall */
