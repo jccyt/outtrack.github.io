@@ -361,8 +361,9 @@ const isDone = (h, day = todayISO()) => (h.days[day] || 0) > 0;
 
 /* ---------- i18n ---------- */
 const isDark = () => document.body.classList.contains("dark");
-const ACC = () => (isDark() ? "#8b7cf6" : "#6e56f6");
-const ACC_HALF = () => (isDark() ? "rgba(139,124,246,.45)" : "rgba(110,86,246,.45)");
+const ACC = () => (isDark() ? "#8ba4ff" : "#1e40af");
+const ACC_HALF = () => (isDark() ? "rgba(139,164,255,.45)" : "rgba(47,111,237,.45)");
+const ACC_GRAD = () => (isDark() ? "url(#otAccD)" : "url(#otAccL)");
 const TRACK_C = () => (isDark() ? "rgba(255,255,255,.1)" : "rgba(0,0,0,.08)");
 const INK = () => (isDark() ? "#f5f5f7" : "#1c1c1e");
 function applyTheme() {
@@ -628,7 +629,7 @@ function drawChart() {
     const p = dayProgress(todayISO(-i));
     const h = Math.max(3, Math.round((p / 100) * (H - 14)));
     const x = (N - 1 - i) * (bw + gap);
-    s += "<rect x=\"" + x.toFixed(1) + "\" y=\"" + (H - h) + "\" width=\"" + bw.toFixed(1) + "\" height=\"" + h + "\" rx=\"3\" style=\"--d:" + (N - 1 - i) + "\" fill=\"" + (p === 100 ? ACC() : p > 0 ? ACC_HALF() : TRACK_C()) + "\"><title>" + p + "%</title></rect>";
+    s += "<rect x=\"" + x.toFixed(1) + "\" y=\"" + (H - h) + "\" width=\"" + bw.toFixed(1) + "\" height=\"" + h + "\" rx=\"3\" style=\"--d:" + (N - 1 - i) + "\" fill=\"" + (p === 100 ? ACC_GRAD() : p > 0 ? ACC_HALF() : TRACK_C()) + "\"><title>" + p + "%</title></rect>";
   }
   svg.innerHTML = s;
   svg.setAttribute("viewBox", "0 0 " + W + " " + H);
@@ -1414,7 +1415,7 @@ de: {
   refund: "<h4>Erstattung</h4><p>Da es aktuell keinen App-Store-Verkauf mit Zahlungsabwicklung gibt, findet keine Abbuchung statt. Sollte künftig ein Store-Kauf angeboten werden, gelten die Erstattungsregeln des jeweiligen Stores (Apple/Google) bzw. das gesetzliche Widerrufsrecht.</p>",
   cookies: "<h4>Cookie-Richtlinie</h4><p>OutTrack setzt keine Cookies und keine vergleichbaren Tracker ein. Der Hinweis beim Erststart betrifft ausschließlich den lokalen Gerätespeicher (Zustimmung = Speichern erlaubt, „Ohne Speichern“ = Memory-only-Modus).</p>",
   imprint: "<h4>Betreiber (Platzhalter — vor Store-Release ersetzen)</h4><p>[VORNAME NACHNAME / FIRMA]<br>[STRASSE NR, PLZ ORT]<br>[E-MAIL]<br>[TELEFON optional]</p>",
-  licenses: "<h4>Lizenzen & Hinweise</h4><p>OutTrack v3.13 — eigener Code, Systemschrift, eigenes SVG-Icon, live synthetisierte WebAudio-Klänge. Keine Frameworks, keine CDNs, keine externen Schriften oder Bilder. Alle Inhalte (Texte, Rezepte) sind eigene redaktionelle Inhalte.</p>",
+  licenses: "<h4>Lizenzen & Hinweise</h4><p>OutTrack v3.14 — eigener Code, Systemschrift, eigenes SVG-Icon, live synthetisierte WebAudio-Klänge. Keine Frameworks, keine CDNs, keine externen Schriften oder Bilder. Alle Inhalte (Texte, Rezepte) sind eigene redaktionelle Inhalte.</p>",
 },
 en: {
   privacy: "<h4>1. No servers, no trackers</h4><p>OutTrack stores all data exclusively locally on your device (localStorage). No accounts, no cookies, no analytics, no transfer to us or third parties.</p><h4>2. Photos</h4><p>Proof photos are downscaled (320 px JPEG) and also stored only locally — never uploaded.</p><h4>3. Your rights</h4><p>Export your data anytime, or wipe it via “Delete all data”.</p>",
@@ -1422,7 +1423,7 @@ en: {
   refund: "<h4>Refunds</h4><p>There is currently no store sale with payment processing, so no charge occurs. If a store purchase is offered later, that store's refund rules (Apple/Google) and statutory withdrawal rights apply.</p>",
   cookies: "<h4>Cookie policy</h4><p>OutTrack sets no cookies and no similar trackers. The first-start notice only concerns local device storage (consent = saving allowed, “Without saving” = memory-only mode).</p>",
   imprint: "<h4>Operator (placeholder — replace before store release)</h4><p>[NAME / COMPANY]<br>[STREET, ZIP CITY]<br>[EMAIL]<br>[PHONE optional]</p>",
-  licenses: "<h4>Licenses & notices</h4><p>OutTrack v3.13 — own code, system font, own SVG icon, live-synthesized WebAudio sounds. No frameworks, no CDNs, no external fonts or images.</p>",
+  licenses: "<h4>Licenses & notices</h4><p>OutTrack v3.14 — own code, system font, own SVG icon, live-synthesized WebAudio sounds. No frameworks, no CDNs, no external fonts or images.</p>",
 },
 };
 $$("[data-legal]").forEach((b) => b.addEventListener("click", () => {
