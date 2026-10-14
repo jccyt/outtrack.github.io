@@ -229,16 +229,6 @@ input[type="number"]{font-variant-numeric:tabular-nums}
 .meal-row.selected .h-label{color:var(--accent);font-weight:800}
 .meal-kcal{font-size:13px;font-weight:700;color:var(--mut);flex:none;font-variant-numeric:tabular-nums}
 .consent-note{font-size:12px;color:var(--mut);margin:10px 0 0}
-body.plan-free .pro-only{display:none !important}
-/* premium */
-.feat-list{list-style:none;margin:8px 0 0;padding:0;background:var(--fill);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.feat-list .feat{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;font-size:15px;border-bottom:1px solid var(--line)}
-.feat-list .feat:last-child{border-bottom:none}
-.feat-yes{color:var(--accent);font-weight:800}
-.feat-no{color:var(--mut)}
-.pro-row{display:flex;gap:8px;margin-top:12px}
-.pro-row input{flex:1.4;text-transform:uppercase;min-width:0}
-.pro-row .apple-btn{flex:1;width:auto}
 /* overload */
 .form-grid{display:flex;flex-direction:column;gap:10px;margin:8px 0 12px}
 .form-row3{display:flex;gap:8px}
@@ -404,18 +394,6 @@ body.is-mobile .install-only{display:block !important}
 @keyframes toastIn{from{opacity:0;transform:translate(-50%,8px) scale(.9)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
 .timer-card.done{animation:doneFlash .65s ease}
 @keyframes doneFlash{0%{transform:scale(1)}30%{transform:scale(1.03)}60%{transform:scale(.99)}100%{transform:scale(1)}}
-/* Paywall (Fake-Paywall: Feature-Liste + Buy-Platzhalter + Code) */
-#paywall{position:fixed;inset:0;z-index:35;overflow-y:auto;overscroll-behavior:contain;
-  background:var(--bg);padding:calc(24px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom));
-  display:flex;justify-content:center;align-items:flex-start;animation:fadeIn .25s ease}
-.pay-card{width:100%;max-width:520px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
-  box-shadow:var(--shadow);padding:24px 18px;display:flex;flex-direction:column;gap:12px;text-align:center;
-  animation:riseIn .45s ease both}
-.pay-card img{width:72px;height:72px;margin:0 auto;animation:splashPop .6s cubic-bezier(.34,1.56,.64,1) both}
-.pay-card .nav-eyebrow{text-align:center}
-.pay-card h2{margin:0;font-size:26px;font-weight:800;letter-spacing:-.02em}
-.pay-card .feat-list{text-align:left}
-#paywall .pro-row{margin-top:4px}
 /* Tutorial (First-Run): läuft als erstes, über allem außer Splash */
 #tutorial{position:fixed;inset:0;z-index:90;overflow-y:auto;overscroll-behavior:contain;
   background:rgba(0,0,0,.3);padding:calc(24px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom));

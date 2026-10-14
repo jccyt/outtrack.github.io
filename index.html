@@ -68,7 +68,7 @@
         <button id="routine-go" class="secondary-btn review-btn" data-i18n="remind_title">Erinnerungen</button>
       </div>
 
-      <div class="card pro-only">
+      <div class="card">
         <div class="stat-top"><h2 data-i18n="ov_title">Progressive Overload</h2><span class="badge" id="pr-count">0 PRs</span></div>
         <p class="muted" data-i18n="ov_sub">Kraft loggen — die App meldet PRs und zeigt Progression.</p>
         <div class="form-grid">
@@ -85,7 +85,7 @@
         <div id="lift-bests" class="bests"></div>
       </div>
 
-      <div class="card redirect-card pro-only">
+      <div class="card redirect-card">
         <h2 data-i18n="rc_title">Fokus-Check</h2>
         <p class="muted" data-i18n="rc_sub">Greifst du gerade zum Handy, obwohl du arbeiten wolltest? 60 Sekunden Pause statt Autopilot.</p>
         <button id="redirect-open" class="secondary-btn" data-i18n="rc_open">Impuls umleiten</button>
@@ -207,24 +207,24 @@
   <section id="view-analytics" class="view">
     <header class="navlarge"><p class="nav-eyebrow" data-i18n="eyebrow_cons">Konsistenz</p><h1 data-i18n="nav_stats">Stats</h1></header>
     <div class="content">
-      <div class="card pro-only">
+      <div class="card">
         <h2 data-i18n="weekly_title">Wochenrückblick</h2>
         <p class="muted" id="weekly-review" data-i18n="weekly_empty">Noch zu wenig Daten — the journey continues.</p>
       </div>
-      <div class="card pro-only">
+      <div class="card">
         <div class="tiles" id="week-tiles"></div>
       </div>
-      <div class="card pro-only">
+      <div class="card">
         <div class="stat-top"><h2 data-i18n="summit_title">Der Gipfel</h2><span class="badge" id="summit-pct">0 %</span></div>
         <p class="muted" data-i18n="summit_sub">Dein Weg als Reise — jeder Schritt zählt.</p>
         <svg id="summit-svg" viewBox="0 0 300 130" class="summit" role="img" aria-label="Gipfel"></svg>
       </div>
-      <div class="card pro-only">
+      <div class="card">
         <h2 data-i18n="lb_title">Bestenliste</h2>
         <p class="muted" data-i18n="lb_sub">Deine Rekorde — nur auf diesem Gerät.</p>
         <div id="leaderboard"></div>
       </div>
-      <div class="card pro-only">
+      <div class="card">
         <h2 data-i18n="pg_title">Overload-Progression</h2>
         <p class="muted" data-i18n="pg_sub">Volumen der letzten Einheiten pro Übung.</p>
         <div id="progression"></div>
@@ -246,7 +246,7 @@
       </div>
       <div class="card">
         <h2 data-i18n="lg_sec">Rechtliches &amp; Info</h2>
-        <p class="muted">OutTrack v3.11 · Offline</p>
+        <p class="muted">OutTrack v3.12 · Offline</p>
         <ul class="link-list">
           <li><button data-legal="privacy" data-i18n="legal_privacy">Datenschutzerklärung</button></li>
           <li><button data-legal="terms" data-i18n="legal_terms">Nutzungsbedingungen</button></li>
@@ -284,15 +284,6 @@
           <button data-theme="dark">🌙 <span data-i18n="theme_dark">Dunkel</span></button>
         </div>
       </div>
-      <div class="card" id="pro-card">
-        <div class="stat-top"><h2 data-i18n="set_pro_title">OutTrack Premium</h2><span class="badge" id="pro-badge">FREE</span></div>
-        <p class="muted" id="pro-note"></p>
-        <ul class="feat-list" id="pro-list"></ul>
-        <div id="pro-unlock-row" class="pro-row">
-          <input id="pro-code" type="text" data-i18n-ph="pro_code_ph" placeholder="Pro-Code" autocapitalize="characters" autocomplete="off" spellcheck="false" />
-          <button id="pro-unlock" class="apple-btn" data-i18n="pro_unlock">Freischalten</button>
-        </div>
-      </div>
       <div class="card">
         <h2 data-i18n="remind_title">Erinnerungen</h2>
         <p class="muted" data-i18n="remind_sub">Lokal auf diesem Gerät — kein Server.</p>
@@ -315,34 +306,19 @@
       </div>
       <div class="card">
         <h2 data-i18n="set_info_title">Info</h2>
-        <p class="muted">OutTrack v3.11 · Offline · 0 Tracker · 0 Cookies</p>
+        <p class="muted">OutTrack v3.12 · Offline · 0 Tracker · 0 Cookies</p>
       </div>
     </div>
   </section>
 
   <nav id="tabbar" aria-label="Navigation">
     <button data-tab="hub" class="tab active" aria-current="page"><i aria-hidden="true">●</i><span data-i18n="tab_hub">Hub</span></button>
-    <button data-tab="journal" class="tab pro-only"><i aria-hidden="true">✎</i><span data-i18n="tab_journal">Journal</span></button>
+    <button data-tab="journal" class="tab"><i aria-hidden="true">✎</i><span data-i18n="tab_journal">Journal</span></button>
     <button data-tab="focus" class="tab center"><i aria-hidden="true">◎</i><span data-i18n="tab_outdo">Outdo</span></button>
-    <button data-tab="food" class="tab pro-only"><i aria-hidden="true">◍</i><span data-i18n="tab_food">Food</span></button>
+    <button data-tab="food" class="tab"><i aria-hidden="true">◍</i><span data-i18n="tab_food">Food</span></button>
     <button data-tab="analytics" class="tab"><i aria-hidden="true">▦</i><span data-i18n="tab_stats">Stats</span></button>
     <button data-tab="settings" class="tab"><i aria-hidden="true">⚙</i><span data-i18n="tab_settings">Einst.</span></button>
   </nav>
-</div>
-
-<div id="paywall" hidden>
-  <div class="pay-card">
-    <img src="icon.svg" alt="" />
-    <p class="nav-eyebrow">OutTrack</p>
-    <h2 data-i18n="pay_title">OutTrack Premium</h2>
-    <p class="muted" data-i18n="pay_sub">Alles. Offline. Für immer deins.</p>
-    <ul class="feat-list" id="pay-list"></ul>
-    <button id="pay-buy" class="apple-btn" data-i18n="pay_buy">Kaufen</button>
-    <div class="pro-row">
-      <input id="pay-code" type="text" data-i18n-ph="pay_code_ph" placeholder="Code eingeben, z. B. OPT-768" autocapitalize="characters" autocomplete="off" spellcheck="false" />
-      <button id="pay-unlock" class="apple-btn" data-i18n="pro_unlock">Freischalten</button>
-    </div>
-  </div>
 </div>
 
 <div id="tutorial" hidden>
