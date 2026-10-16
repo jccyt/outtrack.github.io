@@ -2,6 +2,8 @@
 "use strict";
 const KEY = "outtrack_v2";
 const CONSENT_KEY = "outtrack_consent";
+const ONB_KEY = "outtrack_onboarding";
+const OPENS_KEY = "outtrack_opens";
 const AREAS = ["mind", "body", "craft"];
 const LANGS = [
   { id: "de", label: "Deutsch" },
@@ -13,22 +15,21 @@ const LANGS = [
 const LOCALES = { de: "de-DE", en: "en-US", ru: "ru-RU", es: "es-ES", fr: "fr-FR" };
 const STR = {
 de: {
-  nav_hub: "Hub", nav_journal: "Journal", nav_focus: "Outdo Mode", nav_food: "Food-Tipps", nav_stats: "Stats", nav_settings: "Einstellungen",
-  tab_hub: "Hub", tab_journal: "Journal", tab_outdo: "Outdo", tab_food: "Food", tab_stats: "Stats", tab_settings: "Einst.",
+  nav_hub: "Hub", nav_journal: "Journal", nav_focus: "Fokus", nav_food: "Food-Tipps", nav_stats: "Stats", nav_settings: "Einstellungen",
+  tab_hub: "Hub", tab_journal: "Journal", tab_outdo: "Fokus", tab_food: "Food", tab_stats: "Stats", tab_settings: "Einst.",
   greet_morning: "Guten Morgen", greet_day: "Guten Tag", greet_evening: "Guten Abend", greet_night: "Noch wach? Die Reise geht weiter.",
-  quest_title: "Heutige Quest", quest_ph: "Ein Satz: Was zählt heute?",
+  quest_title: "Heutige Quest", quest_ph: "z. B. Früh aufstehen, 10 Seiten lesen …",
   hero_goal: "Tagesziel: 100 %",
-  routine_title: "Deine Routine", routine_morning: "Morgenroutine", routine_evening: "Abendroutine",
   wg_title: "Widgets", wg_today: "Min. heute",
   wg_hint: "Auf iPhone & Android: OutTrack installieren — Widgets gibt's nur in der App, nicht im Browser.",
   summit_title: "Der Gipfel", summit_sub: "Dein Weg als Reise — jeder Schritt zählt.",
-  wk_checkins: "Check-ins", wk_pts: "PTS · 7 Tage",
+  wk_checkins: "Check-ins", wk_pts: "Pkt · 7 Tage",
   streak_days: "Tage Streak", perfect_label: "100 %-Tage", freeze_btn: "Streak retten",
-  freeze_ok: "Streak gerettet — the journey continues.", freeze_limit: "Freeze geht erst nächste Woche wieder.",
-  chart_7: "7 Tage", chart_30: "30 Tage",
-  sec_habits: "Habits", add_new: "+ Neu", empty_habits: "Noch keine Quest aktiv — leg deine erste fest. ",
+  freeze_ok: "Streak gerettet — weiter geht's.", freeze_limit: "Freeze geht erst nächste Woche wieder.",
+  chart_7s: "7T", chart_30s: "30T", chart_lbl: "Zeitraum",
+  sec_habits: "Habits", add_new: "Neu", empty_habits: "Noch keine Quest aktiv — leg deine erste fest. ",
   sh_title: "Neuer Habit", sh_name_ph: "z. B. Tief lesen", sh_cancel: "Abbrechen", sh_add: "Hinzufügen",
-  area_mind: "Mind", area_body: "Body", area_craft: "Craft",
+  area_mind: "Geist", area_body: "Körper", area_craft: "Handwerk",
   goal_daily: "Täglich", goal_weekly: "×/Woche", goal_target: "Zielzahl", goal_count_lbl: "Anzahl",
  habit_added: "Quest angenommen. Viel Spaß!", habit_deleted: "Habit gelöscht.", habit_done: "+1 — stark!",
   proof_btn: "Beweis", proof_title: "Beweis festhalten", proof_note_ph: "Notiz zum Beweis …",
@@ -37,8 +38,8 @@ de: {
   rc_open: "Impuls umleiten", rd_title: "60 Sekunden — sonst nichts",
   rd_sub: "Eine der drei Mikro-Aktionen wählen, dann ist der Impuls vorbei.",
   ra_water: "Wasser trinken", ra_pushups: "10 Liegestütze", ra_read: "Fokus laut lesen", rd_cancel: "Abbrechen",
- redirect_done: "Umgeleitet +5 MIND. Stark!",
-  launch_title: "Outdo Mode starten", launch_sub: "45 Min. Deep Work",
+ redirect_done: "Umgeleitet +5 GEIST. Stark!",
+  launch_title: "Fokus starten", launch_sub: "45 Min. Deep Work",
   hub_foot: "Antippen zum Abhaken. Deine Daten bleiben bei dir — alles offline.",
   eyebrow_reflexion: "Reflexion", j_title_ph: "Titel (optional)", j_text_ph: "Was beschäftigt dich gerade? …",
   j_save: "Eintrag speichern", j_consent: "Wird nur lokal auf deinem Gerät gespeichert.",
@@ -55,21 +56,15 @@ de: {
   eyebrow_energy: "Energie", mf_all: "Alle", mf_protein: "Protein", mf_energy: "Energie", mf_light: "Light",
   meal_hint: "Tippen für einen Tipp", meal_new: "Neuer Tipp", r_ing: "Zutaten", r_steps: "Zubereitung",
   m_protein: "Protein", m_carbs: "Kohlenhydrate", m_fat: "Fett",
-  tut_skip: "Überspringen", tut_back: "Zurück", tut_next: "Weiter", tut_start: "Los geht's",
-  tut_1t: "Deine tägliche Quest", tut_1d: "Lege Habits fest, hake sie ab und baue deinen Streak auf — ein Schritt nach dem anderen.",
-  tut_2t: "Fokus ohne Ablenkung", tut_2d: "Der Outdo Mode blendet alles aus: Timer stellen, einen Satz Fokus fassen, durchziehen.",
-  tut_3t: "Essen ohne Nachdenken", tut_3d: "136 Rezepte mit Kalorien und Nährwerten — tippen, kochen, fertig.",
-  tut_4t: "Sieh deinen Weg", tut_4d: "Stats, Gipfel und Streak-Freeze zeigen deinen Fortschritt — ohne Schuld, nur die Reise.",
-  tut_5t: "Deine Daten bleiben bei dir", tut_5d: "Kein Konto, kein Server, keine Tracker. Alles liegt nur auf deinem Gerät.",
   sec_all: "Alle Gerichte", food_foot: "Allgemeine Rezeptideen, keine Ernährungsberatung.",
   meta_line: "{kcal} kcal · {mins} Min.", cat_protein: "Protein", cat_energie: "Energie", cat_light: "Light",
   eyebrow_cons: "Konsistenz", weekly_title: "Wochenrückblick",
   lb_redirects: "Umleitungen", lb_streak: "Bester Streak", lb_perfect: "100 %-Tage",
   wr_bestday: "Bester Tag",
-  gr_title: "Wochenraster", gr_sub: "Letzte 35 Tage — dunkler = mehr geschafft.",
+  gr_title: "Wochenraster", gr_sub: "Letzte 35 Tage — leuchtend = mehr geschafft.",
   lg_less: "Wenig", lg_more: "Viel", id_title: "Identität",
   id_sub: "Jeder Habit = +10 Punkte im Lebensbereich. 70 Punkte = Levelaufstieg.",
-  level_lbl: "Level {n}", fl_title: "Fokus-Log", fl_empty: "Noch keine Blöcke — starte deinen ersten Outdo. ◎",
+  level_lbl: "Level {n}", fl_title: "Fokus-Log", fl_empty: "Noch keine Blöcke — starte deinen ersten Fokusblock.",
   lg_sec: "Rechtliches & Info", legal_privacy: "Datenschutzerklärung", legal_terms: "Nutzungsbedingungen",
   legal_refund: "Erstattungsrichtlinie", legal_cookies: "Cookie-Richtlinie", legal_imprint: "Betreiber & Kontakt",
   legal_licenses: "Lizenzen & Hinweise", legal_close: "Schließen",
@@ -79,29 +74,38 @@ de: {
   eyebrow_app: "App", set_lang_title: "Sprache", set_lang_sub: "Gilt sofort für die gesamte App.",
   theme_title: "Erscheinungsbild", theme_sub: "Wird lokal auf dem Gerät gespeichert.",
   theme_light: "Hell", theme_dark: "Dunkel",
-  remind_title: "Erinnerungen", remind_sub: "Lokal auf diesem Gerät — kein Server.",
-  remind_enable: "Erinnern", remind_morning: "Morgens", remind_evening: "Abends",
-  remind_denied: "Mitteilungen blockiert — bitte in den Systemeinstellungen erlauben.",
- remind_saved: "Erinnerungen gespeichert.",
   set_store_title: "Speicherung", store_local: "Lokal gespeichert — alles offline auf diesem Gerät.",
   store_memory: "Memory-only — nichts wird gespeichert.",
-  set_info_title: "Info", cb_text: "Keine Cookies, keine Tracker — nur lokaler Gerätespeicher.",
-  cb_decline: "Ohne Speichern", cb_accept: "Verstanden",
+  set_info_title: "Info",
+  pts_short: "Pkt", wr_foot: "Weiter geht's.",
+  onb_skip: "Überspringen", onb_next: "Weiter", onb_start: "Verstanden — Start",
+  welcome_title: "welcome to your new life",
+  verse_text: "Alles vermag ich durch Christus, der mich stärkt.", verse_ref: "Philipper 4,13", verse_close: "Amen",
+  onb_1t: "Deine tägliche Quest", onb_1d: "Lege 1–3 Habits fest. Hake sie täglich ab. Baue deinen Streak auf.",
+  onb_2t: "Sieh deinen Weg", onb_2d: "Stats, Gipfel und Streak-Freeze zeigen deinen Fortschritt. Ohne Schuld, nur die Reise.",
+  onb_3t: "Deine Daten bleiben bei dir", onb_3d: "Kein Konto. Kein Server. Keine Tracker. Alles nur lokal auf deinem Gerät.",
+  empty_ready: "Bereit für den ersten Schritt?", empty_cta: "Erste Quest schreiben",
+  wheel_title: "Dauer wählen", wheel_hint: "Hoch- oder runterwischen — maximal 3 Stunden.", timer_max: "Max 3h für Deep Work",
+  proof_tip: "Beweis hinzufügen (Foto/Notiz)", proof_cam: "Foto aufnehmen", proof_gallery: "Galerie",
+  proof_note_short: "Kurze Notiz", proof_log_title: "Beweise",
+  summit_level: "Level {n} — {rank}", summit_next: "{pts} / 70 Pkt bis Level {n}",
+  level_tip: "Jeder Habit = +10 Punkte. 70 Punkte = Levelaufstieg.",
+  lvl_names: "Basislager, Aufstieg, Gratwanderung, Gipfelstürmer, Über den Wolken",
+  gr_hover: "{n} Check-ins · {p} %",
 },
 en: {
-  nav_hub: "Hub", nav_journal: "Journal", nav_focus: "Outdo Mode", nav_food: "Food tips", nav_stats: "Stats", nav_settings: "Settings",
-  tab_hub: "Hub", tab_journal: "Journal", tab_outdo: "Outdo", tab_food: "Food", tab_stats: "Stats", tab_settings: "Sett.",
+  nav_hub: "Hub", nav_journal: "Journal", nav_focus: "Focus", nav_food: "Food tips", nav_stats: "Stats", nav_settings: "Settings",
+  tab_hub: "Hub", tab_journal: "Journal", tab_outdo: "Focus", tab_food: "Food", tab_stats: "Stats", tab_settings: "Sett.",
   greet_morning: "Good morning", greet_day: "Good day", greet_evening: "Good evening", greet_night: "Still up? The journey continues.",
   quest_title: "Today's quest", quest_ph: "One sentence: what counts today?",
   hero_goal: "Daily goal: 100%",
-  routine_title: "Your routine", routine_morning: "Morning routine", routine_evening: "Evening routine",
   wg_title: "Widgets", wg_today: "Min today",
   wg_hint: "On iPhone & Android: install OutTrack — widgets live in the app, not the browser.",
   summit_title: "The Summit", summit_sub: "Your path as a journey — every step counts.",
   wk_checkins: "Check-ins", wk_pts: "PTS · 7 days",
   streak_days: "day streak", perfect_label: "100% days", freeze_btn: "Save streak",
   freeze_ok: "Streak saved — the journey continues.", freeze_limit: "Freeze returns next week.",
-  chart_7: "7 days", chart_30: "30 days",
+  chart_7s: "7D", chart_30s: "30D", chart_lbl: "Range",
   sec_habits: "Habits", add_new: "+ New", empty_habits: "No active quest yet — set your first one. ",
   sh_title: "New habit", sh_name_ph: "e.g. Deep reading", sh_cancel: "Cancel", sh_add: "Add",
   area_mind: "Mind", area_body: "Body", area_craft: "Craft",
@@ -114,7 +118,7 @@ en: {
   rd_sub: "Pick one of three micro-actions, then the impulse is gone.",
   ra_water: "Drink water", ra_pushups: "10 push-ups", ra_read: "Read focus aloud", rd_cancel: "Cancel",
  redirect_done: "Redirected +5 MIND. Strong!",
-  launch_title: "Start Outdo Mode", launch_sub: "45 min deep work",
+  launch_title: "Start focus block", launch_sub: "45 min deep work",
   hub_foot: "Tap to check off. Your data stays with you — all offline.",
   eyebrow_reflexion: "Reflection", j_title_ph: "Title (optional)", j_text_ph: "What's on your mind? …",
   j_save: "Save entry", j_consent: "Stored only locally on your device.",
@@ -131,12 +135,6 @@ en: {
   eyebrow_energy: "Energy", mf_all: "All", mf_protein: "Protein", mf_energy: "Energy", mf_light: "Light",
   meal_hint: "Tap for a tip", meal_new: "New tip", r_ing: "Ingredients", r_steps: "Steps",
   m_protein: "Protein", m_carbs: "Carbs", m_fat: "Fat",
-  tut_skip: "Skip", tut_back: "Back", tut_next: "Next", tut_start: "Let's go",
-  tut_1t: "Your daily quest", tut_1d: "Set habits, check them off and build your streak — one step at a time.",
-  tut_2t: "Focus without distraction", tut_2d: "Outdo Mode fades everything out: set a timer, name one focus, follow through.",
-  tut_3t: "Eating without overthinking", tut_3d: "136 recipes with calories and macros — tap, cook, done.",
-  tut_4t: "See your journey", tut_4d: "Stats, summit and streak freeze show your progress — no guilt, just the journey.",
-  tut_5t: "Your data stays with you", tut_5d: "No account, no server, no trackers. Everything lives only on your device.",
   sec_all: "All meals", food_foot: "General recipe ideas, no nutrition advice.",
   meta_line: "{kcal} kcal · {mins} min", cat_protein: "Protein", cat_energie: "Energy", cat_light: "Light",
   eyebrow_cons: "Consistency", weekly_title: "Weekly review",
@@ -145,7 +143,7 @@ en: {
   gr_title: "Week grid", gr_sub: "Last 35 days — darker = more done.",
   lg_less: "Less", lg_more: "More", id_title: "Identity",
   id_sub: "Each habit = +10 points in its area. 70 points = level up.",
-  level_lbl: "Level {n}", fl_title: "Focus log", fl_empty: "No blocks yet — start your first Outdo. ◎",
+  level_lbl: "Level {n}", fl_title: "Focus log", fl_empty: "No blocks yet — start your first focus block.",
   lg_sec: "Legal & info", legal_privacy: "Privacy policy", legal_terms: "Terms of use",
   legal_refund: "Refund policy", legal_cookies: "Cookie policy", legal_imprint: "Operator & contact",
   legal_licenses: "Licenses & notices", legal_close: "Close",
@@ -155,47 +153,69 @@ en: {
   eyebrow_app: "App", set_lang_title: "Language", set_lang_sub: "Applies instantly across the app.",
   theme_title: "Appearance", theme_sub: "Stored locally on this device.",
   theme_light: "Light", theme_dark: "Dark",
-  remind_title: "Reminders", remind_sub: "Local on this device — no server.",
-  remind_enable: "Remind me", remind_morning: "Morning", remind_evening: "Evening",
-  remind_denied: "Notifications blocked — please allow them in system settings.",
- remind_saved: "Reminders saved.",
   set_store_title: "Storage", store_local: "Stored locally — all offline on this device.",
   store_memory: "Memory-only — nothing is stored.",
-  set_info_title: "Info", cb_text: "No cookies, no trackers — only local device storage.",
-  cb_decline: "Without saving", cb_accept: "Got it",
+  set_info_title: "Info",
+  pts_short: "Pts", wr_foot: "The journey continues.",
+  onb_skip: "Skip", onb_next: "Next", onb_start: "Got it — Start",
+  welcome_title: "welcome to your new life",
+  verse_text: "I can do all things through Christ who strengthens me.", verse_ref: "Philippians 4:13", verse_close: "Amen",
+  onb_1t: "Your daily quest", onb_1d: "Set 1–3 habits. Check them off daily. Build your streak.",
+  onb_2t: "See your journey", onb_2d: "Stats, summit and streak freeze show your progress. No guilt, just the journey.",
+  onb_3t: "Your data stays with you", onb_3d: "No account. No server. No trackers. All local on your device.",
+  empty_ready: "Ready for the first step?", empty_cta: "Write your first quest",
+  wheel_title: "Pick a duration", wheel_hint: "Swipe up or down — 3 hours max.", timer_max: "Max 3h for deep work",
+  proof_tip: "Add proof (photo/note)", proof_cam: "Take photo", proof_gallery: "Gallery",
+  proof_note_short: "Short note", proof_log_title: "Proofs",
+  summit_level: "Level {n} — {rank}", summit_next: "{pts} / 70 pts to level {n}",
+  level_tip: "Each habit = +10 points. 70 points = level up.",
+  lvl_names: "Base camp, Ascent, High ridge, Peak climber, Above the clouds",
+  gr_hover: "{n} check-ins · {p} %",
 },
 ru: {
-  nav_hub: "Хаб", nav_journal: "Дневник", nav_focus: "Outdo-режим", nav_food: "Еда", nav_stats: "Статистика", nav_settings: "Настройки",
-  tab_hub: "Хаб", tab_journal: "Дневник", tab_outdo: "Outdo", tab_food: "Еда", tab_stats: "Статы", tab_settings: "Настр.",
+  nav_hub: "Хаб", nav_journal: "Дневник", nav_focus: "Фокус", nav_food: "Еда", nav_stats: "Статистика", nav_settings: "Настройки",
+  tab_hub: "Хаб", tab_journal: "Дневник", tab_outdo: "Фокус", tab_food: "Еда", tab_stats: "Статы", tab_settings: "Настр.",
   greet_morning: "Доброе утро", greet_day: "Добрый день", greet_evening: "Добрый вечер", greet_night: "Не спится? Путь продолжается.",
   quest_title: "Квест дня", quest_ph: "Одна фраза: что важно сегодня?",
   streak_days: "дней streak", perfect_label: "дней на 100 %", freeze_btn: "Спасти streak",
-  chart_7: "7 дней", chart_30: "30 дней",
+  chart_7s: "7Д", chart_30s: "30Д", chart_lbl: "Период",
   sec_habits: "Привычки", add_new: "+ Нов.", sh_title: "Новая привычка", sh_cancel: "Отмена", sh_add: "Добавить",
   area_mind: "Mind", area_body: "Body", area_craft: "Craft",
   goal_daily: "Ежедневно", goal_weekly: "×/нед", goal_target: "Цель", goal_count_lbl: "Число",
   proof_btn: "Пруф", proof_title: "Записать пруф", proof_save: "Сохранить", proof_photo_lbl: "Фото",
   rc_title: "Фокус-проверка", rc_open: "Перенаправить импульс",
   rd_title: "60 секунд — и всё", ra_water: "Выпить воды", ra_pushups: "10 отжиманий", ra_read: "Прочитать фокус вслух", rd_cancel: "Отмена",
-  launch_title: "Запустить Outdo", timer_start: "Старт", timer_pause: "Пауза", timer_resume: "Дальше", timer_reset: "Сброс",
+  launch_title: "Запустить фокус", timer_start: "Старт", timer_pause: "Пауза", timer_resume: "Дальше", timer_reset: "Сброс",
   st_ready: "Готов", st_running: "Идёт…", st_paused: "Пауза", st_done: "Готово ",
   mf_all: "Все", mf_protein: "Белок", mf_energy: "Энергия", mf_light: "Лёгкое", meal_new: "Новый совет", meal_hint: "Нажми для совета",
   r_ing: "Ингредиенты", r_steps: "Приготовление", sec_all: "Все блюда",
   gr_title: "Сетка недель", id_title: "Идентичность", fl_title: "Фокус-лог",
   weekly_title: "Обзор недели", lg_less: "Меньше", lg_more: "Больше",
   set_lang_title: "Язык",
-  remind_title: "Напоминания", remind_enable: "Напоминать", remind_morning: "Утром", remind_evening: "Вечером",
   set_store_title: "Хранение", set_info_title: "Инфо",
   j_save: "Сохранить", sec_entries: "Записи", journal_review: "Вставить обзор недели",
   btn_export: "Экспорт", btn_reset: "Удалить всё", dt_title: "Данные",
-  legal_privacy: "Конфиденциальность", legal_terms: "Условия", legal_refund: "Возвраты",
-  legal_cookies: "Куки", legal_imprint: "Контакты", legal_licenses: "Лицензии", legal_close: "Закрыть",
-  cb_accept: "Понятно", cb_decline: "Без сохранения",
+  legal_privacy: "Конфиденциальность", legal_terms: "Условия использования", legal_refund: "Возвраты",
+  legal_cookies: "Файлы cookie", legal_imprint: "Контакты", legal_licenses: "Лицензии", legal_close: "Закрыть",
+  pts_short: "Очки", wr_foot: "Путь продолжается.",
+  onb_skip: "Пропустить", onb_next: "Далее", onb_start: "Понятно — Старт",
+  welcome_title: "welcome to your new life",
+  verse_text: "Всё могу через Христа, Который меня укрепляет.", verse_ref: "Филиппийцам 4:13", verse_close: "Аминь",
+  onb_1t: "Твой ежедневный квест", onb_1d: "Задай 1–3 привычки. Отмечай их каждый день. Строй streak.",
+  onb_2t: "Смотри свой путь", onb_2d: "Статистика, вершина и заморозка streak показывают прогресс — без вины, только путь.",
+  onb_3t: "Твои данные остаются у тебя", onb_3d: "Никаких аккаунтов. Никаких серверов. Никаких трекеров. Всё только на твоём устройстве.",
+  empty_ready: "Готов к первому шагу?", empty_cta: "Написать первый квест",
+  wheel_title: "Выбери длительность", wheel_hint: "Листай вверх или вниз — максимум 3 часа.", timer_max: "Макс 3 ч для глубокой работы",
+  proof_tip: "Добавить пруф (фото/заметка)", proof_cam: "Сделать фото", proof_gallery: "Галерея",
+  proof_note_short: "Короткая заметка", proof_log_title: "Пруфы",
+  summit_level: "Уровень {n} — {rank}", summit_next: "{pts} / 70 очков до уровня {n}",
+  level_tip: "Каждая привычка = +10 очков. 70 очков = новый уровень.",
+  lvl_names: "Базовая лагерь, Подъём, Высокий гребень, Покоритель вершины, Над облаками",
+  gr_hover: "Чекинов: {n} · {p} %",
   t_hours: "Ч.", t_minutes: "Мин.", t_seconds: "Сек.", custom_apply: "Применить",
   sound_lbl: "Фон", snd_off: "Выкл — тишина", snd_white: "Белый шум", snd_rain: "Дождь", snd_synth: "Синт",
   focus_exit: "В хаб", focus_fs: "Полный экран", level_lbl: "Уровень {n}",
   hero_goal: "Цель дня: 100 %",
-  routine_title: "Твоя рутина", routine_morning: "Утренняя рутина", routine_evening: "Вечерняя рутина",
   wg_title: "Виджеты", wg_today: "Мин. сегодня",
   wg_hint: "На iPhone и Android: установи OutTrack — виджеты есть только в приложении, а не в браузере.",
   summit_title: "Вершина", summit_sub: "Твой путь как путешествие — важен каждый шаг.",
@@ -218,64 +238,66 @@ ru: {
   focus_q: "Какой у тебя один фокус на этот блок?", focus_ph: "напр. закончить OutTrack v3",
   eyebrow_energy: "Энергия",
   m_protein: "Белок", m_carbs: "Углеводы", m_fat: "Жиры",
-  tut_skip: "Пропустить", tut_back: "Назад", tut_next: "Дальше", tut_start: "Погнали",
-  tut_1t: "Твой ежедневный квест", tut_1d: "Задавай привычки, отмечай их и расти streak — шаг за шагом.",
-  tut_2t: "Фокус без отвлечений", tut_2d: "Outdo-режим приглушает всё лишнее: ставь таймер, называй один фокус — и вперёд.",
-  tut_3t: "Еда без раздумий", tut_3d: "136 рецептов с калориями и нутриентами — нажми, приготовь, готово.",
-  tut_4t: "Смотри свой путь", tut_4d: "Статистика, вершина и заморозка streak показывают прогресс — без вины, только путь.",
-  tut_5t: "Твои данные остаются у тебя", tut_5d: "Никаких аккаунтов, серверов и трекеров. Всё хранится только на твоём устройстве.",
   food_foot: "Общие идеи рецептов, не рекомендации по питанию.",
   meta_line: "{kcal} ккал · {mins} мин.", cat_protein: "Белок", cat_energie: "Энергия", cat_light: "Лёгкое",
   eyebrow_cons: "Регулярность", lb_redirects: "Перенаправления", lb_streak: "Лучший streak", lb_perfect: "Дней на 100 %",
   wr_bestday: "Лучший день",
   gr_sub: "Последние 35 дней — темнее = больше сделано.",
   id_sub: "Каждая привычка = +10 очков в сфере жизни. 70 очков = новый уровень.",
-  fl_empty: "Пока нет блоков — запусти первый Outdo. ◎",
+  fl_empty: "Пока нет блоков — запусти первый фокус-блок.",
   lg_sec: "Право и инфо",
  export_ok: "Экспорт скачан.", reset_confirm: "Точно удалить все данные на этом устройстве?",
  reset_done: "Всё удалено. Чистый старт ждёт.",
   eyebrow_app: "Приложение", set_lang_sub: "Применяется сразу ко всему приложению.",
   theme_title: "Внешний вид", theme_sub: "Хранится локально на этом устройстве.",
   theme_light: "Светлая", theme_dark: "Тёмная",
-  remind_sub: "Локально на этом устройстве — без сервера.",
-  remind_denied: "Уведомления заблокированы — разреши их в системных настройках.",
- remind_saved: "Напоминания сохранены.",
   store_local: "Хранится локально — всё офлайн на этом устройстве.",
   store_memory: "Только в памяти — ничего не сохраняется.",
-  cb_text: "Никаких куки и трекеров — только локальное хранилище устройства.",
 },
 es: {
-  nav_hub: "Hub", nav_journal: "Diario", nav_focus: "Modo Outdo", nav_food: "Comida", nav_stats: "Stats", nav_settings: "Ajustes",
-  tab_hub: "Hub", tab_journal: "Diario", tab_outdo: "Outdo", tab_food: "Comida", tab_stats: "Stats", tab_settings: "Ajust.",
+  nav_hub: "Hub", nav_journal: "Diario", nav_focus: "Modo Foco", nav_food: "Comida", nav_stats: "Stats", nav_settings: "Ajustes",
+  tab_hub: "Hub", tab_journal: "Diario", tab_outdo: "Foco", tab_food: "Comida", tab_stats: "Stats", tab_settings: "Ajust.",
   greet_morning: "Buenos días", greet_day: "Buenas tardes", greet_evening: "Buenas noches", greet_night: "¿Despierto? El viaje continúa.",
   quest_title: "Misión de hoy", quest_ph: "Una frase: ¿qué cuenta hoy?",
   streak_days: "días de racha", perfect_label: "días al 100 %", freeze_btn: "Salvar racha",
-  chart_7: "7 días", chart_30: "30 días",
+  chart_7s: "7D", chart_30s: "30D", chart_lbl: "Periodo",
   sec_habits: "Hábitos", add_new: "+ Nuevo", sh_title: "Nuevo hábito", sh_cancel: "Cancelar", sh_add: "Añadir",
   area_mind: "Mente", area_body: "Cuerpo", area_craft: "Oficio",
   goal_daily: "Diario", goal_weekly: "×/sem", goal_target: "Meta", goal_count_lbl: "Número",
   proof_btn: "Prueba", proof_title: "Registrar prueba", proof_save: "Guardar", proof_photo_lbl: "Foto",
   rc_title: "Chequeo de foco", rc_open: "Redirigir impulso",
   rd_title: "60 segundos — nada más", ra_water: "Beber agua", ra_pushups: "10 flexiones", ra_read: "Leer el foco en voz alta", rd_cancel: "Cancelar",
-  launch_title: "Iniciar Outdo", timer_start: "Empezar", timer_pause: "Pausa", timer_resume: "Seguir", timer_reset: "Reset",
+  launch_title: "Iniciar foco", timer_start: "Empezar", timer_pause: "Pausa", timer_resume: "Seguir", timer_reset: "Reset",
   st_ready: "Listo", st_running: "En marcha…", st_paused: "En pausa", st_done: "¡Hecho! ",
   mf_all: "Todo", mf_protein: "Proteína", mf_energy: "Energía", mf_light: "Light", meal_new: "Nuevo tip", meal_hint: "Toca para un tip",
   r_ing: "Ingredientes", r_steps: "Preparación", sec_all: "Todos los platos",
   gr_title: "Cuadrícula", id_title: "Identidad", fl_title: "Registro de foco",
   weekly_title: "Resumen semanal", lg_less: "Menos", lg_more: "Más",
   set_lang_title: "Idioma",
-  remind_title: "Recordatorios", remind_enable: "Recordarme", remind_morning: "Mañana", remind_evening: "Noche",
   set_store_title: "Almacén", set_info_title: "Info",
   j_save: "Guardar", sec_entries: "Entradas", journal_review: "Insertar resumen semanal",
   btn_export: "Exportar", btn_reset: "Borrar todo", dt_title: "Datos",
   legal_privacy: "Privacidad", legal_terms: "Términos", legal_refund: "Reembolsos",
   legal_cookies: "Cookies", legal_imprint: "Contacto", legal_licenses: "Licencias", legal_close: "Cerrar",
-  cb_accept: "Entendido", cb_decline: "Sin guardar",
+  pts_short: "Pts", wr_foot: "El viaje continúa.",
+  onb_skip: "Saltar", onb_next: "Siguiente", onb_start: "Entendido — Empezar",
+  welcome_title: "welcome to your new life",
+  verse_text: "Todo lo puedo en Cristo, que me fortalece.", verse_ref: "Filipenses 4:13", verse_close: "Amén",
+  onb_1t: "Tu misión diaria", onb_1d: "Crea 1–3 hábitos. Márcalos cada día. Construye tu racha.",
+  onb_2t: "Mira tu camino", onb_2d: "Stats, cima y freeze muestran tu progreso. Sin culpa, solo el viaje.",
+  onb_3t: "Tus datos se quedan contigo", onb_3d: "Sin cuenta. Sin servidor. Sin rastreadores. Todo solo en tu dispositivo.",
+  empty_ready: "¿Listo para el primer paso?", empty_cta: "Escribe tu primera misión",
+  wheel_title: "Elige la duración", wheel_hint: "Desliza arriba o abajo — 3 horas máximo.", timer_max: "Máx 3 h de trabajo profundo",
+  proof_tip: "Añadir prueba (foto/nota)", proof_cam: "Tomar foto", proof_gallery: "Galería",
+  proof_note_short: "Nota breve", proof_log_title: "Pruebas",
+  summit_level: "Nivel {n} — {rank}", summit_next: "{pts} / 70 pts para el nivel {n}",
+  level_tip: "Cada hábito = +10 puntos. 70 puntos = subir de nivel.",
+  lvl_names: "Campo base, Ascenso, Cresta alta, Conquistador de cumbres, Sobre las nubes",
+  gr_hover: "{n} check-ins · {p} %",
   t_hours: "H.", t_minutes: "Min.", t_seconds: "Seg.", custom_apply: "Aplicar",
   sound_lbl: "Ambiente", snd_off: "Off — silencio", snd_white: "Ruido blanco", snd_rain: "Lluvia", snd_synth: "Synth",
   focus_exit: "Al Hub", focus_fs: "Pantalla completa", level_lbl: "Nivel {n}",
   hero_goal: "Meta del día: 100 %",
-  routine_title: "Tu rutina", routine_morning: "Rutina de mañana", routine_evening: "Rutina de noche",
   wg_title: "Widgets", wg_today: "Min. hoy",
   wg_hint: "En iPhone y Android: instala OutTrack — los widgets solo están en la app, no en el navegador.",
   summit_title: "La cima", summit_sub: "Tu camino como un viaje — cada paso cuenta.",
@@ -298,64 +320,66 @@ es: {
   focus_q: "¿Cuál es tu único foco para este bloque?", focus_ph: "p. ej. terminar OutTrack v3",
   eyebrow_energy: "Energía",
   m_protein: "Proteína", m_carbs: "Carbohidratos", m_fat: "Grasa",
-  tut_skip: "Saltar", tut_back: "Atrás", tut_next: "Seguir", tut_start: "Vamos",
-  tut_1t: "Tu misión diaria", tut_1d: "Crea hábitos, táchalos y haz crecer tu racha — paso a paso.",
-  tut_2t: "Foco sin distracciones", tut_2d: "El modo Outdo apaga todo lo demás: pon temporizador, nombra un foco, a por ello.",
-  tut_3t: "Comer sin pensar", tut_3d: "136 recetas con calorías y macros — toca, cocina, listo.",
-  tut_4t: "Mira tu camino", tut_4d: "Stats, cima y freeze muestran tu progreso — sin culpa, solo el viaje.",
-  tut_5t: "Tus datos se quedan contigo", tut_5d: "Sin cuenta, sin servidor, sin rastreadores. Todo vive solo en tu dispositivo.",
   food_foot: "Ideas generales de recetas, sin consejo nutricional.",
   meta_line: "{kcal} kcal · {mins} min", cat_protein: "Proteína", cat_energie: "Energía", cat_light: "Light",
   eyebrow_cons: "Constancia", lb_redirects: "Redirecciones", lb_streak: "Mejor racha", lb_perfect: "Días al 100 %",
   wr_bestday: "Mejor día",
   gr_sub: "Últimos 35 días — más oscuro = más logrado.",
   id_sub: "Cada hábito = +10 puntos en su área. 70 puntos = subir de nivel.",
-  fl_empty: "Aún no hay bloques — empieza tu primer Outdo. ◎",
+  fl_empty: "Aún no hay bloques — empieza tu primer bloque de foco.",
   lg_sec: "Legal e info",
  export_ok: "Exportación descargada.", reset_confirm: "¿Borrar todos los datos de este dispositivo?",
  reset_done: "Todo borrado. Un nuevo comienzo espera.",
   eyebrow_app: "App", set_lang_sub: "Se aplica al instante en toda la app.",
   theme_title: "Apariencia", theme_sub: "Se guarda localmente en este dispositivo.",
   theme_light: "Claro", theme_dark: "Oscuro",
-  remind_sub: "Local en este dispositivo — sin servidor.",
-  remind_denied: "Notificaciones bloqueadas — permítelas en ajustes del sistema.",
- remind_saved: "Recordatorios guardados.",
   store_local: "Guardado localmente — todo offline en este dispositivo.",
   store_memory: "Solo en memoria — no se guarda nada.",
-  cb_text: "Sin cookies ni rastreadores — solo almacenamiento local del dispositivo.",
 },
 fr: {
-  nav_hub: "Hub", nav_journal: "Journal", nav_focus: "Mode Outdo", nav_food: "Repas", nav_stats: "Stats", nav_settings: "Réglages",
-  tab_hub: "Hub", tab_journal: "Journal", tab_outdo: "Outdo", tab_food: "Repas", tab_stats: "Stats", tab_settings: "Régl.",
+  nav_hub: "Hub", nav_journal: "Journal", nav_focus: "Mode Focus", nav_food: "Repas", nav_stats: "Stats", nav_settings: "Réglages",
+  tab_hub: "Hub", tab_journal: "Journal", tab_outdo: "Focus", tab_food: "Repas", tab_stats: "Stats", tab_settings: "Régl.",
   greet_morning: "Bonjour", greet_day: "Bonjour", greet_evening: "Bonsoir", greet_night: "Debout ? Le voyage continue.",
   quest_title: "Quête du jour", quest_ph: "Une phrase : quoi d'essentiel aujourd'hui ?",
   streak_days: "jours de série", perfect_label: "jours à 100 %", freeze_btn: "Sauver la série",
-  chart_7: "7 jours", chart_30: "30 jours",
+  chart_7s: "7J", chart_30s: "30J", chart_lbl: "Période",
   sec_habits: "Habitudes", add_new: "+ Nouv.", sh_title: "Nouvelle habitude", sh_cancel: "Annuler", sh_add: "Ajouter",
   area_mind: "Esprit", area_body: "Corps", area_craft: "Art",
   goal_daily: "Quotidien", goal_weekly: "×/sem", goal_target: "Cible", goal_count_lbl: "Nombre",
   proof_btn: "Preuve", proof_title: "Noter une preuve", proof_save: "Enregistrer", proof_photo_lbl: "Photo",
   rc_title: "Contrôle focus", rc_open: "Rediriger l'impulsion",
   rd_title: "60 secondes — rien d'autre", ra_water: "Boire de l'eau", ra_pushups: "10 pompes", ra_read: "Lire le focus à voix haute", rd_cancel: "Annuler",
-  launch_title: "Lancer Outdo", timer_start: "Démarrer", timer_pause: "Pause", timer_resume: "Reprendre", timer_reset: "Reset",
+  launch_title: "Lancer Focus", timer_start: "Démarrer", timer_pause: "Pause", timer_resume: "Reprendre", timer_reset: "Reset",
   st_ready: "Prêt", st_running: "En cours…", st_paused: "En pause", st_done: "Bravo ",
   mf_all: "Tout", mf_protein: "Protéines", mf_energy: "Énergie", mf_light: "Light", meal_new: "Nouvelle idée", meal_hint: "Toucher pour une idée",
   r_ing: "Ingrédients", r_steps: "Préparation", sec_all: "Tous les plats",
   gr_title: "Grille", id_title: "Identité", fl_title: "Log focus",
   weekly_title: "Bilan hebdo", lg_less: "Moins", lg_more: "Plus",
   set_lang_title: "Langue",
-  remind_title: "Rappels", remind_enable: "Me rappeler", remind_morning: "Matin", remind_evening: "Soir",
   set_store_title: "Stockage", set_info_title: "Infos",
   j_save: "Enregistrer", sec_entries: "Entrées", journal_review: "Insérer le bilan hebdo",
   btn_export: "Exporter", btn_reset: "Tout effacer", dt_title: "Données",
   legal_privacy: "Confidentialité", legal_terms: "CGU", legal_refund: "Remboursements",
   legal_cookies: "Cookies", legal_imprint: "Contact", legal_licenses: "Licences", legal_close: "Fermer",
-  cb_accept: "Compris", cb_decline: "Sans enregistrer",
+  pts_short: "Pts", wr_foot: "Le voyage continue.",
+  onb_skip: "Passer", onb_next: "Suivant", onb_start: "Compris — Démarrer",
+  welcome_title: "welcome to your new life",
+  verse_text: "Je peux tout par Christ, qui me fortifie.", verse_ref: "Philippiens 4:13", verse_close: "Amen",
+  onb_1t: "Ta quête du jour", onb_1d: "Crée 1–3 habitudes. Coche-les chaque jour. Builds ta série.",
+  onb_2t: "Vois ton chemin", onb_2d: "Stats, sommet et freeze montrent ton progrès. Sans culpabilité, juste le voyage.",
+  onb_3t: "Tes données restent chez toi", onb_3d: "Pas de compte. Pas de serveur. Pas de traceurs. Tout reste sur ton appareil.",
+  empty_ready: "Prêt pour le premier pas ?", empty_cta: "Écris ta première quête",
+  wheel_title: "Choisis la durée", wheel_hint: "Glisse en haut ou en bas — 3 heures max.", timer_max: "Max 3 h de travail profond",
+  proof_tip: "Ajouter une preuve (photo/note)", proof_cam: "Prendre une photo", proof_gallery: "Galerie",
+  proof_note_short: "Note courte", proof_log_title: "Preuves",
+  summit_level: "Niveau {n} — {rank}", summit_next: "{pts} / 70 pts jusqu'au niveau {n}",
+  level_tip: "Chaque habitude = +10 points. 70 points = niveau supérieur.",
+  lvl_names: "Camp de base, Ascension, Crête haute, Conquérant de sommets, Au-dessus des nuages",
+  gr_hover: "{n} check-ins · {p} %",
   t_hours: "H.", t_minutes: "Min.", t_seconds: "Sec.", custom_apply: "Appliquer",
   sound_lbl: "Ambiance", snd_off: "Off — silence", snd_white: "Bruit blanc", snd_rain: "Pluie", snd_synth: "Synthé",
   focus_exit: "Vers Hub", focus_fs: "Plein écran", level_lbl: "Niveau {n}",
   hero_goal: "Objectif du jour : 100 %",
-  routine_title: "Ta routine", routine_morning: "Routine du matin", routine_evening: "Routine du soir",
   wg_title: "Widgets", wg_today: "Min. aujourd.",
   wg_hint: "Sur iPhone et Android : installe OutTrack — les widgets sont dans l'app, pas dans le navigateur.",
   summit_title: "Le sommet", summit_sub: "Ton chemin comme un voyage — chaque pas compte.",
@@ -378,42 +402,32 @@ fr: {
   focus_q: "Quel est ton unique focus pour ce bloc ?", focus_ph: "p. ex. finir OutTrack v3",
   eyebrow_energy: "Énergie",
   m_protein: "Protéines", m_carbs: "Glucides", m_fat: "Lipides",
-  tut_skip: "Passer", tut_back: "Retour", tut_next: "Suivant", tut_start: "C'est parti",
-  tut_1t: "Ta quête du jour", tut_1d: "Crée des habitudes, coche-les et fais grandir ta série — pas à pas.",
-  tut_2t: "Focus sans distractions", tut_2d: "Le mode Outdo éteint tout le reste : règle un minuteur, nomme un focus, c'est parti.",
-  tut_3t: "Manger sans réfléchir", tut_3d: "136 recettes avec calories et macros — touche, cuisine, terminé.",
-  tut_4t: "Vois ton chemin", tut_4d: "Stats, sommet et freeze montrent ton progrès — sans culpabilité, juste le voyage.",
-  tut_5t: "Tes données restent avec toi", tut_5d: "Pas de compte, pas de serveur, pas de traqueurs. Tout vit sur ton appareil.",
   food_foot: "Idées générales de recettes, sans conseil nutritionnel.",
   meta_line: "{kcal} kcal · {mins} min", cat_protein: "Protéines", cat_energie: "Énergie", cat_light: "Light",
   eyebrow_cons: "Régularité", lb_redirects: "Redirections", lb_streak: "Meilleure série", lb_perfect: "Jours à 100 %",
   wr_bestday: "Meilleur jour",
   gr_sub: "35 derniers jours — plus foncé = plus accompli.",
   id_sub: "Chaque habitude = +10 points dans sa sphère. 70 points = niveau supérieur.",
-  fl_empty: "Pas encore de blocs — lance ton premier Outdo. ◎",
+  fl_empty: "Pas encore de blocs — lance ton premier bloc de focus.",
   lg_sec: "Légal & infos",
  export_ok: "Export téléchargé.", reset_confirm: "Supprimer toutes les données de cet appareil ?",
  reset_done: "Tout effacé. Un nouveau départ t'attend.",
   eyebrow_app: "App", set_lang_sub: "S'applique instantanément à toute l'app.",
   theme_title: "Apparence", theme_sub: "Stocké en local sur cet appareil.",
   theme_light: "Clair", theme_dark: "Sombre",
-  remind_sub: "En local sur cet appareil — sans serveur.",
-  remind_denied: "Notifications bloquées — autorise-les dans les réglages système.",
- remind_saved: "Rappels enregistrés.",
   store_local: "Stocké en local — tout hors ligne sur cet appareil.",
   store_memory: "En mémoire uniquement — rien n'est enregistré.",
-  cb_text: "Ni cookies ni traqueurs — uniquement le stockage local de l'appareil.",
 },
 };
 const QUOTES = {
-  de: ["Kleine Siege summieren sich.", "The journey continues.", "Eine Quest pro Tag reicht.", "Deine Daten bleiben bei dir."],
+  de: ["Kleine Siege summieren sich.", "Weiter geht's.", "Eine Quest pro Tag reicht.", "Deine Daten bleiben bei dir."],
   en: ["Small wins add up.", "The journey continues.", "One quest a day is enough.", "Your data stays with you."],
   ru: ["Маленькие победы суммируются.", "Путь продолжается."],
   es: ["Las pequeñas victorias suman.", "El viaje continúa."],
   fr: ["Les petites victoires s'additionnent.", "Le voyage continue."],
 };
 const $ = (s) => document.querySelector(s);
-const $$ = (s) => Array.from(document.querySelectorAll(s));
+const $$ = (s, root) => Array.from((root || document).querySelectorAll(s));
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const uid = () => Math.random().toString(36).slice(2, 10);
 function t(key, vars) {
@@ -433,12 +447,36 @@ function weekKey(dateISO) {
   const w = Math.ceil((((d - onejan) / 86400000) + onejan.getDay() + 1) / 7);
   return d.getFullYear() + "-W" + String(w).padStart(2, "0");
 }
+/* Toast: oben mittig, 2,5 s, nicht klickbar + Haptik + kleines Confetti */
+const CONF_COLORS = ["#4F46E5", "#8ba4ff", "#2f6fed", "#f5f5f7"];
+function confetti() {
+  const box = $("#confetti");
+  if (!box) return;
+  if (box.children.length > 16) return;
+  for (let i = 0; i < 8; i++) {
+    const bit = document.createElement("i");
+    const ang = (-140 + Math.random() * 100) * Math.PI / 180;
+    const dist = 46 + Math.random() * 56;
+    bit.style.setProperty("--cx", Math.round(Math.cos(ang) * dist) + "px");
+    bit.style.setProperty("--cy", Math.round(Math.sin(ang) * dist) + "px");
+    bit.style.setProperty("--cr", Math.round(-200 + Math.random() * 400) + "deg");
+    bit.style.background = CONF_COLORS[i % CONF_COLORS.length];
+    bit.style.animationDelay = Math.round(Math.random() * 70) + "ms";
+    box.appendChild(bit);
+    setTimeout(() => bit.remove(), 1000);
+  }
+}
+function buzz(ms) {
+  try { if (navigator && typeof navigator.vibrate === "function") navigator.vibrate(ms || 50); } catch { /* kein Haptik-Support */ }
+}
 function toast(msg) {
   const el = $("#toast");
   el.textContent = msg;
   el.hidden = false;
   clearTimeout(toast._t);
-  toast._t = setTimeout(() => { el.hidden = true; }, 2400);
+  toast._t = setTimeout(() => { el.hidden = true; }, 2500);
+  buzz(50);
+  confetti();
 }
 
 /* ---------- Storage ---------- */
@@ -456,8 +494,7 @@ const DEFAULTS = () => ({
   v: 3, lang: "de", theme: "light", habits: DEFAULT_HABITS(),
   journal: [], redirects: [], focusLog: [],
   frozenDays: {}, freezeWeek: "", quest: { date: "", text: "" },
-  remind: { on: false, morning: "07:30", evening: "21:00", fired: {} },
-  chartRange: 7, mealIdx: 0, mealCat: "alle", focusText: "", tutorialSeen: false,
+  chartRange: 7, mealIdx: 0, mealCat: "alle", focusText: "", onboarded: false,
 });
 let db = DEFAULTS();
 function load() {
@@ -473,6 +510,7 @@ function load() {
   try {
     const d = JSON.parse(raw);
     db = Object.assign(DEFAULTS(), d);
+    delete db.remind; // Erinnerungen entfernt (Altdaten-Migration)
     db.habits.forEach((h) => {
       if (typeof h.label === "string") h.label = { de: h.label };
       if (!h.goal) h.goal = "daily";
@@ -489,6 +527,12 @@ function save() {
 }
 const habitLabel = (h) => (typeof h.label === "object" ? (h.label[db.lang] || h.label.de || h.label.en || "") : h.label);
 const isDone = (h, day = todayISO()) => (h.days[day] || 0) > 0;
+
+/* ---------- Icons (Inline-SVG, kein Emoji, kein Text-Glyph) ---------- */
+const ICO = {
+  timer: '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.6" r="7.6"/><path d="M12 9.9v3.7l2.3 1.4"/><path d="M9.9 2.6h4.2"/><path d="M12 2.6v3.4"/></svg>',
+  flame: '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 2.2c.6 3-1.2 4.4-2.4 5.6C8 9.4 6.8 10.8 6.8 13.2A5.2 5.2 0 0 0 12 18.4a5.2 5.2 0 0 0 5.2-5.2c0-2.2-1-3.7-2.3-5.2-.6 1-1.4 1.6-2.2 1.8.9-2.6.5-5.4-.7-7.6z"/></svg>',
+};
 
 /* ---------- i18n ---------- */
 const isDark = () => document.body.classList.contains("dark");
@@ -522,6 +566,7 @@ function applyLang() {
   document.documentElement.lang = db.lang;
   $$("[data-i18n]").forEach((el) => { el.textContent = t(el.dataset.i18n); });
   $$("[data-i18n-ph]").forEach((el) => { el.placeholder = t(el.dataset.i18nPh); });
+  try { if (!$("#onboarding").hidden) renderOnb(); } catch { /* Onboarding noch nicht da */ }
 }
 function renderLangList() {
   const ul = $("#lang-list");
@@ -577,7 +622,7 @@ function renderWidgets() {
   const w = (v, l, d) => "<div class=\"wg\" style=\"--d:" + d + "\"><strong>" + v + "</strong><small>" + esc(l) + "</small></div>";
   box.innerHTML =
     w(calcStreak(), t("lb_streak"), 0) +
-    w("◎ " + mins, t("wg_today"), 1) +
+    w(ICO.timer + "&nbsp;" + mins, t("wg_today"), 1) +
     w(perfectDays(), t("lb_perfect"), 2);
 }
 tabs.forEach((x) => x.addEventListener("click", () => go(x.dataset.tab)));
@@ -595,6 +640,9 @@ function renderAll() {
 }
 
 /* ---------- Progress core ---------- */
+function anyCheckin() {
+  return db.habits.some((h) => Object.keys(h.days || {}).some((d) => (h.days[d] || 0) > 0));
+}
 function dayProgress(day = todayISO()) {
   if (!db.habits.length) return 0;
   let done = 0;
@@ -672,7 +720,7 @@ function renderWeek() {
     try { wd = d.toLocaleDateString(loc(), { weekday: "narrow" }); } catch { wd = "·"; }
     const cls = p >= 100 ? "" : p > 0 ? "part" : "off";
     html += "<div class=\"wday " + cls + (isToday ? " today" : "") + "\" style=\"--d:" + i + "\">" +
-      "<span>" + esc(wd) + "</span><span class=\"fl\">●</span>" +
+      "<span>" + esc(wd) + "</span><span class=\"fl\">" + ICO.flame + "</span>" +
       "<span class=\"dn\">" + String(d.getDate()).padStart(2, "0") + "</span>" +
       "<span class=\"dot" + (isToday ? "" : " ghost") + "\"></span></div>";
   }
@@ -708,6 +756,10 @@ function renderHub() {
     needle.setAttribute("transform", "rotate(" + ang + " 100 100)");
     try { needle.style.transform = "rotate(" + ang + "deg)"; needle.style.transformOrigin = "100px 100px"; } catch { /* still */ }
   }
+  // Empty-State: vor dem ersten Check-in kein 0-%-Kreis, sondern Einstieg
+  const started = anyCheckin();
+  $("#gauge-wrap").hidden = !started;
+  $("#empty-gauge").hidden = started;
   countNum("ring-pct", pct, "%");
   const doneN = db.habits.filter((h) => isDone(h)).length;
   $("#ring-sub").textContent = doneN + " / " + db.habits.length;
@@ -729,25 +781,13 @@ function renderHub() {
     const n = db.habits.filter((h) => h.area === a && isDone(h)).length;
     if (n > 0) chips.push("<span>" + esc(t("area_" + a)) + " +" + (n * 10) + "</span>");
   });
-  if (redToday > 0) chips.push("<span>Mind +" + (redToday * 5) + "</span>");
+  if (redToday > 0) chips.push("<span>" + esc(t("area_mind")) + " +" + (redToday * 5) + "</span>");
   $("#points-mini").innerHTML = chips.join("");
   // Quest-Input
   const q = $("#focus-goal");
   if (document.activeElement !== q) q.value = db.quest.date === todayISO() ? (db.quest.text || "") : "";
   drawChart();
   renderHabits();
-  renderRoutine();
-}
-/* Deine Routine: Morgen/Abend-Zeiten + Tages-Quest als Checkliste (Build your routine) */
-function renderRoutine() {
-  const box = $("#routine-rows");
-  if (!box) return;
-  const q = db.quest.date === todayISO() && db.quest.text ? db.quest.text : "—";
-  const doneN = db.habits.filter((h) => isDone(h)).length;
-  box.innerHTML =
-    "<div class=\"lb-row\"><span>" + esc(t("routine_morning")) + "</span><strong>" + esc(db.remind.morning || "07:30") + "</strong></div>" +
-    "<div class=\"lb-row\"><span>" + esc(t("quest_title")) + " · " + doneN + "/" + db.habits.length + "</span><strong>" + esc(q.length > 24 ? q.slice(0, 24) + "…" : q) + "</strong></div>" +
-    "<div class=\"lb-row\"><span>" + esc(t("routine_evening")) + "</span><strong>" + esc(db.remind.evening || "21:00") + "</strong></div>";
 }
 function drawChart() {
   const svg = $("#chart-svg");
@@ -779,7 +819,6 @@ $("#focus-goal").addEventListener("input", (e) => {
     save();
   }, 400);
 });
-$("#routine-go").addEventListener("click", () => go("settings"));
 $("#freeze-btn").addEventListener("click", () => {
   const wk = weekKey(todayISO());
   if (db.freezeWeek === wk) { toast(t("freeze_limit")); return; }
@@ -810,10 +849,12 @@ function renderHabits() {
     li.innerHTML = "<span class=\"check\">✓</span>" +
       "<span class=\"h-main\"><span class=\"h-label\">" + esc(habitLabel(h)) + "</span>" +
       "<span class=\"h-sub\">" + esc(habitSub(h)) + "</span></span>" +
-      (proof && proof.img ? "<img class=\"proof-thumb\" alt=\"\" />" : "") +
-      "<button class=\"h-proof" + (proof ? " has" : "") + "\">" + esc(t("proof_btn")) + (proof ? " ✓" : "") + "</button>" +
+      (proof && proofImage(h, today) ? "<img class=\"proof-thumb\" alt=\"\" />" : "") +
+      "<button class=\"h-proof" + (proof ? " has ok" : "") + "\" title=\"" + esc(t("proof_tip")) + "\" aria-label=\"" + esc(t("proof_tip")) + "\">" + esc(t("proof_btn")) + (proof ? " ✓" : "") + "</button>" +
       "<button class=\"h-del\" aria-label=\"×\">×</button>";
-    if (proof && proof.img) li.querySelector(".proof-thumb").src = proof.img;
+    const thumb = li.querySelector(".proof-thumb");
+    const pimg = proofImage(h, today);
+    if (thumb && pimg) thumb.src = pimg;
     const toggle = () => {
       if (h.goal === "target") {
         h.days[today] = (h.days[today] || 0) + 1;
@@ -841,6 +882,12 @@ function renderHabits() {
 
 /* ---------- Habit-Sheet (mit Zielen) ---------- */
 let sheetArea = "mind", sheetGoal = "daily";
+const openHabitSheet = () => {
+  $("#sheet").hidden = false;
+  $("#sheet-backdrop").hidden = false;
+  setTimeout(() => $("#new-habit-label").focus(), 50);
+};
+$("#first-quest-btn").addEventListener("click", openHabitSheet);
 $("#add-habit-btn").addEventListener("click", () => {
   $("#sheet").hidden = false;
   $("#sheet-backdrop").hidden = false;
@@ -875,25 +922,72 @@ $("#sheet-save").addEventListener("click", () => {
   toast(t("habit_added"));
 });
 
-/* ---------- Beweise (Notiz + Foto, 320px JPEG) ---------- */
+/* ---------- Beweise: Foto (Kamera/ Galerie) oder Notiz, Bild in IndexedDB ---------- */
 let proofHabit = null, proofImg = "";
+const proofKey = (hid, day) => hid + "@" + day;
+const proofCache = new Map(); // Key -> Data-URL (RAM), dauerhaft in IndexedDB
+let idbReady = null;
+function idb() {
+  if (idbReady) return idbReady;
+  idbReady = new Promise((res, rej) => {
+    try {
+      if (!window.indexedDB) return rej(new Error("kein IndexedDB"));
+      const rq = window.indexedDB.open("outtrack_proofs", 1);
+      rq.onupgradeneeded = () => { try { rq.result.createObjectStore("img"); } catch { /* schon da */ } };
+      rq.onsuccess = () => res(rq.result);
+      rq.onerror = () => rej(rq.error || new Error("idb"));
+      rq.onblocked = () => rej(new Error("idb blockiert"));
+    } catch (e) { rej(e); }
+  });
+  idbReady.catch(() => { idbReady = null; });
+  return idbReady;
+}
+async function idbPut(key, val) {
+  const d = await idb();
+  return new Promise((res, rej) => {
+    const tx = d.transaction("img", "readwrite");
+    tx.objectStore("img").put(val, key);
+    tx.oncomplete = () => res(true);
+    tx.onerror = () => rej(tx.error || new Error("put"));
+  });
+}
+async function idbGet(key) {
+  const d = await idb();
+  return new Promise((res, rej) => {
+    const tx = d.transaction("img", "readonly");
+    const rq = tx.objectStore("img").get(key);
+    rq.onsuccess = () => res(rq.result || "");
+    rq.onerror = () => rej(rq.error || new Error("get"));
+  });
+}
+const proofImage = (h, day) => (h.proofs && h.proofs[day] && (h.proofs[day].img || proofCache.get(proofKey(h.id, day)))) || "";
+function showProofDetail() {
+  const det = $("#proof-detail");
+  det.hidden = false;
+  const prev = $("#proof-preview");
+  if (proofImg) { prev.src = proofImg; prev.hidden = false; } else { prev.hidden = true; }
+}
 function openProof(id) {
   proofHabit = db.habits.find((h) => h.id === id);
   if (!proofHabit) return;
   const p = (proofHabit.proofs && proofHabit.proofs[todayISO()]) || {};
   $("#proof-note").value = p.note || "";
-  proofImg = p.img || "";
-  const prev = $("#proof-preview");
-  if (proofImg) { prev.src = proofImg; prev.hidden = false; } else { prev.hidden = true; }
+  proofImg = proofImage(proofHabit, todayISO());
+  $("#proof-detail").hidden = true;
   $("#proof-photo").value = "";
+  $("#proof-gallery").value = "";
   $("#proof-sheet").hidden = false;
   $("#proof-backdrop").hidden = false;
 }
 const closeProof = () => { $("#proof-sheet").hidden = true; $("#proof-backdrop").hidden = true; proofHabit = null; };
 $("#proof-cancel").addEventListener("click", closeProof);
 $("#proof-backdrop").addEventListener("click", closeProof);
-$("#proof-photo").addEventListener("change", (e) => {
-  const f = e.target.files && e.target.files[0];
+$("#proof-note-btn").addEventListener("click", () => {
+  showProofDetail();
+  setTimeout(() => $("#proof-note").focus(), 30);
+});
+function readPhoto(input) {
+  const f = input.files && input.files[0];
   if (!f) return;
   const rd = new FileReader();
   rd.onload = () => {
@@ -907,24 +1001,56 @@ $("#proof-photo").addEventListener("change", (e) => {
         c.height = Math.max(1, Math.round(img.height * sc));
         c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
         proofImg = c.toDataURL("image/jpeg", 0.82);
-        const prev = $("#proof-preview");
-        prev.src = proofImg; prev.hidden = false;
-      } catch { /* Bild wird ohne Speichern verworfen */ }
+        showProofDetail();
+      } catch { /* Bild wird verworfen */ }
     };
+    img.onerror = () => { /* unlesbar */ };
     img.src = rd.result;
   };
+  rd.onerror = () => { /* unlesbar */ };
   rd.readAsDataURL(f);
-});
-$("#proof-save").addEventListener("click", () => {
+}
+$("#proof-photo").addEventListener("change", (e) => readPhoto(e.target));
+$("#proof-gallery").addEventListener("change", (e) => readPhoto(e.target));
+$("#proof-save").addEventListener("click", async () => {
   if (!proofHabit) return;
   const note = $("#proof-note").value.trim().slice(0, 140);
   if (!note && !proofImg) { closeProof(); return; }
-  proofHabit.proofs[todayISO()] = { note, img: proofImg };
-  if (!isDone(proofHabit)) proofHabit.days[todayISO()] = 1;
+  const h = proofHabit, day = todayISO(), key = proofKey(h.id, day);
+  const prev = (h.proofs && h.proofs[day]) || {};
+  const img = proofImg || prev.img || proofCache.get(key) || "";
+  const rec = { note, img: "", idb: 0 };
+  if (img) {
+    proofCache.set(key, img);
+    try {
+      await idbPut(key, img);
+      rec.idb = 1;
+    } catch { rec.img = img; } // IndexedDB fehlt -> im localStorage-Datensatz
+  }
+  h.proofs[day] = rec;
+  if (!isDone(h)) h.days[day] = 1;
   save(); closeProof(); renderHub();
   toast(t("proof_saved"));
 });
-
+/* Beweis-Bilder aus IndexedDB nachladen (Datensatz merkt sich nur den Schlüssel) */
+async function hydrateProofs() {
+  const wanted = [];
+  db.habits.forEach((h) => {
+    for (const day in (h.proofs || {})) {
+      const rec = h.proofs[day] || {};
+      if (rec && rec.idb && !rec.img) wanted.push([h.id, day]);
+    }
+  });
+  if (!wanted.length) return;
+  let got = 0;
+  for (const [hid, day] of wanted) {
+    try {
+      const v = await idbGet(proofKey(hid, day));
+      if (v) { proofCache.set(proofKey(hid, day), v); got++; }
+    } catch { /* IndexedDB nicht verfügbar */ }
+  }
+  if (got) { renderHub(); renderStats(); }
+}
 /* ---------- Fokus-Check (Calibrated Friction) ---------- */
 let redirectTimer = null, redirectLeft = 60;
 function openRedirect() {
@@ -943,6 +1069,36 @@ function closeRedirect() {
   clearInterval(redirectTimer);
   $("#redirect-sheet").hidden = true;
   $("#redirect-backdrop").hidden = true;
+}
+/* App in 10 Minuten 3× geöffnet -> Fokus-Check von selbst (max. 1× pro Tag) */
+const AUTOLOOP_KEY = "outtrack_autoloop";
+const AUTOLOOP_COOLDOWN = 24 * 3600 * 1000;
+let openLoopDone = false;
+function trackOpen() {
+  const now = Date.now();
+  let arr = [];
+  try { arr = JSON.parse(localStorage.getItem(OPENS_KEY) || "[]"); } catch { arr = []; }
+  arr = arr.filter((x) => typeof x === "number" && now - x < 10 * 60 * 1000);
+  arr.push(now);
+  try { localStorage.setItem(OPENS_KEY, JSON.stringify(arr)); } catch { /* egal */ }
+  return arr.length;
+}
+function autoLoopCooling() {
+  try {
+    const last = Number(localStorage.getItem(AUTOLOOP_KEY) || 0);
+    return Date.now() - last < AUTOLOOP_COOLDOWN;
+  } catch { return false; }
+}
+function checkOpenLoop() {
+  if (openLoopDone) return false;
+  if (trackOpen() < 3) return false;
+  // Ohne Cooldown würde JEDES weitere Laden feuern, solange 3 Öffnungen
+  // im 10-Min-Fenster liegen — also max. einmal pro Tag von selbst zeigen.
+  if (autoLoopCooling()) return false;
+  openLoopDone = true;
+  try { localStorage.setItem(AUTOLOOP_KEY, String(Date.now())); } catch { /* egal */ }
+  openRedirect();
+  return true;
 }
 $("#redirect-open").addEventListener("click", openRedirect);
 $("#redirect-cancel").addEventListener("click", closeRedirect);
@@ -1088,50 +1244,78 @@ $("#meal-ing").addEventListener("keydown", (e) => {
   if (li && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); li.classList.toggle("off"); }
 });
 
-/* ---------- Tutorial (First-Run): was die App kann + wie sie geht ---------- */
-const TUTS = [["tut_1t", "tut_1d"], ["tut_2t", "tut_2d"], ["tut_3t", "tut_3d"], ["tut_4t", "tut_4d"], ["tut_5t", "tut_5d"]];
-let tutIdx = 0;
-function renderTut() {
-  const last = tutIdx === TUTS.length - 1;
-  $("#tut-title").textContent = t(TUTS[tutIdx][0]);
-  $("#tut-text").textContent = t(TUTS[tutIdx][1]);
-  $("#tut-back").hidden = tutIdx === 0;
-  $("#tut-next").textContent = t(last ? "tut_start" : "tut_next");
-  $("#tut-next").removeAttribute("data-i18n");
-  const dots = $("#tut-dots");
+/* ---------- Welcome (allererster Start, noch vor dem Onboarding) ---------- */
+const WELCOME_KEY = "outtrack_welcome";
+function welcomeSeen() {
+  try { return localStorage.getItem(WELCOME_KEY) === "1"; } catch { return true; }
+}
+function firstLaunch() {
+  try {
+    return !localStorage.getItem(KEY) && !localStorage.getItem(ONB_KEY) && !localStorage.getItem(WELCOME_KEY);
+  } catch { return false; }
+}
+function showWelcome() { $("#welcome").hidden = false; }
+function closeWelcome() {
+  $("#welcome").hidden = true;
+  try { localStorage.setItem(WELCOME_KEY, "1"); } catch { /* egal */ }
+  if (!onbSeen() && !db.tutorialSeen) showOnboarding();
+  else checkOpenLoop();
+}
+$("#welcome-go").addEventListener("click", closeWelcome);
+
+/* ---------- Onboarding (Fullscreen, 3 Slides, vor dem Hub) ---------- */
+const ONB = [["onb_1t", "onb_1d"], ["onb_2t", "onb_2d"], ["onb_3t", "onb_3d"]];
+let onbIdx = 0;
+function renderOnb() {
+  const last = onbIdx === ONB.length - 1;
+  $("#onb-title").textContent = t(ONB[onbIdx][0]);
+  $("#onb-text").textContent = t(ONB[onbIdx][1]);
+  const next = $("#onb-next");
+  next.textContent = t(last ? "onb_start" : "onb_next");
+  next.removeAttribute("data-i18n");
+  $$(".onb-svg").forEach((svg, i) => svg.classList.toggle("on", i === onbIdx));
+  const dots = $("#onb-dots");
   dots.innerHTML = "";
-  TUTS.forEach((_, n) => {
+  ONB.forEach((_, n) => {
     const b = document.createElement("button");
-    if (n === tutIdx) b.className = "on";
+    if (n === onbIdx) b.className = "on";
     b.setAttribute("role", "tab");
-    b.setAttribute("aria-label", (n + 1) + " / " + TUTS.length);
-    b.addEventListener("click", () => { tutIdx = n; renderTut(); });
+    b.setAttribute("aria-label", (n + 1) + " / " + ONB.length);
+    b.addEventListener("click", () => { onbIdx = n; renderOnb(); });
     dots.appendChild(b);
   });
-  const body = $("#tut-body");
-  body.style.animation = "none";
-  void body.offsetWidth;
-  body.style.animation = "";
+  const copy = $(".onb-copy");
+  copy.style.animation = "none";
+  void copy.offsetWidth;
+  copy.style.animation = "";
 }
-function showTutorial() {
-  tutIdx = 0;
-  renderTut();
-  $("#tutorial").hidden = false;
+function onbSeen() {
+  try { return localStorage.getItem(ONB_KEY) === "1"; } catch { return false; }
 }
-function closeTutorial() {
-  $("#tutorial").hidden = true;
-  if (!db.tutorialSeen) { db.tutorialSeen = true; save(); }
+function showOnboarding() {
+  onbIdx = 0;
+  renderOnb();
+  $("#onboarding").hidden = false;
 }
-$("#tut-skip").addEventListener("click", closeTutorial);
-$("#tut-back").addEventListener("click", () => { if (tutIdx > 0) { tutIdx--; renderTut(); } });
-$("#tut-next").addEventListener("click", () => {
-  if (tutIdx < TUTS.length - 1) { tutIdx++; renderTut(); }
-  else closeTutorial();
+function closeOnboarding() {
+  $("#onboarding").hidden = true;
+  try { localStorage.setItem(ONB_KEY, "1"); } catch { /* egal */ }
+  if (!db.onboarded) { db.onboarded = true; save(); }
+  renderHub();
+  checkOpenLoop();
+}
+$("#onb-skip").addEventListener("click", closeOnboarding);
+$("#onb-next").addEventListener("click", () => {
+  if (onbIdx < ONB.length - 1) { onbIdx++; renderOnb(); }
+  else closeOnboarding();
 });
 
-/* ---------- Outdo Timer ---------- */
+/* ---------- Fokus-Timer mit Wheel-Picker (max. 3 h) ---------- */
 const CIRC = 552.9;
+const MAX_FOCUS_SEC = 180 * 60;
+const WHEEL_MAX = { h: 3, m: 59, s: 59 };
 let tDur = 45 * 60, tLeft = 45 * 60, tRunning = false, tEnd = 0, tTick = null;
+let wheelVal = { h: 0, m: 45, s: 0 };
 function fmtT(s) {
   s = Math.max(0, s);
   const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), r = s % 60;
@@ -1144,35 +1328,118 @@ function drawTimer() {
   $("#timer-fg").style.strokeDashoffset = String(CIRC * (1 - frac));
 }
 function renderTimerLabels() {
-  $("#timer-start").textContent = t(tRunning ? "timer_pause" : (tLeft < tDur ? "timer_resume" : "timer_start"));
+  const start = $("#timer-start");
+  start.textContent = t(tRunning ? "timer_pause" : (tLeft < tDur ? "timer_resume" : "timer_start"));
+  start.disabled = tDur <= 0;
   $("#timer-state").textContent = t(tRunning ? "st_running" : (tLeft < tDur ? "st_paused" : "st_ready"));
 }
 function stopTick() { tRunning = false; clearInterval(tTick); tTick = null; }
 function setDuration(sec) {
   stopTick();
-  tDur = Math.max(1, sec);
+  tDur = Math.max(0, Math.round(sec));
   tLeft = tDur;
   drawTimer(); renderTimerLabels();
 }
-function syncCustomFields() {
-  $("#custom-h").value = Math.floor(tDur / 3600);
-  $("#custom-m").value = Math.floor((tDur % 3600) / 60);
-  $("#custom-s").value = tDur % 60;
+/* Wheel: Spalten aufbauen, Wert setzen, Scrollen + Tastatur (Pfeile, Shift = 5er-Schritte) */
+function buildWheel(unit, max) {
+  const box = document.getElementById("wheel-" + unit);
+  if (!box) return;
+  box.innerHTML = "";
+  for (let v = 0; v <= max; v++) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "wheel-opt";
+    b.dataset.v = String(v);
+    b.textContent = unit === "h" ? String(v) : String(v).padStart(2, "0");
+    b.setAttribute("role", "option");
+    b.addEventListener("click", () => setWheel(unit, v));
+    box.appendChild(b);
+  }
 }
+function paintWheel(unit) {
+  const box = document.getElementById("wheel-" + unit);
+  if (!box) return;
+  $$(".wheel-opt", box).forEach((el) => {
+    const on = Number(el.dataset.v) === wheelVal[unit];
+    el.classList.toggle("on", on);
+    el.setAttribute("aria-selected", on ? "true" : "false");
+    if (on) centerWheelOpt(box, el);
+  });
+}
+/* Option mittig scrollen — per Rects statt scrollIntoView: el.offsetTop rechnet
+   ab #app (nächster positionierter Vorfahr), nicht ab der Scroll-Box, und
+   scrollIntoView würde ggf. die ganze Seite mitscrollen. */
+function centerWheelOpt(box, el) {
+  try {
+    const br = box.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    const target = box.scrollTop + (r.top + r.height / 2) - (br.top + box.clientHeight / 2);
+    if (Math.abs(box.scrollTop - target) > 1) box.scrollTop = target;
+  } catch { /* egal */ }
+}
+const wheelTotal = () => wheelVal.h * 3600 + wheelVal.m * 60 + wheelVal.s;
+function setWheel(unit, v, silent) {
+  wheelVal[unit] = Math.max(0, Math.min(WHEEL_MAX[unit], Math.round(Number(v) || 0)));
+  paintWheel(unit);
+  if (!silent) applyWheel();
+}
+function applyWheel() {
+  if (wheelTotal() > MAX_FOCUS_SEC) {
+    toast(t("timer_max"));
+    wheelVal.h = Math.floor(MAX_FOCUS_SEC / 3600);
+    wheelVal.m = Math.floor((MAX_FOCUS_SEC % 3600) / 60);
+    wheelVal.s = 0;
+    ["h", "m", "s"].forEach(paintWheel);
+  }
+  $$("#presets button").forEach((x) => x.classList.remove("active"));
+  setDuration(wheelTotal());
+}
+function syncWheelFromDuration() {
+  wheelVal.h = Math.floor(tDur / 3600);
+  wheelVal.m = Math.floor((tDur % 3600) / 60);
+  wheelVal.s = tDur % 60;
+  ["h", "m", "s"].forEach(paintWheel);
+}
+["h", "m", "s"].forEach((unit) => {
+  const box = document.getElementById("wheel-" + unit);
+  if (!box) return;
+  let quiet = null;
+  box.addEventListener("scroll", () => {
+    clearTimeout(quiet);
+    quiet = setTimeout(() => {
+      if (box.scrollHeight <= box.clientHeight) return;
+      // Mitte und Optionen beide per getBoundingClientRect (Viewport-Koordinaten):
+      // el.offsetTop wäre relativ zu #app und damit um die halbe Seite daneben.
+      const br = box.getBoundingClientRect();
+      const mid = br.top + box.clientHeight / 2;
+      let best = null, bd = Infinity;
+      $$(".wheel-opt", box).forEach((el) => {
+        const r = el.getBoundingClientRect();
+        const d = Math.abs(r.top + r.height / 2 - mid);
+        if (d < bd) { bd = d; best = el; }
+      });
+      if (best && !best.classList.contains("on")) setWheel(unit, Number(best.dataset.v));
+    }, 140);
+  }, { passive: true });
+  box.addEventListener("keydown", (e) => {
+    const step = e.shiftKey ? 5 : 1;
+    if (e.key === "ArrowUp") { e.preventDefault(); setWheel(unit, wheelVal[unit] + step); }
+    else if (e.key === "ArrowDown") { e.preventDefault(); setWheel(unit, wheelVal[unit] - step); }
+  });
+});
+buildWheel("h", WHEEL_MAX.h);
+buildWheel("m", WHEEL_MAX.m);
+buildWheel("s", WHEEL_MAX.s);
 $("#presets").addEventListener("click", (e) => {
   const b = e.target.closest("button");
   if (!b) return;
   $$("#presets button").forEach((x) => x.classList.toggle("active", x === b));
   setDuration((Number(b.dataset.min) || 45) * 60);
-  syncCustomFields();
+  syncWheelFromDuration();
 });
-$("#custom-apply").addEventListener("click", () => {
-  const sec = (Number($("#custom-h").value) || 0) * 3600 + (Number($("#custom-m").value) || 0) * 60 + (Number($("#custom-s").value) || 0);
-  if (sec < 5) return;
-  $$("#presets button").forEach((x) => x.classList.remove("active"));
-  setDuration(sec);
-});
+$("#custom-apply").addEventListener("click", applyWheel);
 $("#timer-start").addEventListener("click", () => {
+  if (tDur <= 0) { toast(t("timer_max")); return; }
   if (tRunning) {
     tLeft = Math.max(0, Math.round((tEnd - Date.now()) / 1000));
     stopTick(); drawTimer(); renderTimerLabels();
@@ -1307,7 +1574,7 @@ function renderWeekly() {
     row(t("lb_streak"), bestStreak()) +
     row(t("wr_bestday"), esc(bestStr)) +
     row(t("lb_redirects"), red) +
-    "<p class=\"muted center wr-foot\">The journey continues.</p>";
+    "<p class=\"muted center wr-foot\">" + esc(t("wr_foot")) + "</p>";
 }
 function weeklyText() {
   let done = 0, perfect = 0, best = null, bestP = -1;
@@ -1328,7 +1595,7 @@ function weeklyText() {
   return "Wochenrückblick (" + todayISO(-6) + " – " + todayISO() + ")\n" +
     "• Check-ins: " + done + " · 100 %-Tage: " + perfect + " · Streak: " + calcStreak() + "\n" +
     "• Bester Tag: " + (best || "—") + " (" + bestP + " %)\n" +
-    "• Umleitungen: " + red + "\nThe journey continues.";
+    "• Umleitungen: " + red + "\n" + t("wr_foot");
 }
 function renderStats() {
   renderWeekly();
@@ -1345,12 +1612,12 @@ function renderStats() {
     const c = document.createElement("span");
     c.className = "sq " + (p === 0 ? "l0" : p < 34 ? "l1" : p < 67 ? "l2" : p < 100 ? "l3" : "l4");
     c.style.setProperty("--d", 34 - i);
-    c.title = d + " · " + p + "%";
+    c.title = d + " · " + t("gr_hover", { n: db.habits.filter((h) => isDone(h, d)).length, p });
     grid.appendChild(c);
   }
   const pts = areaPoints();
   const grand = total * 10 + db.redirects.length * 5;
-  $("#total-points").textContent = grand + " PTS";
+  $("#total-points").textContent = grand + " " + t("pts_short");
   // Identität
   const idBox = $("#identity");
   idBox.innerHTML = "";
@@ -1361,13 +1628,14 @@ function renderStats() {
     const div = document.createElement("div");
     div.className = "id-row";
     div.style.setProperty("--d", aidx);
-    div.innerHTML = "<div class=\"id-head\"><span>" + esc(t("area_" + a)) + "</span><small>" + esc(t("level_lbl", { n: lvl })) + " · " + p + " PTS</small></div><div class=\"bar\"><i style=\"width:" + w + "%\"></i></div>";
+    div.innerHTML = "<div class=\"id-head\"><span>" + esc(t("area_" + a)) + "</span><small>" + esc(t("level_lbl", { n: lvl })) + " · " + p + " " + esc(t("pts_short")) + "</small></div><div class=\"bar\"><i style=\"width:" + w + "%\"></i></div>";
     idBox.appendChild(div);
   });
+  renderProofLog();
   // Fokus-Log
   const fl = $("#focus-log");
   fl.innerHTML = "";
-  const items = db.focusLog.map((f) => ({ d: f.date, html: "◎ " + f.mins + " Min." + (f.text ? " — " + esc(f.text) : "") }))
+  const items = db.focusLog.map((f) => ({ d: f.date, html: ICO.timer + "&nbsp;" + f.mins + " Min." + (f.text ? " — " + esc(f.text) : "") }))
     .concat(db.redirects.map((r) => ({ d: r.date, html: esc(RA_KEYS[r.action] ? t(RA_KEYS[r.action]) : r.action) })))
     .sort((a, b) => (a.d < b.d ? 1 : -1)).slice(0, 10);
   if (!items.length) fl.innerHTML = "<p class=\"muted\">" + esc(t("fl_empty")) + "</p>";
@@ -1380,6 +1648,34 @@ function renderStats() {
   });
 }
 
+/* Beweise in den Stats anzeigen (Bild + Notiz + Datum) */
+function renderProofLog() {
+  const box = $("#proof-log");
+  const head = $("#proof-log-head");
+  if (!box || !head) return;
+  const items = [];
+  db.habits.forEach((h) => {
+    for (const day in (h.proofs || {})) {
+      const rec = h.proofs[day] || {};
+      const img = proofImage(h, day);
+      if (!rec.note && !img) continue;
+      items.push({ day, note: rec.note || "", img });
+    }
+  });
+  items.sort((a, b) => (a.day < b.day ? 1 : -1));
+  const top = items.slice(0, 12);
+  head.hidden = top.length === 0;
+  box.innerHTML = "";
+  top.forEach((it) => {
+    const d = document.createElement("div");
+    d.className = "proof-item";
+    d.innerHTML = (it.img ? "<img alt=\"\">" : "") +
+      (it.note ? "<p class=\"pn\">" + esc(it.note) + "</p>" : "") +
+      "<p class=\"pd\">" + esc(it.day) + "</p>";
+    if (it.img) d.querySelector("img").src = it.img;
+    box.appendChild(d);
+  });
+}
 /* Last-Week-Tiles + Der Gipfel (Promo: Track your progress / Reach mastery) */
 function weekCheckins() {
   let n = 0;
@@ -1399,13 +1695,34 @@ function renderTiles() {
     tile("✓ " + weekCheckins(), t("wk_checkins"), 1) +
     tile("◆ " + weekPTS(), t("wk_pts"), 2);
 }
+/* Level: Punkte / 70 = Aufstieg, mit Namen und Fortschrittsbalken */
+const LEVEL_STEP = 70;
+function totalPoints() {
+  let n = 0;
+  db.habits.forEach((h) => { n += Object.keys(h.days || {}).length * 10; });
+  return n + db.redirects.length * 5;
+}
+function levelRank(lvl) {
+  const names = String(t("lvl_names") || "").split(",").map((x) => x.trim()).filter(Boolean);
+  return names.length ? names[(lvl - 1) % names.length] : "";
+}
+function renderLevel() {
+  const pts = totalPoints();
+  const lvl = Math.floor(pts / LEVEL_STEP) + 1;
+  const inLvl = pts % LEVEL_STEP;
+  const lv = $("#summit-level"), nx = $("#summit-next"), bar = $("#summit-bar"), tip = $("#summit-tip");
+  if (lv) lv.textContent = t("summit_level", { n: lvl, rank: levelRank(lvl) });
+  if (nx) nx.textContent = t("summit_next", { pts: inLvl, n: lvl + 1 });
+  if (bar) bar.style.width = Math.round((inLvl / LEVEL_STEP) * 100) + "%";
+  if (tip) { tip.textContent = t("level_tip"); tip.title = t("level_tip"); }
+}
 function renderSummit() {
   const svg = $("#summit-svg");
   if (!svg) return;
   let sum = 0;
   for (let i = 0; i < 30; i++) sum += dayProgress(todayISO(-i));
   const p = Math.round(sum / 30);
-  countNum("summit-pct", p, " %");
+  renderLevel();
   const cx = 20 + 190 * (p / 100), cy = 115 - 90 * (p / 100);
   const ac = ACC(), ink = INK(), faint = isDark() ? "rgba(255,255,255,.15)" : "rgba(0,0,0,.15)";
   svg.innerHTML =
@@ -1419,69 +1736,53 @@ function renderSummit() {
     "<circle cx=\"" + cx.toFixed(1) + "\" cy=\"" + cy.toFixed(1) + "\" r=\"6\" fill=\"" + ink + "\"/>" +
     "<circle cx=\"" + cx.toFixed(1) + "\" cy=\"" + cy.toFixed(1) + "\" r=\"10\" fill=\"none\" stroke=\"" + ink + "\" stroke-width=\"1.5\" opacity=\".3\"/>";
 }
-/* ---------- Erinnerungen (lokal, Intervall-Check) ---------- */
+/* ---------- Einstellungen ---------- */
 function renderSettings() {
-  $("#remind-toggle").checked = !!db.remind.on;
-  $("#remind-morning").value = db.remind.morning || "07:30";
-  $("#remind-evening").value = db.remind.evening || "21:00";
   $("#store-state").textContent = t(persistOK ? "store_local" : "store_memory");
 }
-$("#remind-toggle").addEventListener("change", (e) => {
-  const on = e.target.checked;
-  const apply = (ok) => {
-    db.remind.on = ok;
-    if (!ok) e.target.checked = false;
-    save(); renderSettings();
-    toast(t(ok ? "remind_saved" : "store_local"));
-  };
-  if (on && "Notification" in window && Notification.permission === "default") {
-    Notification.requestPermission().then((p) => {
-      if (p !== "granted") { apply(false); toast(t("remind_denied")); }
-      else apply(true);
-    }).catch(() => apply(true));
-  } else if (on && "Notification" in window && Notification.permission === "denied") {
-    apply(false); toast(t("remind_denied"));
-  } else apply(on);
-});
-$("#remind-morning").addEventListener("change", (e) => { db.remind.morning = e.target.value || "07:30"; save(); });
-$("#remind-evening").addEventListener("change", (e) => { db.remind.evening = e.target.value || "21:00"; save(); });
-function checkReminders() {
-  if (!db.remind.on) return;
-  if (!("Notification" in window) || Notification.permission !== "granted") return;
-  const now = new Date();
-  const hm = String(now.getHours()).padStart(2, "0") + ":" + String(now.getMinutes()).padStart(2, "0");
-  [db.remind.morning, db.remind.evening].forEach((slot) => {
-    if (!slot || slot !== hm) return;
-    const fk = todayISO() + "@" + slot;
-    if (db.remind.fired[fk]) return;
-    db.remind.fired[fk] = true;
-    save();
-    try {
-      const q = db.quest.date === todayISO() && db.quest.text ? db.quest.text : t("quest_title");
-      new Notification("OutTrack", { body: q });
-    } catch { /* still */ }
-  });
-}
-setInterval(checkReminders, 30000);
 
 /* ---------- Rechtliches (maßgeblich Deutsch) ---------- */
 const LEGAL_TITLE = { privacy: "legal_privacy", terms: "legal_terms", refund: "legal_refund", cookies: "legal_cookies", imprint: "legal_imprint", licenses: "legal_licenses" };
 const LEGAL_BODY = {
 de: {
   privacy: "<h4>1. Keine Server, keine Tracker</h4><p>OutTrack speichert alle Daten ausschließlich lokal auf deinem Gerät (localStorage). Es gibt keine Accounts, keine Cookies, keine Analyse-Tools, keine Datenübertragung an uns oder Dritte.</p><h4>2. Fotos</h4><p>Beweisfotos werden verkleinert (320 px, JPEG) ebenfalls nur lokal gespeichert und nie hochgeladen.</p><h4>3. Deine Rechte</h4><p>Du kannst deine Daten jederzeit per Export sichern und per „Alle Daten löschen“ entfernen.</p>",
-  terms: "<h4>1. Was OutTrack ist</h4><p>Ein Offline-Werkzeug für Habits, Journal, Rezepte und Fokus-Blöcke. Keine Heilversprechen, keine Ernährungsberatung, keine medizinische Beratung.</p><h4>2. Premium</h4><p>Premium wird per Pro-Code freigeschaltet und gilt auf diesem Gerät.</p><h4>3. Fair use</h4><p>Keine Guilt-Mechaniken, keine Dark Patterns — versprochen.</p>",
-  refund: "<h4>Erstattung</h4><p>Da es aktuell keinen App-Store-Verkauf mit Zahlungsabwicklung gibt, findet keine Abbuchung statt. Sollte künftig ein Store-Kauf angeboten werden, gelten die Erstattungsregeln des jeweiligen Stores (Apple/Google) bzw. das gesetzliche Widerrufsrecht.</p>",
-  cookies: "<h4>Cookie-Richtlinie</h4><p>OutTrack setzt keine Cookies und keine vergleichbaren Tracker ein. Der Hinweis beim Erststart betrifft ausschließlich den lokalen Gerätespeicher (Zustimmung = Speichern erlaubt, „Ohne Speichern“ = Memory-only-Modus).</p>",
+  terms: "<h4>1. Was OutTrack ist</h4><p>Ein Offline-Werkzeug für Habits, Journal, Rezepte und Fokus-Blöcke. Keine Heilversprechen, keine Ernährungsberatung, keine medizinische Beratung.</p><h4>2. Umfang</h4><p>Alle Funktionen stehen nach Installation ohne weitere Freischaltung zur Verfügung.</p><h4>3. Fair use</h4><p>Keine Guilt-Mechaniken, keine Dark Patterns — versprochen.</p>",
+  refund: "<h4>Erstattung</h4><p>Beim Kauf über einen App Store gelten dessen Erstattungsregeln (Apple/Google) sowie das gesetzliche Widerrufsrecht.</p>",
+  cookies: "<h4>Cookie-Richtlinie</h4><p>OutTrack setzt keine Cookies und keine vergleichbaren Tracker ein. Alle Daten liegen ausschließlich im lokalen Gerätespeicher.</p>",
   imprint: "<h4>Betreiber (Platzhalter — vor Store-Release ersetzen)</h4><p>[VORNAME NACHNAME / FIRMA]<br>[STRASSE NR, PLZ ORT]<br>[E-MAIL]<br>[TELEFON optional]</p>",
-  licenses: "<h4>Lizenzen & Hinweise</h4><p>OutTrack v3.22 — eigener Code, Systemschrift, eigenes SVG-Icon, live synthetisierte WebAudio-Klänge. Keine Frameworks, keine CDNs, keine externen Schriften oder Bilder. Alle Inhalte (Texte, Rezepte) sind eigene redaktionelle Inhalte.</p>",
+  licenses: "<h4>Lizenzen & Hinweise</h4><p>OutTrack v3.24 — eigener Code, Systemschrift, eigenes SVG-Icon, live synthetisierte WebAudio-Klänge. Keine Frameworks, keine CDNs, keine externen Schriften oder Bilder. Alle Inhalte sind eigene redaktionelle Inhalte.</p>",
 },
 en: {
   privacy: "<h4>1. No servers, no trackers</h4><p>OutTrack stores all data exclusively locally on your device (localStorage). No accounts, no cookies, no analytics, no transfer to us or third parties.</p><h4>2. Photos</h4><p>Proof photos are downscaled (320 px JPEG) and also stored only locally — never uploaded.</p><h4>3. Your rights</h4><p>Export your data anytime, or wipe it via “Delete all data”.</p>",
-  terms: "<h4>1. What OutTrack is</h4><p>An offline tool for habits, journaling, recipes and focus blocks. No health promises, no nutrition or medical advice.</p><h4>2. Premium</h4><p>Premium is unlocked via pro code and applies on this device.</p><h4>3. Fair use</h4><p>No guilt mechanics, no dark patterns — promised.</p>",
-  refund: "<h4>Refunds</h4><p>There is currently no store sale with payment processing, so no charge occurs. If a store purchase is offered later, that store's refund rules (Apple/Google) and statutory withdrawal rights apply.</p>",
-  cookies: "<h4>Cookie policy</h4><p>OutTrack sets no cookies and no similar trackers. The first-start notice only concerns local device storage (consent = saving allowed, “Without saving” = memory-only mode).</p>",
+  terms: "<h4>1. What OutTrack is</h4><p>An offline tool for habits, journaling, recipes and focus blocks. No health promises, no nutrition or medical advice.</p><h4>2. Scope</h4><p>All features are available after installation, no extra unlock needed.</p><h4>3. Fair use</h4><p>No guilt mechanics, no dark patterns — promised.</p>",
+  refund: "<h4>Refunds</h4><p>When buying through an app store, that store's refund rules (Apple/Google) and statutory withdrawal rights apply.</p>",
+  cookies: "<h4>Cookie policy</h4><p>OutTrack sets no cookies and no similar trackers. All data lives only in local device storage.</p>",
   imprint: "<h4>Operator (placeholder — replace before store release)</h4><p>[NAME / COMPANY]<br>[STREET, ZIP CITY]<br>[EMAIL]<br>[PHONE optional]</p>",
-  licenses: "<h4>Licenses & notices</h4><p>OutTrack v3.22 — own code, system font, own SVG icon, live-synthesized WebAudio sounds. No frameworks, no CDNs, no external fonts or images.</p>",
+  licenses: "<h4>Licenses & notices</h4><p>OutTrack v3.24 — own code, system font, own SVG icon, live-synthesized WebAudio sounds. No frameworks, no CDNs, no external fonts or images.</p>",
+},
+ru: {
+  privacy: "<h4>1. Никаких серверов и трекеров</h4><p>OutTrack хранит все данные только локально на твоём устройстве (localStorage). Никаких аккаунтов, куки, аналитики и передачи данных нам или третьим лицам.</p><h4>2. Фото</h4><p>Фото-пруфы уменьшаются (320 px, JPEG) и тоже хранятся только локально — никогда не загружаются.</p><h4>3. Твои права</h4><p>Сохрани данные через экспорт или удали их через «Удалить всё».</p>",
+  terms: "<h4>1. Что такое OutTrack</h4><p>Офлайн-инструмент для привычек, дневника, рецептов и фокус-блоков. Никаких обещаний про здоровье, питание или медицину.</p><h4>2. Объём</h4><p>Все функции доступны сразу после установки, без дополнительной разблокировки.</p><h4>3. Честно</h4><p>Никакого чувства вины и тёмных паттернов — обещаем.</p>",
+  refund: "<h4>Возвраты</h4><p>При покупке через магазин приложений действуют его правила возврата (Apple/Google) и законное право на отказ.</p>",
+  cookies: "<h4>Политика куки</h4><p>OutTrack не использует куки и подобные трекеры. Все данные хранятся только в локальном хранилище устройства.</p>",
+  imprint: "<h4>Оператор (заглушка — заменить перед релизом в сторе)</h4><p>[ИМЯ / КОМПАНИЯ]<br>[УЛИЦА, ИНДЕКС ГОРОД]<br>[EMAIL]<br>[ТЕЛЕФОН необязательно]</p>",
+  licenses: "<h4>Лицензии и замечания</h4><p>OutTrack v3.24 — собственный код, системный шрифт, собственная SVG-иконка, синтезированные WebAudio-звуки. Никаких фреймворков, CDN, внешних шрифтов и картинок. Весь контент — собственные редакционные материалы.</p>",
+},
+es: {
+  privacy: "<h4>1. Sin servidores ni rastreadores</h4><p>OutTrack guarda todos los datos solo localmente en tu dispositivo (localStorage). Sin cuentas, sin cookies, sin analítica ni transferencias a nosotros o terceros.</p><h4>2. Fotos</h4><p>Las fotos de prueba se reducen (320 px, JPEG) y también se guardan solo localmente — nunca se suben.</p><h4>3. Tus derechos</h4><p>Guarda tus datos con exportar o bórralos con «Borrar todo».</p>",
+  terms: "<h4>1. Qué es OutTrack</h4><p>Una herramienta offline para hábitos, diario, recetas y bloques de foco. Sin promesas de salud ni consejo nutricional o médico.</p><h4>2. Alcance</h4><p>Todas las funciones están disponibles tras instalar, sin desbloqueo adicional.</p><h4>3. Juego limpio</h4><p>Sin culpa ni patrones oscuros — prometido.</p>",
+  refund: "<h4>Reembolsos</h4><p>Al comprar en una tienda de apps se aplican sus reglas de reembolso (Apple/Google) y el derecho legal de desistimiento.</p>",
+  cookies: "<h4>Política de cookies</h4><p>OutTrack no usa cookies ni rastreadores similares. Todos los datos viven solo en el almacenamiento local del dispositivo.</p>",
+  imprint: "<h4>Operador (marcador — reemplazar antes del lanzamiento)</h4><p>[NOMBRE / EMPRESA]<br>[CALLE, CP CIUDAD]<br>[EMAIL]<br>[TELÉFONO opcional]</p>",
+  licenses: "<h4>Licencias y avisos</h4><p>OutTrack v3.24 — código propio, fuente del sistema, icono SVG propio, sonidos WebAudio sintetizados. Sin frameworks, sin CDN, sin fuentes ni imágenes externas. Todo el contenido es redacción propia.</p>",
+},
+fr: {
+  privacy: "<h4>1. Ni serveurs ni traceurs</h4><p>OutTrack stocke toutes les données uniquement en local sur ton appareil (localStorage). Pas de comptes, pas de cookies, pas d'analyse, aucun transfert vers nous ou des tiers.</p><h4>2. Photos</h4><p>Les photos de preuve sont réduites (320 px, JPEG) et stockées uniquement en local — jamais envoyées.</p><h4>3. Tes droits</h4><p>Sauvegarde tes données via exporter, ou efface-les via « Tout effacer ».</p>",
+  terms: "<h4>1. Ce qu'est OutTrack</h4><p>Un outil hors ligne pour habitudes, journal, recettes et blocs de focus. Aucune promesse santé, aucun conseil nutrition ou médical.</p><h4>2. Portée</h4><p>Toutes les fonctions sont disponibles après installation, sans déblocage supplémentaire.</p><h4>3. Jeu franc</h4><p>Ni culpabilité ni dark patterns — promis.</p>",
+  refund: "<h4>Remboursements</h4><p>En cas d'achat via une boutique d'apps, ses règles de remboursement (Apple/Google) et le droit légal de rétractation s'appliquent.</p>",
+  cookies: "<h4>Politique cookies</h4><p>OutTrack n'utilise ni cookies ni traceurs similaires. Toutes les données restent dans le stockage local de l'appareil.</p>",
+  imprint: "<h4>Opérateur (espace réservé — remplacer avant la sortie)</h4><p>[NOM / SOCIÉTÉ]<br>[RUE, CP VILLE]<br>[EMAIL]<br>[TÉLÉPHONE facultatif]</p>",
+  licenses: "<h4>Licences & mentions</h4><p>OutTrack v3.24 — code maison, police système, icône SVG maison, sons WebAudio synthétisés. Ni frameworks, ni CDN, ni polices ni images externes. Tout le contenu est rédactionnel maison.</p>",
 },
 };
 $$("[data-legal]").forEach((b) => b.addEventListener("click", () => {
@@ -1496,10 +1797,42 @@ const closeLegal = () => { $("#legal-sheet").hidden = true; $("#legal-backdrop")
 $("#legal-close").addEventListener("click", closeLegal);
 $("#legal-backdrop").addEventListener("click", closeLegal);
 
+/* ---------- Easter Egg: Long-Press auf den Gipfel -> Vers (Philipper 4,13) ---------- */
+const VERSE_MS = 650, VERSE_SLACK = 12;
+let verseT = null, verseX = 0, verseY = 0;
+function openVerse() {
+  $("#verse-sheet").hidden = false;
+  $("#verse-backdrop").hidden = false;
+}
+const closeVerse = () => { $("#verse-sheet").hidden = true; $("#verse-backdrop").hidden = true; };
+(function () {
+  const svg = $("#summit-svg");
+  if (!svg) return;
+  svg.addEventListener("pointerdown", (e) => {
+    verseX = e.clientX; verseY = e.clientY;
+    clearTimeout(verseT);
+    verseT = setTimeout(openVerse, VERSE_MS);
+  });
+  svg.addEventListener("pointermove", (e) => {
+    if (verseT == null) return;
+    if (Math.abs(e.clientX - verseX) > VERSE_SLACK || Math.abs(e.clientY - verseY) > VERSE_SLACK) {
+      clearTimeout(verseT); verseT = null; // Scrollen bricht ab, Halten öffnet
+    }
+  });
+  ["pointerup", "pointercancel", "pointerleave"].forEach((ev) =>
+    svg.addEventListener(ev, () => { clearTimeout(verseT); verseT = null; }));
+  svg.addEventListener("contextmenu", (e) => e.preventDefault());
+})();
+$("#verse-close").addEventListener("click", closeVerse);
+$("#verse-backdrop").addEventListener("click", closeVerse);
+
 /* ---------- Export / Löschen / Consent ---------- */
 $("#export-data").addEventListener("click", () => {
+  const payload = Object.assign({}, db);
+  payload._proofImages = {};
+  for (const [k, v] of proofCache) payload._proofImages[k] = v;
   try {
-    const blob = new Blob([JSON.stringify(db)], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = "outtrack-export.json";
@@ -1519,22 +1852,12 @@ $("#reset-data").addEventListener("click", () => {
   toast(t("reset_done"));
 });
 function initConsent() {
-  let c = null;
-  try { c = localStorage.getItem(CONSENT_KEY); } catch { c = "no"; }
-  if (c === null) $("#cookie-banner").hidden = false;
+  // Kein Banner mehr: die Zusage steht in Onboarding-Slide 3. Beim Erststart
+  // wird die lokale Speicherung stillschweigend erlaubt (Datenschutz: alles lokal).
+  try {
+    if (localStorage.getItem(CONSENT_KEY) === null) localStorage.setItem(CONSENT_KEY, "yes");
+  } catch { /* egal */ }
 }
-$("#cookie-accept").addEventListener("click", () => {
-  persistOK = true;
-  try { localStorage.setItem(CONSENT_KEY, "yes"); } catch { /* still */ }
-  $("#cookie-banner").hidden = true;
-  save(); renderSettings();
-});
-$("#cookie-decline").addEventListener("click", () => {
-  persistOK = false;
-  try { localStorage.setItem(CONSENT_KEY, "no"); } catch { /* still */ }
-  $("#cookie-banner").hidden = true;
-  renderSettings();
-});
 
 /* ---------- Init ---------- */
 load();
@@ -1548,8 +1871,12 @@ try { // Widgets-Hinweis nur mobil/installiert — nicht auf GitHub-Pages-Deskto
 initConsent();
 renderAll();
 go("hub");
-if (!db.tutorialSeen) showTutorial();
-drawTimer(); syncCustomFields();
+syncWheelFromDuration();
+drawTimer(); renderTimerLabels();
+if (!welcomeSeen() && firstLaunch()) showWelcome();
+else if (!onbSeen() && !db.tutorialSeen) showOnboarding();
+else checkOpenLoop();
+hydrateProofs();
 try { // Splash: kurz, skippbar, Reduced-Motion-sicher
   const sp = $("#splash");
   const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1557,6 +1884,10 @@ try { // Splash: kurz, skippbar, Reduced-Motion-sicher
   if (sp) sp.addEventListener("click", hide);
   if (reduce) hide(); else setTimeout(hide, 750);
 } catch { /* still */ }
-checkReminders();
-window.__ot = { go, t, dayProgress, setDuration, get db() { return db; }, STR };
+window.__ot = {
+  go, t, dayProgress, setDuration, anyCheckin, totalPoints, levelRank,
+  setWheel, wheelTotal, openRedirect, checkOpenLoop, openProof, openVerse, openWelcome: showWelcome, openOnboarding: showOnboarding,
+  proofImage, toast, renderHub, renderStats,
+  get db() { return db; }, STR,
+};
 
