@@ -599,6 +599,11 @@ function go(tab) {
       hc.classList.add("play");
     } catch { /* still */ }
   }
+  if (tab === "focus") {
+    // Rad erst hier zentrieren: solange das View display:none hat, sind alle Rects 0
+    // und ein Scrollen beim Start landet auf 0 statt auf dem gesetzten Wert.
+    try { syncWheelFromDuration(); renderTimerLabels(); } catch { /* still */ }
+  }
   if (tab === "analytics") renderStats();
   if (tab === "food") { renderMeal(false); renderMealList(); }
   if (tab === "settings") renderSettings();
