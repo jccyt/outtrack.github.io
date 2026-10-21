@@ -536,8 +536,8 @@ body.dark .redirect-card{box-shadow:0 0 0 3px rgba(139,164,255,.14),0 0 26px rgb
 .sync-qr{width:190px;height:190px;border-radius:16px;overflow:hidden;background:#fff;padding:8px;box-shadow:0 2px 14px rgba(0,0,0,.12)}
 .sync-qr svg{display:block;width:100%;height:100%}
 .sync-hint{font-size:14px;color:var(--mut);margin:0;max-width:34em}
-.sync-urlrow{display:flex;gap:8px;align-items:center;width:100%;max-width:420px}
-.sync-url{flex:1;min-width:0;font-size:13px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+.sync-urlrow{display:flex;gap:8px;align-items:center;width:100%;max-width:460px;flex-wrap:wrap}
+.sync-url{flex:1 1 100%;min-width:0;font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
   background:var(--fill);border:1px solid var(--line);border-radius:12px;padding:10px 12px;color:var(--mut)}
 .sync-url[readonly]{opacity:.85}
 .sync-status{font-size:14px;color:var(--mut);margin:0}
