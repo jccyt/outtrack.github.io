@@ -267,6 +267,14 @@ input[type="number"]{font-variant-numeric:tabular-nums}
 .link-list button::after{content:"›";color:var(--mut);font-size:20px}
 .link-list button:active{background:var(--accent-soft)}
 .link-list .lang-check{color:var(--accent);font-weight:800}
+/* Sprache: Pills statt Chevron-Liste (kein Untermenü -> kein Pfeil) */
+#lang-list{display:flex;flex-wrap:wrap;gap:5px;background:none;border:none;border-radius:0;overflow:visible;margin-top:10px}
+#lang-list li{border-bottom:none}
+#lang-list button{width:auto;flex:none;display:inline-flex;align-items:center;justify-content:center;gap:5px;
+  background:var(--fill);border:1px solid var(--line);border-radius:999px;padding:8px 10px;
+  font-size:14px;font-weight:600;letter-spacing:-.01em;text-align:center;white-space:nowrap}
+#lang-list button::after{content:none}
+#lang-list button.lang-on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:700}
 .link-list button > span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .danger-zone .row2{align-items:stretch}
 /* sheets */

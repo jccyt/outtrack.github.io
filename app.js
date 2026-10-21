@@ -573,7 +573,8 @@ function renderLangList() {
   ul.innerHTML = "";
   LANGS.forEach((l) => {
     const li = document.createElement("li");
-    li.innerHTML = "<button><span>" + esc(l.label) + "</span><span class=\"lang-check\">" + (db.lang === l.id ? "✓" : "") + "</span></button>";
+    const on = db.lang === l.id;
+    li.innerHTML = "<button" + (on ? ' class="lang-on"' : "") + "><span>" + esc(l.label) + "</span><span class=\"lang-check\">" + (on ? "✓" : "") + "</span></button>";
     li.querySelector("button").addEventListener("click", () => {
       db.lang = l.id; save(); renderAll();
     });
