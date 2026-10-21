@@ -32,8 +32,6 @@ de: {
   area_mind: "Geist", area_body: "Körper", area_craft: "Handwerk",
   goal_daily: "Täglich", goal_weekly: "×/Woche", goal_target: "Zielzahl", goal_count_lbl: "Anzahl",
  habit_added: "Quest angenommen. Viel Spaß!", habit_deleted: "Habit gelöscht.", habit_done: "+1 — stark!",
-  proof_btn: "Beweis", proof_title: "Beweis festhalten", proof_note_ph: "Notiz zum Beweis …",
-  proof_photo_lbl: "Foto", proof_save: "Beweis speichern", proof_saved: "Beweis gespeichert. ",
   rc_title: "Fokus-Check", rc_sub: "Greifst du gerade zum Handy, obwohl du arbeiten wolltest? 60 Sekunden Pause statt Autopilot.",
   rc_open: "Impuls umleiten", rd_title: "60 Sekunden — sonst nichts",
   rd_sub: "Eine der drei Mikro-Aktionen wählen, dann ist der Impuls vorbei.",
@@ -86,12 +84,11 @@ de: {
   onb_3t: "Deine Daten bleiben bei dir", onb_3d: "Kein Konto. Kein Server. Keine Tracker. Alles nur lokal auf deinem Gerät.",
   empty_ready: "Bereit für den ersten Schritt?", empty_cta: "Erste Quest schreiben",
   wheel_title: "Dauer wählen", wheel_hint: "Hoch- oder runterwischen — maximal 3 Stunden.", timer_max: "Max 3h für Deep Work",
-  proof_tip: "Beweis hinzufügen (Foto/Notiz)", proof_cam: "Foto aufnehmen", proof_gallery: "Galerie",
-  proof_note_short: "Kurze Notiz", proof_log_title: "Beweise",
   summit_level: "Level {n} — {rank}", summit_next: "{pts} / 70 Pkt bis Level {n}",
   level_tip: "Jeder Habit = +10 Punkte. 70 Punkte = Levelaufstieg.",
   lvl_names: "Basislager, Aufstieg, Gratwanderung, Gipfelstürmer, Über den Wolken",
   gr_hover: "{n} Check-ins · {p} %",
+  sync_title: "Geräte synchronisieren", sync_sub: "Daten wandern direkt zwischen deinen Geräten – ohne Cloud, ohne Konto.", sync_qr_hint: "Auf dem zweiten Gerät: „QR-Code scannen“.", sync_scan: "QR-Code scannen", sync_scanning: "Kamera startet …", sync_waiting: "Warte auf ein Gerät …", sync_connected: "Verbunden mit {name}", sync_last: "Zuletzt synchronisiert: {time}", sync_new_qr: "Neues QR erstellen", sync_disconnect: "Verbindung trennen", sync_ok: "Sync erfolgreich", sync_fail: "Verbindung fehlgeschlagen", sync_manual: "Adresse manuell eingeben", sync_url_ph: "http://192.168.x.x:port/s/…", sync_url_ok: "Verbindung hergestellt", sync_conflicts: "{n} Konflikte zusammengeführt", sync_moved: "{n} Änderungen übertragen", sync_hub_hint: "Am Computer: Einstellungen → Synchronisieren", sync_copy: "Kopieren",
 },
 en: {
   nav_hub: "Hub", nav_journal: "Journal", nav_focus: "Focus", nav_food: "Food tips", nav_stats: "Stats", nav_settings: "Settings",
@@ -111,8 +108,6 @@ en: {
   area_mind: "Mind", area_body: "Body", area_craft: "Craft",
   goal_daily: "Daily", goal_weekly: "×/week", goal_target: "Target", goal_count_lbl: "Count",
  habit_added: "Quest accepted. Have fun!", habit_deleted: "Habit deleted.", habit_done: "+1 — strong!",
-  proof_btn: "Proof", proof_title: "Log proof", proof_note_ph: "Note for this proof…",
-  proof_photo_lbl: "Photo", proof_save: "Save proof", proof_saved: "Proof saved. ",
   rc_title: "Focus check", rc_sub: "Reaching for your phone although you meant to work? 60 seconds off instead of autopilot.",
   rc_open: "Redirect impulse", rd_title: "60 seconds — nothing else",
   rd_sub: "Pick one of three micro-actions, then the impulse is gone.",
@@ -165,12 +160,11 @@ en: {
   onb_3t: "Your data stays with you", onb_3d: "No account. No server. No trackers. All local on your device.",
   empty_ready: "Ready for the first step?", empty_cta: "Write your first quest",
   wheel_title: "Pick a duration", wheel_hint: "Swipe up or down — 3 hours max.", timer_max: "Max 3h for deep work",
-  proof_tip: "Add proof (photo/note)", proof_cam: "Take photo", proof_gallery: "Gallery",
-  proof_note_short: "Short note", proof_log_title: "Proofs",
   summit_level: "Level {n} — {rank}", summit_next: "{pts} / 70 pts to level {n}",
   level_tip: "Each habit = +10 points. 70 points = level up.",
   lvl_names: "Base camp, Ascent, High ridge, Peak climber, Above the clouds",
   gr_hover: "{n} check-ins · {p} %",
+  sync_title: "Sync devices", sync_sub: "Data moves directly between your devices — no cloud, no account.", sync_qr_hint: "On the second device: “Scan QR code”.", sync_scan: "Scan QR code", sync_scanning: "Starting camera …", sync_waiting: "Waiting for a device …", sync_connected: "Connected to {name}", sync_last: "Last synced: {time}", sync_new_qr: "Create new QR", sync_disconnect: "Disconnect", sync_ok: "Sync successful", sync_fail: "Connection failed", sync_manual: "Enter address manually", sync_url_ph: "http://192.168.x.x:port/s/…", sync_url_ok: "Connected", sync_conflicts: "{n} conflicts merged", sync_moved: "{n} changes transferred", sync_hub_hint: "On the computer: Settings → Sync", sync_copy: "Copy",
 },
 ru: {
   nav_hub: "Хаб", nav_journal: "Дневник", nav_focus: "Фокус", nav_food: "Еда", nav_stats: "Статистика", nav_settings: "Настройки",
@@ -182,7 +176,6 @@ ru: {
   sec_habits: "Привычки", add_new: "+ Нов.", sh_title: "Новая привычка", sh_cancel: "Отмена", sh_add: "Добавить",
   area_mind: "Mind", area_body: "Body", area_craft: "Craft",
   goal_daily: "Ежедневно", goal_weekly: "×/нед", goal_target: "Цель", goal_count_lbl: "Число",
-  proof_btn: "Пруф", proof_title: "Записать пруф", proof_save: "Сохранить", proof_photo_lbl: "Фото",
   rc_title: "Фокус-проверка", rc_open: "Перенаправить импульс",
   rd_title: "60 секунд — и всё", ra_water: "Выпить воды", ra_pushups: "10 отжиманий", ra_read: "Прочитать фокус вслух", rd_cancel: "Отмена",
   launch_title: "Запустить фокус", timer_start: "Старт", timer_pause: "Пауза", timer_resume: "Дальше", timer_reset: "Сброс",
@@ -206,8 +199,6 @@ ru: {
   onb_3t: "Твои данные остаются у тебя", onb_3d: "Никаких аккаунтов. Никаких серверов. Никаких трекеров. Всё только на твоём устройстве.",
   empty_ready: "Готов к первому шагу?", empty_cta: "Написать первый квест",
   wheel_title: "Выбери длительность", wheel_hint: "Листай вверх или вниз — максимум 3 часа.", timer_max: "Макс 3 ч для глубокой работы",
-  proof_tip: "Добавить пруф (фото/заметка)", proof_cam: "Сделать фото", proof_gallery: "Галерея",
-  proof_note_short: "Короткая заметка", proof_log_title: "Пруфы",
   summit_level: "Уровень {n} — {rank}", summit_next: "{pts} / 70 очков до уровня {n}",
   level_tip: "Каждая привычка = +10 очков. 70 очков = новый уровень.",
   lvl_names: "Базовая лагерь, Подъём, Высокий гребень, Покоритель вершины, Над облаками",
@@ -223,7 +214,6 @@ ru: {
   freeze_ok: "streak спасён — путь продолжается.", freeze_limit: "Заморозка вернётся на следующей неделе.",
  empty_habits: "Пока нет активного квеста — задай первый.", sh_name_ph: "напр. глубокое чтение",
  habit_added: "Квест принят. Удачи!", habit_deleted: "Привычка удалена.", habit_done: "+1 — так держать!",
-  proof_note_ph: "Заметка к пруфу…", proof_saved: "Пруф сохранён. ",
   rc_sub: "Снова тянешься к телефону, хотя хотел работать? 60 секунд паузы вместо автопилота.",
   rd_sub: "Выбери одно из трёх микродействий — и импульс пройдёт.",
  redirect_done: "Перенаправлено +5 MIND. Так держать!",
@@ -253,6 +243,7 @@ ru: {
   theme_light: "Светлая", theme_dark: "Тёмная",
   store_local: "Хранится локально — всё офлайн на этом устройстве.",
   store_memory: "Только в памяти — ничего не сохраняется.",
+  sync_title: "Синхронизация устройств", sync_sub: "Данные идут напрямую между устройствами — без облака и без аккаунта.", sync_qr_hint: "На втором устройстве: «Сканировать QR-код».", sync_scan: "Сканировать QR-код", sync_scanning: "Включаем камеру …", sync_waiting: "Ждём устройство …", sync_connected: "Подключено: {name}", sync_last: "Синхронизировано: {time}", sync_new_qr: "Новый QR-код", sync_disconnect: "Отключить", sync_ok: "Синхронизация прошла", sync_fail: "Не удалось подключиться", sync_manual: "Ввести адрес вручную", sync_url_ph: "http://192.168.x.x:port/s/…", sync_url_ok: "Подключено", sync_conflicts: "Объединено конфликтов: {n}", sync_moved: "Передано изменений: {n}", sync_hub_hint: "На компьютере: Настройки → Синхронизация", sync_copy: "Копировать",
 },
 es: {
   nav_hub: "Hub", nav_journal: "Diario", nav_focus: "Modo Foco", nav_food: "Comida", nav_stats: "Stats", nav_settings: "Ajustes",
@@ -264,7 +255,6 @@ es: {
   sec_habits: "Hábitos", add_new: "+ Nuevo", sh_title: "Nuevo hábito", sh_cancel: "Cancelar", sh_add: "Añadir",
   area_mind: "Mente", area_body: "Cuerpo", area_craft: "Oficio",
   goal_daily: "Diario", goal_weekly: "×/sem", goal_target: "Meta", goal_count_lbl: "Número",
-  proof_btn: "Prueba", proof_title: "Registrar prueba", proof_save: "Guardar", proof_photo_lbl: "Foto",
   rc_title: "Chequeo de foco", rc_open: "Redirigir impulso",
   rd_title: "60 segundos — nada más", ra_water: "Beber agua", ra_pushups: "10 flexiones", ra_read: "Leer el foco en voz alta", rd_cancel: "Cancelar",
   launch_title: "Iniciar foco", timer_start: "Empezar", timer_pause: "Pausa", timer_resume: "Seguir", timer_reset: "Reset",
@@ -288,8 +278,6 @@ es: {
   onb_3t: "Tus datos se quedan contigo", onb_3d: "Sin cuenta. Sin servidor. Sin rastreadores. Todo solo en tu dispositivo.",
   empty_ready: "¿Listo para el primer paso?", empty_cta: "Escribe tu primera misión",
   wheel_title: "Elige la duración", wheel_hint: "Desliza arriba o abajo — 3 horas máximo.", timer_max: "Máx 3 h de trabajo profundo",
-  proof_tip: "Añadir prueba (foto/nota)", proof_cam: "Tomar foto", proof_gallery: "Galería",
-  proof_note_short: "Nota breve", proof_log_title: "Pruebas",
   summit_level: "Nivel {n} — {rank}", summit_next: "{pts} / 70 pts para el nivel {n}",
   level_tip: "Cada hábito = +10 puntos. 70 puntos = subir de nivel.",
   lvl_names: "Campo base, Ascenso, Cresta alta, Conquistador de cumbres, Sobre las nubes",
@@ -305,7 +293,6 @@ es: {
   freeze_ok: "Racha salvada — el viaje continúa.", freeze_limit: "El freeze vuelve la próxima semana.",
  empty_habits: "Aún no hay misión activa — crea la primera.", sh_name_ph: "p. ej. lectura profunda",
  habit_added: "Misión aceptada. ¡Diviértete!", habit_deleted: "Hábito eliminado.", habit_done: "+1 — ¡fuerte!",
-  proof_note_ph: "Nota para esta prueba…", proof_saved: "Prueba guardada. ",
   rc_sub: "¿Agarras el móvil aunque querías trabajar? 60 segundos de pausa en vez de piloto automático.",
   rd_sub: "Elige una de las tres micro-acciones y el impulso pasará.",
  redirect_done: "Redirigido +5 MIND. ¡Fuerte!",
@@ -335,6 +322,7 @@ es: {
   theme_light: "Claro", theme_dark: "Oscuro",
   store_local: "Guardado localmente — todo offline en este dispositivo.",
   store_memory: "Solo en memoria — no se guarda nada.",
+  sync_title: "Sincronizar dispositivos", sync_sub: "Los datos van directos entre tus dispositivos: sin nube y sin cuenta.", sync_qr_hint: "En el segundo dispositivo: «Escanear código QR».", sync_scan: "Escanear código QR", sync_scanning: "Abriendo la cámara…", sync_waiting: "Esperando un dispositivo…", sync_connected: "Conectado con {name}", sync_last: "Última sincronización: {time}", sync_new_qr: "Crear un QR nuevo", sync_disconnect: "Desconectar", sync_ok: "Sincronización correcta", sync_fail: "Error de conexión", sync_manual: "Introducir la dirección a mano", sync_url_ph: "http://192.168.x.x:port/s/…", sync_url_ok: "Conectado", sync_conflicts: "{n} conflictos fusionados", sync_moved: "{n} cambios transferidos", sync_hub_hint: "En el ordenador: Ajustes → Sincronizar", sync_copy: "Copiar",
 },
 fr: {
   nav_hub: "Hub", nav_journal: "Journal", nav_focus: "Mode Focus", nav_food: "Repas", nav_stats: "Stats", nav_settings: "Réglages",
@@ -346,7 +334,6 @@ fr: {
   sec_habits: "Habitudes", add_new: "+ Nouv.", sh_title: "Nouvelle habitude", sh_cancel: "Annuler", sh_add: "Ajouter",
   area_mind: "Esprit", area_body: "Corps", area_craft: "Art",
   goal_daily: "Quotidien", goal_weekly: "×/sem", goal_target: "Cible", goal_count_lbl: "Nombre",
-  proof_btn: "Preuve", proof_title: "Noter une preuve", proof_save: "Enregistrer", proof_photo_lbl: "Photo",
   rc_title: "Contrôle focus", rc_open: "Rediriger l'impulsion",
   rd_title: "60 secondes — rien d'autre", ra_water: "Boire de l'eau", ra_pushups: "10 pompes", ra_read: "Lire le focus à voix haute", rd_cancel: "Annuler",
   launch_title: "Lancer Focus", timer_start: "Démarrer", timer_pause: "Pause", timer_resume: "Reprendre", timer_reset: "Reset",
@@ -370,8 +357,6 @@ fr: {
   onb_3t: "Tes données restent chez toi", onb_3d: "Pas de compte. Pas de serveur. Pas de traceurs. Tout reste sur ton appareil.",
   empty_ready: "Prêt pour le premier pas ?", empty_cta: "Écris ta première quête",
   wheel_title: "Choisis la durée", wheel_hint: "Glisse en haut ou en bas — 3 heures max.", timer_max: "Max 3 h de travail profond",
-  proof_tip: "Ajouter une preuve (photo/note)", proof_cam: "Prendre une photo", proof_gallery: "Galerie",
-  proof_note_short: "Note courte", proof_log_title: "Preuves",
   summit_level: "Niveau {n} — {rank}", summit_next: "{pts} / 70 pts jusqu'au niveau {n}",
   level_tip: "Chaque habitude = +10 points. 70 points = niveau supérieur.",
   lvl_names: "Camp de base, Ascension, Crête haute, Conquérant de sommets, Au-dessus des nuages",
@@ -387,7 +372,6 @@ fr: {
   freeze_ok: "Série sauvée — le voyage continue.", freeze_limit: "Le freeze revient la semaine prochaine.",
  empty_habits: "Pas encore de quête active — crée la première.", sh_name_ph: "p. ex. lecture profonde",
  habit_added: "Quête acceptée. Amuse-toi !", habit_deleted: "Habitude supprimée.", habit_done: "+1 — fort !",
-  proof_note_ph: "Note pour cette preuve…", proof_saved: "Preuve enregistrée. ",
   rc_sub: "Tu attrapes ton téléphone alors que tu voulais travailler ? 60 secondes de pause au lieu du pilote automatique.",
   rd_sub: "Choisis l'une des trois micro-actions, et l'impulsion passera.",
  redirect_done: "Redirigé +5 MIND. Fort !",
@@ -417,6 +401,7 @@ fr: {
   theme_light: "Clair", theme_dark: "Sombre",
   store_local: "Stocké en local — tout hors ligne sur cet appareil.",
   store_memory: "En mémoire uniquement — rien n'est enregistré.",
+  sync_title: "Synchroniser les appareils", sync_sub: "Les données passent directement entre vos appareils — sans cloud, sans compte.", sync_qr_hint: "Sur le second appareil : « Scanner le code QR ».", sync_scan: "Scanner le code QR", sync_scanning: "Ouverture de la caméra…", sync_waiting: "En attente d’un appareil…", sync_connected: "Connecté à {name}", sync_last: "Dernière synchro : {time}", sync_new_qr: "Nouveau code QR", sync_disconnect: "Déconnecter", sync_ok: "Synchro réussie", sync_fail: "Échec de la connexion", sync_manual: "Saisir l’adresse à la main", sync_url_ph: "http://192.168.x.x:port/s/…", sync_url_ok: "Connecté", sync_conflicts: "{n} conflits fusionnés", sync_moved: "{n} modifications transférées", sync_hub_hint: "Sur l’ordinateur : Réglages → Synchroniser", sync_copy: "Copier",
 },
 };
 const QUOTES = {
@@ -486,9 +471,9 @@ try {
   if (c === "no") persistOK = false;
 } catch { persistOK = false; }
 const DEFAULT_HABITS = () => ([
-  { id: uid(), label: { de: "Tief lesen", en: "Deep reading", ru: "Глубокое чтение", es: "Lectura profunda", fr: "Lecture profonde" }, area: "mind", goal: "daily", count: 1, days: {}, proofs: {} },
-  { id: uid(), label: { de: "Bewegen", en: "Move", ru: "Движение", es: "Moverse", fr: "Bouger" }, area: "body", goal: "daily", count: 1, days: {}, proofs: {} },
-  { id: uid(), label: { de: "Etwas erschaffen", en: "Make something", ru: "Создать что-то", es: "Crear algo", fr: "Créer quelque chose" }, area: "craft", goal: "weekly", count: 3, days: {}, proofs: {} },
+  { id: uid(), label: { de: "Tief lesen", en: "Deep reading", ru: "Глубокое чтение", es: "Lectura profunda", fr: "Lecture profonde" }, area: "mind", goal: "daily", count: 1, days: {} },
+  { id: uid(), label: { de: "Bewegen", en: "Move", ru: "Движение", es: "Moverse", fr: "Bouger" }, area: "body", goal: "daily", count: 1, days: {} },
+  { id: uid(), label: { de: "Etwas erschaffen", en: "Make something", ru: "Создать что-то", es: "Crear algo", fr: "Créer quelque chose" }, area: "craft", goal: "weekly", count: 3, days: {} },
 ]);
 const DEFAULTS = () => ({
   v: 3, lang: "de", theme: "light", habits: DEFAULT_HABITS(),
@@ -505,6 +490,7 @@ function load() {
     try {
       if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) db.theme = "dark";
     } catch { /* Hell bleibt Default */ }
+    if (window.OTSync) window.OTSync.migrate(db);
     return;
   }
   try {
@@ -516,15 +502,20 @@ function load() {
       if (!h.goal) h.goal = "daily";
       if (!h.count) h.count = 1;
       if (!h.days) h.days = {};
-      if (!h.proofs) h.proofs = {};
       for (const k in h.days) if (h.days[k] === true) h.days[k] = 1;
     });
+    // Datenmodell v4: IDs + Zeitstempel (Basis fuer den Geraete-Sync)
+    if (window.OTSync) window.OTSync.migrate(db);
   } catch { db = DEFAULTS(); }
 }
 function save() {
   if (!persistOK) return;
   try { localStorage.setItem(KEY, JSON.stringify(db)); } catch { /* memory-only */ }
 }
+// Zeitstempel fuer den Sync: der zuletzt geaenderte Record gewinnt
+const stamp = (rec) => { if (rec) rec.updatedAt = Date.now(); return rec; };
+// Geloeschte Habits bleiben als Tombstone im Datensatz (Sync), sind aber unsichtbar
+const activeHabits = () => (db.habits || []).filter((h) => !h.deleted);
 const habitLabel = (h) => (typeof h.label === "object" ? (h.label[db.lang] || h.label.de || h.label.en || "") : h.label);
 const isDone = (h, day = todayISO()) => (h.days[day] || 0) > 0;
 
@@ -647,19 +638,19 @@ function renderAll() {
 
 /* ---------- Progress core ---------- */
 function anyCheckin() {
-  return db.habits.some((h) => Object.keys(h.days || {}).some((d) => (h.days[d] || 0) > 0));
+  return activeHabits().some((h) => Object.keys(h.days || {}).some((d) => (h.days[d] || 0) > 0));
 }
 function dayProgress(day = todayISO()) {
-  if (!db.habits.length) return 0;
+  if (!activeHabits().length) return 0;
   let done = 0;
-  db.habits.forEach((h) => { if (isDone(h, day) || db.frozenDays[day]) done++; });
+  activeHabits().forEach((h) => { if (isDone(h, day) || db.frozenDays[day]) done++; });
   if (db.frozenDays[day]) return 100;
-  return Math.round((done / db.habits.length) * 100);
+  return Math.round((done / activeHabits().length) * 100);
 }
 function dayComplete(day) {
-  if (!db.habits.length) return false;
+  if (!activeHabits().length) return false;
   if (db.frozenDays[day]) return true;
-  return db.habits.every((h) => isDone(h, day));
+  return activeHabits().every((h) => isDone(h, day));
 }
 function calcStreak() {
   let n = 0;
@@ -695,7 +686,7 @@ function weekCount(h) {
 function totalCount(h) { return Object.values(h.days).reduce((a, b) => a + (b || 0), 0); }
 function areaPoints() {
   const pts = { mind: 0, body: 0, craft: 0 };
-  db.habits.forEach((h) => { pts[h.area] = (pts[h.area] || 0) + Object.keys(h.days).length * 10; });
+  activeHabits().forEach((h) => { pts[h.area] = (pts[h.area] || 0) + Object.keys(h.days).length * 10; });
   db.redirects.forEach(() => { pts.mind += 5; });
   return pts;
 }
@@ -767,8 +758,8 @@ function renderHub() {
   $("#gauge-wrap").hidden = !started;
   $("#empty-gauge").hidden = started;
   countNum("ring-pct", pct, "%");
-  const doneN = db.habits.filter((h) => isDone(h)).length;
-  $("#ring-sub").textContent = doneN + " / " + db.habits.length;
+  const doneN = activeHabits().filter((h) => isDone(h)).length;
+  $("#ring-sub").textContent = doneN + " / " + activeHabits().length;
   $("#hero-done").hidden = pct !== 100;
   countNum("streak-count", calcStreak(), "");
   countNum("perfect-count", perfectDays(), "");
@@ -784,7 +775,7 @@ function renderHub() {
   // Punkte-Chips für heute
   const chips = [];
   AREAS.forEach((a) => {
-    const n = db.habits.filter((h) => h.area === a && isDone(h)).length;
+    const n = activeHabits().filter((h) => h.area === a && isDone(h)).length;
     if (n > 0) chips.push("<span>" + esc(t("area_" + a)) + " +" + (n * 10) + "</span>");
   });
   if (redToday > 0) chips.push("<span>" + esc(t("area_mind")) + " +" + (redToday * 5) + "</span>");
@@ -851,22 +842,16 @@ function habitSub(h) {
 function renderHabits() {
   const ul = $("#habit-list");
   ul.innerHTML = "";
-  $("#habits-empty").hidden = db.habits.length > 0;
+  $("#habits-empty").hidden = activeHabits().length > 0;
   const today = todayISO();
-  db.habits.forEach((h) => {
+  activeHabits().forEach((h) => {
     const li = document.createElement("li");
     li.className = "habit" + (isDone(h) ? " done" : "");
     li.setAttribute("tabindex", "0");
-    const proof = h.proofs && h.proofs[today];
     li.innerHTML = "<span class=\"check\">✓</span>" +
       "<span class=\"h-main\"><span class=\"h-label\">" + esc(habitLabel(h)) + "</span>" +
       "<span class=\"h-sub\">" + esc(habitSub(h)) + "</span></span>" +
-      (proof && proofImage(h, today) ? "<img class=\"proof-thumb\" alt=\"\" />" : "") +
-      "<button class=\"h-proof" + (proof ? " has ok" : "") + "\" title=\"" + esc(t("proof_tip")) + "\" aria-label=\"" + esc(t("proof_tip")) + "\">" + esc(t("proof_btn")) + (proof ? " ✓" : "") + "</button>" +
       "<button class=\"h-del\" aria-label=\"×\">×</button>";
-    const thumb = li.querySelector(".proof-thumb");
-    const pimg = proofImage(h, today);
-    if (thumb && pimg) thumb.src = pimg;
     const toggle = () => {
       if (h.goal === "target") {
         h.days[today] = (h.days[today] || 0) + 1;
@@ -877,12 +862,12 @@ function renderHabits() {
         h.days[today] = 1;
         toast(t("habit_done"));
       }
+      h.updatedAt = Date.now();
       save(); renderHub();
       if (dayProgress() === 100) renderStats();
     };
     li.addEventListener("click", (e) => {
-      if (e.target.closest(".h-del")) { db.habits = db.habits.filter((x) => x.id !== h.id); save(); renderHub(); toast(t("habit_deleted")); return; }
-      if (e.target.closest(".h-proof")) { openProof(h.id); return; }
+      if (e.target.closest(".h-del")) { h.deleted = Date.now(); h.updatedAt = Date.now(); save(); renderHub(); toast(t("habit_deleted")); return; }
       toggle();
     });
     li.addEventListener("keydown", (e) => {
@@ -925,7 +910,7 @@ $("#sheet-save").addEventListener("click", () => {
   const v = $("#new-habit-label").value.trim().slice(0, 28);
   if (!v) { $("#new-habit-label").focus(); return; }
   const count = sheetGoal === "daily" ? 1 : Math.max(1, Math.min(99, Number($("#goal-count").value) || 1));
-  db.habits.push({ id: uid(), label: { [db.lang]: v, de: db.lang === "de" ? v : "", en: db.lang === "en" ? v : "" }, area: sheetArea, goal: sheetGoal, count, days: {}, proofs: {} });
+  db.habits.push({ id: uid(), label: { [db.lang]: v, de: db.lang === "de" ? v : "", en: db.lang === "en" ? v : "" }, area: sheetArea, goal: sheetGoal, count, days: {}, updatedAt: Date.now() });
   const h = db.habits[db.habits.length - 1];
   if (!h.label.de) h.label.de = v;
   if (!h.label.en) h.label.en = v;
@@ -934,135 +919,6 @@ $("#sheet-save").addEventListener("click", () => {
   toast(t("habit_added"));
 });
 
-/* ---------- Beweise: Foto (Kamera/ Galerie) oder Notiz, Bild in IndexedDB ---------- */
-let proofHabit = null, proofImg = "";
-const proofKey = (hid, day) => hid + "@" + day;
-const proofCache = new Map(); // Key -> Data-URL (RAM), dauerhaft in IndexedDB
-let idbReady = null;
-function idb() {
-  if (idbReady) return idbReady;
-  idbReady = new Promise((res, rej) => {
-    try {
-      if (!window.indexedDB) return rej(new Error("kein IndexedDB"));
-      const rq = window.indexedDB.open("outtrack_proofs", 1);
-      rq.onupgradeneeded = () => { try { rq.result.createObjectStore("img"); } catch { /* schon da */ } };
-      rq.onsuccess = () => res(rq.result);
-      rq.onerror = () => rej(rq.error || new Error("idb"));
-      rq.onblocked = () => rej(new Error("idb blockiert"));
-    } catch (e) { rej(e); }
-  });
-  idbReady.catch(() => { idbReady = null; });
-  return idbReady;
-}
-async function idbPut(key, val) {
-  const d = await idb();
-  return new Promise((res, rej) => {
-    const tx = d.transaction("img", "readwrite");
-    tx.objectStore("img").put(val, key);
-    tx.oncomplete = () => res(true);
-    tx.onerror = () => rej(tx.error || new Error("put"));
-  });
-}
-async function idbGet(key) {
-  const d = await idb();
-  return new Promise((res, rej) => {
-    const tx = d.transaction("img", "readonly");
-    const rq = tx.objectStore("img").get(key);
-    rq.onsuccess = () => res(rq.result || "");
-    rq.onerror = () => rej(rq.error || new Error("get"));
-  });
-}
-const proofImage = (h, day) => (h.proofs && h.proofs[day] && (h.proofs[day].img || proofCache.get(proofKey(h.id, day)))) || "";
-function showProofDetail() {
-  const det = $("#proof-detail");
-  det.hidden = false;
-  const prev = $("#proof-preview");
-  if (proofImg) { prev.src = proofImg; prev.hidden = false; } else { prev.hidden = true; }
-}
-function openProof(id) {
-  proofHabit = db.habits.find((h) => h.id === id);
-  if (!proofHabit) return;
-  const p = (proofHabit.proofs && proofHabit.proofs[todayISO()]) || {};
-  $("#proof-note").value = p.note || "";
-  proofImg = proofImage(proofHabit, todayISO());
-  $("#proof-detail").hidden = true;
-  $("#proof-photo").value = "";
-  $("#proof-gallery").value = "";
-  $("#proof-sheet").hidden = false;
-  $("#proof-backdrop").hidden = false;
-}
-const closeProof = () => { $("#proof-sheet").hidden = true; $("#proof-backdrop").hidden = true; proofHabit = null; };
-$("#proof-cancel").addEventListener("click", closeProof);
-$("#proof-backdrop").addEventListener("click", closeProof);
-$("#proof-note-btn").addEventListener("click", () => {
-  showProofDetail();
-  setTimeout(() => $("#proof-note").focus(), 30);
-});
-function readPhoto(input) {
-  const f = input.files && input.files[0];
-  if (!f) return;
-  const rd = new FileReader();
-  rd.onload = () => {
-    const img = new Image();
-    img.onload = () => {
-      try {
-        const max = 320;
-        const sc = Math.min(1, max / Math.max(img.width, img.height));
-        const c = document.createElement("canvas");
-        c.width = Math.max(1, Math.round(img.width * sc));
-        c.height = Math.max(1, Math.round(img.height * sc));
-        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
-        proofImg = c.toDataURL("image/jpeg", 0.82);
-        showProofDetail();
-      } catch { /* Bild wird verworfen */ }
-    };
-    img.onerror = () => { /* unlesbar */ };
-    img.src = rd.result;
-  };
-  rd.onerror = () => { /* unlesbar */ };
-  rd.readAsDataURL(f);
-}
-$("#proof-photo").addEventListener("change", (e) => readPhoto(e.target));
-$("#proof-gallery").addEventListener("change", (e) => readPhoto(e.target));
-$("#proof-save").addEventListener("click", async () => {
-  if (!proofHabit) return;
-  const note = $("#proof-note").value.trim().slice(0, 140);
-  if (!note && !proofImg) { closeProof(); return; }
-  const h = proofHabit, day = todayISO(), key = proofKey(h.id, day);
-  const prev = (h.proofs && h.proofs[day]) || {};
-  const img = proofImg || prev.img || proofCache.get(key) || "";
-  const rec = { note, img: "", idb: 0 };
-  if (img) {
-    proofCache.set(key, img);
-    try {
-      await idbPut(key, img);
-      rec.idb = 1;
-    } catch { rec.img = img; } // IndexedDB fehlt -> im localStorage-Datensatz
-  }
-  h.proofs[day] = rec;
-  if (!isDone(h)) h.days[day] = 1;
-  save(); closeProof(); renderHub();
-  toast(t("proof_saved"));
-});
-/* Beweis-Bilder aus IndexedDB nachladen (Datensatz merkt sich nur den Schlüssel) */
-async function hydrateProofs() {
-  const wanted = [];
-  db.habits.forEach((h) => {
-    for (const day in (h.proofs || {})) {
-      const rec = h.proofs[day] || {};
-      if (rec && rec.idb && !rec.img) wanted.push([h.id, day]);
-    }
-  });
-  if (!wanted.length) return;
-  let got = 0;
-  for (const [hid, day] of wanted) {
-    try {
-      const v = await idbGet(proofKey(hid, day));
-      if (v) { proofCache.set(proofKey(hid, day), v); got++; }
-    } catch { /* IndexedDB nicht verfügbar */ }
-  }
-  if (got) { renderHub(); renderStats(); }
-}
 /* ---------- Fokus-Check (Calibrated Friction) ---------- */
 let redirectTimer = null, redirectLeft = 60;
 function openRedirect() {
@@ -1117,7 +973,7 @@ $("#redirect-cancel").addEventListener("click", closeRedirect);
 $("#redirect-backdrop").addEventListener("click", closeRedirect);
 const RA_KEYS = { water: "ra_water", pushups: "ra_pushups", read: "ra_read" };
 $$(".redirect-actions button").forEach((b) => b.addEventListener("click", () => {
-  db.redirects.push({ date: new Date().toISOString(), action: b.dataset.ra });
+  db.redirects.push({ id: uid(), date: new Date().toISOString(), action: b.dataset.ra, updatedAt: Date.now() });
   save(); closeRedirect(); renderHub();
   toast(t("redirect_done"));
 }));
@@ -1139,7 +995,7 @@ function renderJournal() {
     del.textContent = "×";
     del.setAttribute("aria-label", "×");
     del.addEventListener("click", () => {
-      db.journal = db.journal.filter((x) => x.id !== e.id);
+      e.deleted = Date.now(); e.updatedAt = Date.now();
       save(); renderJournal();
       toast(t("entry_deleted"));
     });
@@ -1150,7 +1006,7 @@ function renderJournal() {
 $("#journal-save").addEventListener("click", () => {
   const text = $("#journal-text").value.trim().slice(0, 2000);
   if (!text) { toast(t("journal_empty")); return; }
-  db.journal.unshift({ id: uid(), date: new Date().toISOString(), title: $("#journal-title").value.trim().slice(0, 60), text });
+  db.journal.unshift({ id: uid(), date: new Date().toISOString(), title: $("#journal-title").value.trim().slice(0, 60), text, updatedAt: Date.now() });
   $("#journal-title").value = "";
   $("#journal-text").value = "";
   save(); renderJournal();
@@ -1471,7 +1327,7 @@ $("#timer-start").addEventListener("click", () => {
 function completeBlock() {
   stopTick();
   const mins = Math.max(1, Math.round(tDur / 60));
-  db.focusLog.push({ date: new Date().toISOString(), mins, text: db.focusText || "" });
+  db.focusLog.push({ id: uid(), date: new Date().toISOString(), mins, text: db.focusText || "", updatedAt: Date.now() });
   save();
   tLeft = tDur;
   drawTimer(); renderTimerLabels();
@@ -1569,7 +1425,7 @@ function renderWeekly() {
   for (let i = 0; i < 7; i++) {
     const d = todayISO(-i);
     const p = dayProgress(d);
-    done += db.habits.filter((h) => isDone(h, d)).length;
+    done += activeHabits().filter((h) => isDone(h, d)).length;
     if (p === 100) perfect++;
     if (p > bestP) { bestP = p; best = d; }
   }
@@ -1593,7 +1449,7 @@ function weeklyText() {
   for (let i = 0; i < 7; i++) {
     const d = todayISO(-i);
     const p = dayProgress(d);
-    done += db.habits.filter((h) => isDone(h, d)).length;
+    done += activeHabits().filter((h) => isDone(h, d)).length;
     if (p === 100) perfect++;
     if (p > bestP) { bestP = p; best = d; }
   }
@@ -1620,11 +1476,11 @@ function renderStats() {
   for (let i = 34; i >= 0; i--) {
     const d = todayISO(-i);
     const p = dayProgress(d);
-    total += db.habits.filter((h) => isDone(h, d)).length;
+    total += activeHabits().filter((h) => isDone(h, d)).length;
     const c = document.createElement("span");
     c.className = "sq " + (p === 0 ? "l0" : p < 34 ? "l1" : p < 67 ? "l2" : p < 100 ? "l3" : "l4");
     c.style.setProperty("--d", 34 - i);
-    c.title = d + " · " + t("gr_hover", { n: db.habits.filter((h) => isDone(h, d)).length, p });
+    c.title = d + " · " + t("gr_hover", { n: activeHabits().filter((h) => isDone(h, d)).length, p });
     grid.appendChild(c);
   }
   const pts = areaPoints();
@@ -1643,7 +1499,6 @@ function renderStats() {
     div.innerHTML = "<div class=\"id-head\"><span>" + esc(t("area_" + a)) + "</span><small>" + esc(t("level_lbl", { n: lvl })) + " · " + p + " " + esc(t("pts_short")) + "</small></div><div class=\"bar\"><i style=\"width:" + w + "%\"></i></div>";
     idBox.appendChild(div);
   });
-  renderProofLog();
   // Fokus-Log
   const fl = $("#focus-log");
   fl.innerHTML = "";
@@ -1660,38 +1515,10 @@ function renderStats() {
   });
 }
 
-/* Beweise in den Stats anzeigen (Bild + Notiz + Datum) */
-function renderProofLog() {
-  const box = $("#proof-log");
-  const head = $("#proof-log-head");
-  if (!box || !head) return;
-  const items = [];
-  db.habits.forEach((h) => {
-    for (const day in (h.proofs || {})) {
-      const rec = h.proofs[day] || {};
-      const img = proofImage(h, day);
-      if (!rec.note && !img) continue;
-      items.push({ day, note: rec.note || "", img });
-    }
-  });
-  items.sort((a, b) => (a.day < b.day ? 1 : -1));
-  const top = items.slice(0, 12);
-  head.hidden = top.length === 0;
-  box.innerHTML = "";
-  top.forEach((it) => {
-    const d = document.createElement("div");
-    d.className = "proof-item";
-    d.innerHTML = (it.img ? "<img alt=\"\">" : "") +
-      (it.note ? "<p class=\"pn\">" + esc(it.note) + "</p>" : "") +
-      "<p class=\"pd\">" + esc(it.day) + "</p>";
-    if (it.img) d.querySelector("img").src = it.img;
-    box.appendChild(d);
-  });
-}
 /* Last-Week-Tiles + Der Gipfel (Promo: Track your progress / Reach mastery) */
 function weekCheckins() {
   let n = 0;
-  for (let i = 0; i < 7; i++) n += db.habits.filter((h) => isDone(h, todayISO(-i))).length;
+  for (let i = 0; i < 7; i++) n += activeHabits().filter((h) => isDone(h, todayISO(-i))).length;
   return n;
 }
 function weekPTS() {
@@ -1711,7 +1538,7 @@ function renderTiles() {
 const LEVEL_STEP = 70;
 function totalPoints() {
   let n = 0;
-  db.habits.forEach((h) => { n += Object.keys(h.days || {}).length * 10; });
+  activeHabits().forEach((h) => { n += Object.keys(h.days || {}).length * 10; });
   return n + db.redirects.length * 5;
 }
 function levelRank(lvl) {
@@ -1757,40 +1584,40 @@ function renderSettings() {
 const LEGAL_TITLE = { privacy: "legal_privacy", terms: "legal_terms", refund: "legal_refund", cookies: "legal_cookies", imprint: "legal_imprint", licenses: "legal_licenses" };
 const LEGAL_BODY = {
 de: {
-  privacy: "<h4>1. Keine Server, keine Tracker</h4><p>OutTrack speichert alle Daten ausschließlich lokal auf deinem Gerät (localStorage). Es gibt keine Accounts, keine Cookies, keine Analyse-Tools, keine Datenübertragung an uns oder Dritte.</p><h4>2. Fotos</h4><p>Beweisfotos werden verkleinert (320 px, JPEG) ebenfalls nur lokal gespeichert und nie hochgeladen.</p><h4>3. Deine Rechte</h4><p>Du kannst deine Daten jederzeit per Export sichern und per „Alle Daten löschen“ entfernen.</p>",
-  terms: "<h4>1. Was OutTrack ist</h4><p>Ein Offline-Werkzeug für Habits, Journal, Rezepte und Fokus-Blöcke. Keine Heilversprechen, keine Ernährungsberatung, keine medizinische Beratung.</p><h4>2. Umfang</h4><p>Alle Funktionen stehen nach Installation ohne weitere Freischaltung zur Verfügung.</p><h4>3. Fair use</h4><p>Keine Guilt-Mechaniken, keine Dark Patterns — versprochen.</p>",
+  privacy: "<h4>1. Keine Server, keine Tracker</h4><p>OutTrack speichert alle Daten ausschließlich lokal auf deinem Gerät (localStorage). Es gibt keine Accounts, keine Cookies, keine Analyse-Tools, keine Datenübertragung an uns oder Dritte.</p><h4>2. Synchronisation zwischen deinen Geräten</h4><p>Kopplst du zwei Geräte, tauschen sie ihre Daten direkt über dein lokales WLAN aus – verschlüsselt (AES-GCM) mit einem Schlüssel, der nur im QR-Code steht. Die Daten verlassen dein WLAN nicht: keine Cloud, keine Konten, keine Server. Die Synchronisation läuft nur, solange die App geöffnet ist.</p><h4>3. Kamera</h4><p>Die Kamera wird ausschließlich benutzt, um den Kopplungs-QR-Code zu scannen. Es werden keine Bilder aufgenommen, gespeichert oder übertragen.</p><h4>4. Deine Rechte</h4><p>Du kannst deine Daten jederzeit per Export sichern, die Gerätekopplung trennen und per „Alle Daten löschen“ alles entfernen.</p>",
+  terms: "<h4>1. Was OutTrack ist</h4><p>Ein Offline-Werkzeug für Habits, Journal, Rezepte und Fokus-Blöcke. Keine Heilversprechen, keine Ernährungsberatung, keine medizinische Beratung.</p><h4>2. Umfang</h4><p>Alle Funktionen stehen nach Installation ohne weitere Freischaltung zur Verfügung.</p><h4>3. Synchronisation</h4><p>Die Gerätesynchronisation nutzt ausschließlich dein lokales WLAN und deine eigenen Geräte. Sie funktioniert ohne Konto, ohne Cloud und ohne Server.</p><h4>4. Fair use</h4><p>Keine Guilt-Mechaniken, keine Dark Patterns — versprochen.</p>",
   refund: "<h4>Erstattung</h4><p>Beim Kauf über einen App Store gelten dessen Erstattungsregeln (Apple/Google) sowie das gesetzliche Widerrufsrecht.</p>",
   cookies: "<h4>Cookie-Richtlinie</h4><p>OutTrack setzt keine Cookies und keine vergleichbaren Tracker ein. Alle Daten liegen ausschließlich im lokalen Gerätespeicher.</p>",
   imprint: "<h4>Betreiber (Platzhalter — vor Store-Release ersetzen)</h4><p>[VORNAME NACHNAME / FIRMA]<br>[STRASSE NR, PLZ ORT]<br>[E-MAIL]<br>[TELEFON optional]</p>",
   licenses: "<h4>Lizenzen & Hinweise</h4><p>OutTrack v3.24 — eigener Code, Systemschrift, eigenes SVG-Icon, live synthetisierte WebAudio-Klänge. Keine Frameworks, keine CDNs, keine externen Schriften oder Bilder. Alle Inhalte sind eigene redaktionelle Inhalte.</p>",
 },
 en: {
-  privacy: "<h4>1. No servers, no trackers</h4><p>OutTrack stores all data exclusively locally on your device (localStorage). No accounts, no cookies, no analytics, no transfer to us or third parties.</p><h4>2. Photos</h4><p>Proof photos are downscaled (320 px JPEG) and also stored only locally — never uploaded.</p><h4>3. Your rights</h4><p>Export your data anytime, or wipe it via “Delete all data”.</p>",
-  terms: "<h4>1. What OutTrack is</h4><p>An offline tool for habits, journaling, recipes and focus blocks. No health promises, no nutrition or medical advice.</p><h4>2. Scope</h4><p>All features are available after installation, no extra unlock needed.</p><h4>3. Fair use</h4><p>No guilt mechanics, no dark patterns — promised.</p>",
+  privacy: "<h4>1. No servers, no trackers</h4><p>OutTrack stores all data exclusively locally on your device (localStorage). No accounts, no cookies, no analytics, no transfer to us or third parties.</p><h4>2. Sync between your devices</h4><p>When you pair two devices, they exchange data directly over your local network – encrypted (AES-GCM) with a key that only exists in the QR code. Data never leaves your network: no cloud, no accounts, no servers. Syncing only runs while the app is open.</p><h4>3. Camera</h4><p>The camera is used solely to scan the pairing QR code. No images are captured, stored or transmitted.</p><h4>4. Your rights</h4><p>Export your data anytime, disconnect your devices, and wipe everything with “Delete all data”.</p>",
+  terms: "<h4>1. What OutTrack is</h4><p>An offline tool for habits, journaling, recipes and focus blocks. No health promises, no nutrition or medical advice.</p><h4>2. Scope</h4><p>All features are available after installation, no extra unlock needed.</p><h4>3. Sync</h4><p>Device sync uses only your local network and your own devices. It works without an account, without a cloud and without servers.</p><h4>4. Fair use</h4><p>No guilt mechanics, no dark patterns — promised.</p>",
   refund: "<h4>Refunds</h4><p>When buying through an app store, that store's refund rules (Apple/Google) and statutory withdrawal rights apply.</p>",
   cookies: "<h4>Cookie policy</h4><p>OutTrack sets no cookies and no similar trackers. All data lives only in local device storage.</p>",
   imprint: "<h4>Operator (placeholder — replace before store release)</h4><p>[NAME / COMPANY]<br>[STREET, ZIP CITY]<br>[EMAIL]<br>[PHONE optional]</p>",
   licenses: "<h4>Licenses & notices</h4><p>OutTrack v3.24 — own code, system font, own SVG icon, live-synthesized WebAudio sounds. No frameworks, no CDNs, no external fonts or images.</p>",
 },
 ru: {
-  privacy: "<h4>1. Никаких серверов и трекеров</h4><p>OutTrack хранит все данные только локально на твоём устройстве (localStorage). Никаких аккаунтов, куки, аналитики и передачи данных нам или третьим лицам.</p><h4>2. Фото</h4><p>Фото-пруфы уменьшаются (320 px, JPEG) и тоже хранятся только локально — никогда не загружаются.</p><h4>3. Твои права</h4><p>Сохрани данные через экспорт или удали их через «Удалить всё».</p>",
-  terms: "<h4>1. Что такое OutTrack</h4><p>Офлайн-инструмент для привычек, дневника, рецептов и фокус-блоков. Никаких обещаний про здоровье, питание или медицину.</p><h4>2. Объём</h4><p>Все функции доступны сразу после установки, без дополнительной разблокировки.</p><h4>3. Честно</h4><p>Никакого чувства вины и тёмных паттернов — обещаем.</p>",
+  privacy: "<h4>1. Без серверов, без трекеров</h4><p>OutTrack хранит все данные только локально на твоём устройстве (localStorage). Никаких аккаунтов, куки, аналитики и передачи данных нам или третьим лицам.</p><h4>2. Синхронизация между устройствами</h4><p>Когда ты связываешь два устройства, они обмениваются данными напрямую по твоей локальной сети — с шифрованием (AES-GCM) ключом, который есть только в QR-коде. Данные не покидают твою сеть: никакого облака, никаких аккаунтов и серверов. Синхронизация идёт, только пока приложение открыто.</p><h4>3. Камера</h4><p>Камера используется исключительно для сканирования QR-кода связывания. Снимки не делаются, не сохраняются и не передаются.</p><h4>4. Твои права</h4><p>Экспортируй данные в любой момент, отключай устройства и удаляй всё через «Удалить все данные».</p>",
+  terms: "<h4>1. Что такое OutTrack</h4><p>Офлайн-инструмент для привычек, дневника, рецептов и фокус-блоков. Никаких обещаний по здоровью, питанию или медицине.</p><h4>2. Объём</h4><p>Все функции доступны сразу после установки, без дополнительной разблокировки.</p><h4>3. Синхронизация</h4><p>Синхронизация устройств использует только твою локальную сеть и твои собственные устройства. Она работает без аккаунта, без облака и без серверов.</p><h4>4. Честно</h4><p>Никаких чувства вины и тёмных паттернов — обещаем.</p>",
   refund: "<h4>Возвраты</h4><p>При покупке через магазин приложений действуют его правила возврата (Apple/Google) и законное право на отказ.</p>",
   cookies: "<h4>Политика куки</h4><p>OutTrack не использует куки и подобные трекеры. Все данные хранятся только в локальном хранилище устройства.</p>",
   imprint: "<h4>Оператор (заглушка — заменить перед релизом в сторе)</h4><p>[ИМЯ / КОМПАНИЯ]<br>[УЛИЦА, ИНДЕКС ГОРОД]<br>[EMAIL]<br>[ТЕЛЕФОН необязательно]</p>",
   licenses: "<h4>Лицензии и замечания</h4><p>OutTrack v3.24 — собственный код, системный шрифт, собственная SVG-иконка, синтезированные WebAudio-звуки. Никаких фреймворков, CDN, внешних шрифтов и картинок. Весь контент — собственные редакционные материалы.</p>",
 },
 es: {
-  privacy: "<h4>1. Sin servidores ni rastreadores</h4><p>OutTrack guarda todos los datos solo localmente en tu dispositivo (localStorage). Sin cuentas, sin cookies, sin analítica ni transferencias a nosotros o terceros.</p><h4>2. Fotos</h4><p>Las fotos de prueba se reducen (320 px, JPEG) y también se guardan solo localmente — nunca se suben.</p><h4>3. Tus derechos</h4><p>Guarda tus datos con exportar o bórralos con «Borrar todo».</p>",
-  terms: "<h4>1. Qué es OutTrack</h4><p>Una herramienta offline para hábitos, diario, recetas y bloques de foco. Sin promesas de salud ni consejo nutricional o médico.</p><h4>2. Alcance</h4><p>Todas las funciones están disponibles tras instalar, sin desbloqueo adicional.</p><h4>3. Juego limpio</h4><p>Sin culpa ni patrones oscuros — prometido.</p>",
+  privacy: "<h4>1. Sin servidores, sin rastreadores</h4><p>OutTrack guarda todos los datos solo localmente en tu dispositivo (localStorage). Sin cuentas, cookies, analítica ni transferencias a nosotros o terceros.</p><h4>2. Sincronización entre tus dispositivos</h4><p>Cuando emparejas dos dispositivos, intercambian los datos directamente por tu red local — cifrados (AES-GCM) con una clave que solo existe en el código QR. Los datos no salen de tu red: no hay nube, cuentas ni servidores. La sincronización solo ocurre con la app abierta.</p><h4>3. Cámara</h4><p>La cámara se usa únicamente para escanear el código QR de emparejamiento. No se toman, guardan ni transmiten imágenes.</p><h4>4. Tus derechos</h4><p>Exporta tus datos cuando quieras, desconecta los dispositivos y bórralo todo con «Borrar todo».</p>",
+  terms: "<h4>1. Qué es OutTrack</h4><p>Una herramienta offline para hábitos, diario, recetas y bloques de foco. Sin promesas de salud, ni consejo nutricional o médico.</p><h4>2. Alcance</h4><p>Todas las funciones están disponibles tras instalar, sin desbloqueo adicional.</p><h4>3. Sincronización</h4><p>La sincronización entre dispositivos usa solo tu red local y tus propios dispositivos. Funciona sin cuenta, sin nube y sin servidores.</p><h4>4. Juego limpio</h4><p>Sin culpa ni patrones oscuros — prometido.</p>",
   refund: "<h4>Reembolsos</h4><p>Al comprar en una tienda de apps se aplican sus reglas de reembolso (Apple/Google) y el derecho legal de desistimiento.</p>",
   cookies: "<h4>Política de cookies</h4><p>OutTrack no usa cookies ni rastreadores similares. Todos los datos viven solo en el almacenamiento local del dispositivo.</p>",
   imprint: "<h4>Operador (marcador — reemplazar antes del lanzamiento)</h4><p>[NOMBRE / EMPRESA]<br>[CALLE, CP CIUDAD]<br>[EMAIL]<br>[TELÉFONO opcional]</p>",
   licenses: "<h4>Licencias y avisos</h4><p>OutTrack v3.24 — código propio, fuente del sistema, icono SVG propio, sonidos WebAudio sintetizados. Sin frameworks, sin CDN, sin fuentes ni imágenes externas. Todo el contenido es redacción propia.</p>",
 },
 fr: {
-  privacy: "<h4>1. Ni serveurs ni traceurs</h4><p>OutTrack stocke toutes les données uniquement en local sur ton appareil (localStorage). Pas de comptes, pas de cookies, pas d'analyse, aucun transfert vers nous ou des tiers.</p><h4>2. Photos</h4><p>Les photos de preuve sont réduites (320 px, JPEG) et stockées uniquement en local — jamais envoyées.</p><h4>3. Tes droits</h4><p>Sauvegarde tes données via exporter, ou efface-les via « Tout effacer ».</p>",
-  terms: "<h4>1. Ce qu'est OutTrack</h4><p>Un outil hors ligne pour habitudes, journal, recettes et blocs de focus. Aucune promesse santé, aucun conseil nutrition ou médical.</p><h4>2. Portée</h4><p>Toutes les fonctions sont disponibles après installation, sans déblocage supplémentaire.</p><h4>3. Jeu franc</h4><p>Ni culpabilité ni dark patterns — promis.</p>",
+  privacy: "<h4>1. Ni serveurs, ni traceurs</h4><p>OutTrack stocke toutes les données uniquement en local sur ton appareil (localStorage). Pas de comptes, pas de cookies, pas d’analyse, aucun transfert vers nous ou des tiers.</p><h4>2. Synchronisation entre tes appareils</h4><p>Quand tu apparies deux appareils, ils échangent leurs données directement via ton réseau local — chiffrées (AES-GCM) avec une clé qui n’existe que dans le code QR. Les données ne quittent pas ton réseau : ni cloud, ni compte, ni serveur. La synchro n’a lieu que l’app ouverte.</p><h4>3. Caméra</h4><p>La caméra sert uniquement à scanner le QR d’appairage. Aucune image n’est prise, conservée ni transmise.</p><h4>4. Tes droits</h4><p>Exporte tes données à tout moment, déconnecte les appareils et efface tout avec « Tout effacer ».</p>",
+  terms: "<h4>1. Ce qu’est OutTrack</h4><p>Un outil hors ligne pour habitudes, journal, recettes et blocs de focus. Aucune promesse santé, ni conseil nutritionnel ou médical.</p><h4>2. Portée</h4><p>Toutes les fonctions sont disponibles après installation, sans déblocage supplémentaire.</p><h4>3. Synchronisation</h4><p>La synchronisation entre appareils utilise uniquement ton réseau local et tes propres appareils. Elle fonctionne sans compte, sans cloud et sans serveur.</p><h4>4. Jeu franc</h4><p>Ni culpabilité ni dark patterns — promis.</p>",
   refund: "<h4>Remboursements</h4><p>En cas d'achat via une boutique d'apps, ses règles de remboursement (Apple/Google) et le droit légal de rétractation s'appliquent.</p>",
   cookies: "<h4>Politique cookies</h4><p>OutTrack n'utilise ni cookies ni traceurs similaires. Toutes les données restent dans le stockage local de l'appareil.</p>",
   imprint: "<h4>Opérateur (espace réservé — remplacer avant la sortie)</h4><p>[NOM / SOCIÉTÉ]<br>[RUE, CP VILLE]<br>[EMAIL]<br>[TÉLÉPHONE facultatif]</p>",
@@ -1841,8 +1668,6 @@ $("#verse-backdrop").addEventListener("click", closeVerse);
 /* ---------- Export / Löschen / Consent ---------- */
 $("#export-data").addEventListener("click", () => {
   const payload = Object.assign({}, db);
-  payload._proofImages = {};
-  for (const [k, v] of proofCache) payload._proofImages[k] = v;
   try {
     const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
     const a = document.createElement("a");
@@ -1883,12 +1708,22 @@ try { // Widgets-Hinweis nur mobil/installiert — nicht auf GitHub-Pages-Deskto
 initConsent();
 renderAll();
 go("hub");
+// Geraete-Sync starten (nur auf Geraeten, die es koennen: Computer = Hub, Handy = Client)
+if (window.__otSync) {
+  window.__otSync.start({
+    S: window.OTSync, QR: window.OTQR,
+    getDb: () => db,
+    setDb: (v) => { db = v; },
+    render: () => { renderAll(); },
+    toast: (m) => toast(m),
+    t: (k, v) => t(k, v),
+  });
+}
 syncWheelFromDuration();
 drawTimer(); renderTimerLabels();
 if (!welcomeSeen() && firstLaunch()) showWelcome();
 else if (!onbSeen() && !db.tutorialSeen) showOnboarding();
 else checkOpenLoop();
-hydrateProofs();
 try { // Splash: kurz, skippbar, Reduced-Motion-sicher
   const sp = $("#splash");
   const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1898,8 +1733,8 @@ try { // Splash: kurz, skippbar, Reduced-Motion-sicher
 } catch { /* still */ }
 window.__ot = {
   go, t, dayProgress, setDuration, anyCheckin, totalPoints, levelRank,
-  setWheel, wheelTotal, openRedirect, checkOpenLoop, openProof, openVerse, openWelcome: showWelcome, openOnboarding: showOnboarding,
-  proofImage, toast, renderHub, renderStats,
+  setWheel, wheelTotal, openRedirect, checkOpenLoop, openVerse, openWelcome: showWelcome, openOnboarding: showOnboarding,
+  toast, renderHub, renderStats,
   get db() { return db; }, STR,
 };
 
