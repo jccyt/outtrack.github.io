@@ -78,17 +78,19 @@
         <svg id="chart-svg" viewBox="0 0 300 90" class="chart" role="img" aria-label="Verlauf"></svg>
       </div>
 
-      <div class="section-head"><h2 data-i18n="sec_habits">Habits</h2><button id="add-habit-btn" class="add-habit-btn"><span class="plus" aria-hidden="true">+</span><span data-i18n="add_new">Neu</span></button></div>
-      <ul id="habit-list" class="inset-list"></ul>
-      <p id="habits-empty" class="empty-note" hidden data-i18n="empty_habits">Noch keine Quest aktiv — leg deine erste fest.</p>
+      <div class="col-side">
+        <div class="section-head"><h2 data-i18n="sec_habits">Habits</h2><button id="add-habit-btn" class="add-habit-btn"><span class="plus" aria-hidden="true">+</span><span data-i18n="add_new">Neu</span></button></div>
+        <ul id="habit-list" class="inset-list"></ul>
+        <p id="habits-empty" class="empty-note" hidden data-i18n="empty_habits">Noch keine Quest aktiv — leg deine erste fest.</p>
 
-      <div class="card redirect-card">
-        <h2 data-i18n="rc_title">Fokus-Check</h2>
-        <p class="muted" data-i18n="rc_sub">Greifst du gerade zum Handy, obwohl du arbeiten wolltest? 60 Sekunden Pause statt Autopilot.</p>
-        <button id="redirect-open" class="secondary-btn" data-i18n="rc_open">Impuls umleiten</button>
+        <div class="card redirect-card">
+          <h2 data-i18n="rc_title">Fokus-Check</h2>
+          <p class="muted" data-i18n="rc_sub">Greifst du gerade zum Handy, obwohl du arbeiten wolltest? 60 Sekunden Pause statt Autopilot.</p>
+          <button id="redirect-open" class="secondary-btn" data-i18n="rc_open">Impuls umleiten</button>
+        </div>
+
+        <button id="launch-focus" class="apple-btn"><span class="btn-main" data-i18n="launch_title">Fokus starten</span><span class="btn-sub" data-i18n="launch_sub">45 Min. Deep Work</span></button>
       </div>
-
-      <button id="launch-focus" class="apple-btn"><span class="btn-main" data-i18n="launch_title">Fokus starten</span><span class="btn-sub" data-i18n="launch_sub">45 Min. Deep Work</span></button>
       <p class="footnote" data-i18n="hub_foot">Antippen zum Abhaken. Deine Daten bleiben bei dir — alles offline.</p>
     </div>
   </section>
@@ -114,63 +116,67 @@
   <section id="view-focus" class="view">
     <header class="navlarge"><p class="nav-eyebrow" data-i18n="eyebrow_deep">Deep Work</p><h1 data-i18n="nav_focus">Fokus</h1></header>
     <div class="content" id="focus-stage">
-      <div class="card">
-        <h2 data-i18n="wg_title">Widgets</h2>
-        <div class="wg-grid" id="wg-grid"></div>
-        <p class="wg-hint install-only" data-i18n="wg_hint"></p>
-      </div>
-      <div class="segmented" id="presets" role="group" aria-label="Dauer">
-        <button data-min="25">25</button>
-        <button data-min="45" class="active">45</button>
-        <button data-min="90">90</button>
-      </div>
-      <div class="card custom-time">
-        <p class="wheel-title" data-i18n="wheel_title">Dauer wählen</p>
-        <div class="wheel-row">
-          <div class="wheel" data-unit="h">
-            <span class="wheel-cap" data-i18n="t_hours">Std.</span>
-            <div class="wheel-scroll" id="wheel-h" role="listbox" tabindex="0" aria-label="Std."></div>
-          </div>
-          <span class="wheel-colon" aria-hidden="true">:</span>
-          <div class="wheel" data-unit="m">
-            <span class="wheel-cap" data-i18n="t_minutes">Min.</span>
-            <div class="wheel-scroll" id="wheel-m" role="listbox" tabindex="0" aria-label="Min."></div>
-          </div>
-          <span class="wheel-colon" aria-hidden="true">:</span>
-          <div class="wheel" data-unit="s">
-            <span class="wheel-cap" data-i18n="t_seconds">Sek.</span>
-            <div class="wheel-scroll" id="wheel-s" role="listbox" tabindex="0" aria-label="Sek."></div>
-          </div>
+      <div class="col-a">
+        <div class="card">
+          <h2 data-i18n="wg_title">Widgets</h2>
+          <div class="wg-grid" id="wg-grid"></div>
+          <p class="wg-hint install-only" data-i18n="wg_hint"></p>
         </div>
-        <p class="wheel-hint muted" data-i18n="wheel_hint">Hoch- oder runterwischen — maximal 3 Stunden.</p>
-        <button id="custom-apply" class="secondary-btn" data-i18n="custom_apply">Zeit übernehmen</button>
-      </div>
-      <div class="card timer-card">
-        <div class="timer-wrap">
-          <svg viewBox="0 0 200 200" class="timer-ring" role="img" aria-label="Timer">
-            <circle cx="100" cy="100" r="88" class="ring-bg"/>
-            <circle cx="100" cy="100" r="88" class="ring-fg" id="timer-fg"/>
-          </svg>
-          <div class="timer-text"><div id="timer-display" aria-hidden="true">45:00</div><div id="timer-state" role="status" data-i18n="st_ready">Bereit</div></div>
+        <div class="segmented" id="presets" role="group" aria-label="Dauer">
+          <button data-min="25">25</button>
+          <button data-min="45" class="active">45</button>
+          <button data-min="90">90</button>
         </div>
-        <div class="timer-controls">
-          <button id="timer-start" class="apple-btn" data-i18n="timer_start">Block starten</button>
-          <button id="timer-reset" class="secondary-btn" data-i18n="timer_reset">Reset</button>
+        <div class="card custom-time">
+          <p class="wheel-title" data-i18n="wheel_title">Dauer wählen</p>
+          <div class="wheel-row">
+            <div class="wheel" data-unit="h">
+              <span class="wheel-cap" data-i18n="t_hours">Std.</span>
+              <div class="wheel-scroll" id="wheel-h" role="listbox" tabindex="0" aria-label="Std."></div>
+            </div>
+            <span class="wheel-colon" aria-hidden="true">:</span>
+            <div class="wheel" data-unit="m">
+              <span class="wheel-cap" data-i18n="t_minutes">Min.</span>
+              <div class="wheel-scroll" id="wheel-m" role="listbox" tabindex="0" aria-label="Min."></div>
+            </div>
+            <span class="wheel-colon" aria-hidden="true">:</span>
+            <div class="wheel" data-unit="s">
+              <span class="wheel-cap" data-i18n="t_seconds">Sek.</span>
+              <div class="wheel-scroll" id="wheel-s" role="listbox" tabindex="0" aria-label="Sek."></div>
+            </div>
+          </div>
+          <p class="wheel-hint muted" data-i18n="wheel_hint">Hoch- oder runterwischen — maximal 3 Stunden.</p>
+          <button id="custom-apply" class="secondary-btn" data-i18n="custom_apply">Zeit übernehmen</button>
         </div>
       </div>
-      <div class="card form-row">
-        <label for="sound-select" data-i18n="sound_lbl">Umgebung</label>
-        <select id="sound-select">
-          <option value="off" data-i18n="snd_off">Aus — Stille</option>
-          <option value="white" data-i18n="snd_white">Weißes Rauschen</option>
-          <option value="rain" data-i18n="snd_rain">Regen</option>
-          <option value="synth" data-i18n="snd_synth">Synth-Fläche</option>
-        </select>
-      </div>
-      <div class="card">
-        <label class="field-label" for="focus-input" data-i18n="focus_q">Was ist dein einzelner Fokus für diesen Block?</label>
-        <input id="focus-input" type="text" maxlength="120" data-i18n-ph="focus_ph" placeholder="z. B. OutTrack v3 fertigstellen" autocomplete="off" />
-        <p id="focus-saved">✓</p>
+      <div class="col-b">
+        <div class="card timer-card">
+          <div class="timer-wrap">
+            <svg viewBox="0 0 200 200" class="timer-ring" role="img" aria-label="Timer">
+              <circle cx="100" cy="100" r="88" class="ring-bg"/>
+              <circle cx="100" cy="100" r="88" class="ring-fg" id="timer-fg"/>
+            </svg>
+            <div class="timer-text"><div id="timer-display" aria-hidden="true">45:00</div><div id="timer-state" role="status" data-i18n="st_ready">Bereit</div></div>
+          </div>
+          <div class="timer-controls">
+            <button id="timer-start" class="apple-btn" data-i18n="timer_start">Block starten</button>
+            <button id="timer-reset" class="secondary-btn" data-i18n="timer_reset">Reset</button>
+          </div>
+        </div>
+        <div class="card form-row">
+          <label for="sound-select" data-i18n="sound_lbl">Umgebung</label>
+          <select id="sound-select">
+            <option value="off" data-i18n="snd_off">Aus — Stille</option>
+            <option value="white" data-i18n="snd_white">Weißes Rauschen</option>
+            <option value="rain" data-i18n="snd_rain">Regen</option>
+            <option value="synth" data-i18n="snd_synth">Synth-Fläche</option>
+          </select>
+        </div>
+        <div class="card">
+          <label class="field-label" for="focus-input" data-i18n="focus_q">Was ist dein einzelner Fokus für diesen Block?</label>
+          <input id="focus-input" type="text" maxlength="120" data-i18n-ph="focus_ph" placeholder="z. B. OutTrack v3 fertigstellen" autocomplete="off" />
+          <p id="focus-saved">✓</p>
+        </div>
       </div>
       <div class="row2">
         <button id="exit-focus" class="secondary-btn" data-i18n="focus_exit">Zum Hub</button>
@@ -183,31 +189,35 @@
   <section id="view-food" class="view">
     <header class="navlarge"><p class="nav-eyebrow" data-i18n="eyebrow_energy">Energie</p><h1 data-i18n="nav_food">Food-Tipps</h1></header>
     <div class="content">
-      <div class="segmented" id="meal-filter">
-        <button data-cat="alle" class="active" data-i18n="mf_all">Alle</button>
-        <button data-cat="protein" data-i18n="mf_protein">Protein</button>
-        <button data-cat="energie" data-i18n="mf_energy">Energie</button>
-        <button data-cat="light" data-i18n="mf_light">Light</button>
-      </div>
-      <div class="card meal-card">
-        <p class="meal-cat" id="meal-cat">—</p>
-        <h2 id="meal-name" data-i18n="meal_hint">Tippen für einen Tipp</h2>
-        <div class="macro-hero">
-          <div class="kcal-block"><strong id="meal-kcal">—</strong><span>kcal</span></div>
-          <div class="macro-bars" id="meal-macros"></div>
+      <div class="col-a">
+        <div class="segmented" id="meal-filter">
+          <button data-cat="alle" class="active" data-i18n="mf_all">Alle</button>
+          <button data-cat="protein" data-i18n="mf_protein">Protein</button>
+          <button data-cat="energie" data-i18n="mf_energy">Energie</button>
+          <button data-cat="light" data-i18n="mf_light">Light</button>
         </div>
-        <p class="meal-meta" id="meal-meta"></p>
-        <div id="meal-recipe" class="recipe" hidden>
-          <h3 data-i18n="r_ing">Zutaten</h3>
-          <ul id="meal-ing" class="checklist"></ul>
-          <h3 data-i18n="r_steps">Zubereitung</h3>
-          <ol id="meal-steps"></ol>
+        <div class="card meal-card">
+          <p class="meal-cat" id="meal-cat">—</p>
+          <h2 id="meal-name" data-i18n="meal_hint">Tippen für einen Tipp</h2>
+          <div class="macro-hero">
+            <div class="kcal-block"><strong id="meal-kcal">—</strong><span>kcal</span></div>
+            <div class="macro-bars" id="meal-macros"></div>
+          </div>
+          <p class="meal-meta" id="meal-meta"></p>
+          <div id="meal-recipe" class="recipe" hidden>
+            <h3 data-i18n="r_ing">Zutaten</h3>
+            <ul id="meal-ing" class="checklist"></ul>
+            <h3 data-i18n="r_steps">Zubereitung</h3>
+            <ol id="meal-steps"></ol>
+          </div>
+          <button id="meal-next" class="apple-btn" data-i18n="meal_new">Neuer Tipp</button>
         </div>
-        <button id="meal-next" class="apple-btn" data-i18n="meal_new">Neuer Tipp</button>
       </div>
-      <div class="section-head"><h2 data-i18n="sec_all">Alle Gerichte</h2><button id="meal-search-clear" class="link-btn" hidden>×</button></div>
-      <input id="meal-search" type="search" data-i18n-ph="j_search_ph" placeholder="Suchen" aria-label="Suchen" />
-      <ul id="meal-list" class="inset-list"></ul>
+      <div class="col-b">
+        <div class="section-head"><h2 data-i18n="sec_all">Alle Gerichte</h2><button id="meal-search-clear" class="link-btn" hidden>×</button></div>
+        <input id="meal-search" type="search" data-i18n-ph="j_search_ph" placeholder="Suchen" aria-label="Suchen" />
+        <ul id="meal-list" class="inset-list"></ul>
+      </div>
       <p class="footnote" data-i18n="food_foot">Allgemeine Rezeptideen, keine Ernährungsberatung.</p>
     </div>
   </section>

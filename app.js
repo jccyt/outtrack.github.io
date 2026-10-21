@@ -800,14 +800,20 @@ function drawChart() {
   const W = 300, H = 90, gap = N > 7 ? 3 : 8;
   const bw = (W - gap * (N - 1)) / N;
   let s = "";
+  let any = false;
   for (let i = N - 1; i >= 0; i--) {
     const p = dayProgress(todayISO(-i));
+    if (p > 0) any = true;
     const h = Math.max(3, Math.round((p / 100) * (H - 14)));
     const x = (N - 1 - i) * (bw + gap);
     s += "<rect x=\"" + x.toFixed(1) + "\" y=\"" + (H - h) + "\" width=\"" + bw.toFixed(1) + "\" height=\"" + h + "\" rx=\"3\" style=\"--d:" + (N - 1 - i) + "\" fill=\"" + (p === 100 ? ACC_GRAD() : p > 0 ? ACC_HALF() : TRACK_C()) + "\"><title>" + p + "%</title></rect>";
   }
   svg.innerHTML = s;
   svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  // Ohne Daten keinen leeren Chart-Block stehen lassen (sonst ~150 px Leerraum)
+  svg.classList.toggle("is-empty", !any);
+  const head = svg.previousElementSibling;
+  if (head && head.classList.contains("chart-head")) head.classList.toggle("is-empty", !any);
 }
 $("#chart-range").addEventListener("click", (e) => {
   const b = e.target.closest("button");
