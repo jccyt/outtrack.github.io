@@ -119,8 +119,16 @@
     st.key = await S.deriveKey(st.token);
     const blob = await S.encrypt(st.key, S.snapshot(getDb()));
     const info = await invoke("sync_start", { token: st.token, blob: blob, name: deviceName() });
-    st.url = urlFromInfo(info);
+    const httpUrl = urlFromInfo(info);
     st.port = info && typeof info === "object" ? info.port : 0;
+    // Der QR enthaelt einen Deep-Link: die Handykamera oeffnet damit direkt die App
+    st.httpUrl = httpUrl;
+    try {
+      const u = new URL(httpUrl);
+      st.url = deepLink(u.hostname, u.port || "45123", st.token);
+    } catch {
+      st.url = httpUrl;
+    }
     paint();
     // Snapshot nach jeder Aenderung veröffentlichen
     if (st.hubTimer) clearInterval(st.hubTimer);
@@ -166,13 +174,31 @@
     if (a === 172 && b >= 16 && b <= 31) return true;         // 172.16.0.0/12
     return false;
   }
+  // Zwei Formen werden akzeptiert:
+  //   outtrack://sync?h=<ip>&p=<port>&t=<token>   (Deep-Link: mit der Handykamera scannbar)
+  //   http://<ip>:<port>/s/<token>                  (direkte Server-Adresse)
   function parseUrl(url) {
-    const m = String(url || "").match(/\/s\/([A-Za-z0-9_-]+)\s*$/);
+    const raw = String(url || "").trim();
+    const deep = raw.match(/^outtrack:\/\/sync\?([^#]+)$/i);
+    if (deep) {
+      const q = new URLSearchParams(deep[1]);
+      const host = q.get("h") || "";
+      const port = q.get("p") || "";
+      const token = q.get("t") || "";
+      if (!host || !port || !token) throw new Error("Unvollstaendige Sync-Adresse");
+      if (!isPrivateHost(host)) throw new Error("Nur lokale Adressen erlaubt");
+      return { base: "http://" + host + ":" + port, token: token, host: host, port: port };
+    }
+    const m = raw.match(/\/s\/([A-Za-z0-9_-]+)\s*$/);
     if (!m) throw new Error("Keine Sync-Adresse");
-    const base = String(url).replace(/\/s\/[A-Za-z0-9_-]+\s*$/, "");
+    const base = raw.replace(/\/s\/[A-Za-z0-9_-]+\s*$/, "");
     const host = base.replace(/^https?:\/\//, "").split(/[\/:]/)[0];
     if (!isPrivateHost(host)) throw new Error("Nur lokale Adressen erlaubt");
-    return { base, token: m[1] };
+    return { base, token: m[1], host: host, port: (base.match(/:(\d+)$/) || [])[1] || "" };
+  }
+  // Deep-Link fuer den QR-Code: die Handykamera oeffnet damit direkt die App
+  function deepLink(host, port, token) {
+    return "outtrack://sync?h=" + encodeURIComponent(host) + "&p=" + encodeURIComponent(port) + "&t=" + encodeURIComponent(token);
   }
   async function clientConnect(url) {
     const { base, token } = parseUrl(url);
@@ -263,7 +289,12 @@
     try {
       let url = await scanBrowser();
       if (!url) url = await scanPlugin();
-      if (!url) { if (stt) stt.textContent = t("sync_fail"); return; }
+      if (!url) {
+        // Kein Scanner im WebView (z. B. Android): dann mit der Handykamera
+        // den Deep-Link aus dem QR oeffnen - das startet die App direkt.
+        if (stt) stt.textContent = t("sync_no_scanner");
+        return;
+      }
       await clientConnect(url);
     } catch (e) {
       const s2 = el("sync-status2");
@@ -320,6 +351,19 @@
         if (st.timer) clearInterval(st.timer);
         paint();
       });
+      // ueber einen Deep-Link geoeffnet? outtrack://sync?h=..&p=..&t=..
+      const app = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App;
+      const handleUrl = (url) => {
+        if (!url || !/^outtrack:\/\/sync/i.test(url)) return;
+        clientConnect(url).catch(() => {
+          const s2 = el("sync-status2");
+          if (s2) s2.textContent = t("sync_fail");
+        });
+      };
+      if (app && app.addListener) {
+        app.addListener("appUrlOpen", (e) => handleUrl(e && e.detail ? e.detail.url : "")).catch(() => {});
+        app.getLaunchUrl().then((e) => handleUrl(e && e.url)).catch(() => {});
+      }
       // gespeicherte Kopplung wiederherstellen
       const saved = loadStore();
       if (saved && saved.url) {
@@ -334,5 +378,5 @@
   // Vom Rust-Teil aufgerufen, wenn ein Client pusht
   function receive(blob) { hubReceive(blob); }
 
-  window.__otSync = { start, receive, state: st, clientConnect, clientPoll, parseUrl, urlFromInfo };
+  window.__otSync = { start, receive, state: st, clientConnect, clientPoll, parseUrl, urlFromInfo, deepLink };
 })();
