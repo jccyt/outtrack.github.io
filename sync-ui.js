@@ -361,8 +361,10 @@
         });
       };
       if (app && app.addListener) {
-        app.addListener("appUrlOpen", (e) => handleUrl(e && e.detail ? e.detail.url : "")).catch(() => {});
-        app.getLaunchUrl().then((e) => handleUrl(e && e.url)).catch(() => {});
+        try { app.addListener("appUrlOpen", (e) => handleUrl(e && (e.url || (e.detail && e.detail.url)))); } catch (e) {}
+        if (app.getLaunchUrl) {
+          app.getLaunchUrl().then((e) => handleUrl(e && e.url)).catch(() => {});
+        }
       }
       // gespeicherte Kopplung wiederherstellen
       const saved = loadStore();
