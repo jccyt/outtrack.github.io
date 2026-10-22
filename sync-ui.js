@@ -41,6 +41,21 @@
     return internals.invoke(cmd, args);
   };
   const el = (id) => document.getElementById(id);
+  // Diagnose-Meldung an den Rust-Teil (erscheint im Terminal)
+  // Antwort des Servers kann ein Objekt {url, port} oder ein reiner String sein.
+  // (Ein Bug: der Server lieferte einen String, der Code erwartete ein Objekt -
+  //  dadurch blieb die Adresse leer und es wurde kein QR gezeichnet.)
+  const urlFromInfo = (info) => {
+    if (typeof info === "string") return info;
+    if (info && typeof info.url === "string") return info.url;
+    return "";
+  };
+  const note = (msg) => {
+    try {
+      const i = window.__TAURI_INTERNALS__;
+      if (i && i.invoke) i.invoke("sync_note", { text: String(msg) });
+    } catch { /* egal */ }
+  };
   const nowTime = () => new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   const store = () => {
     try { localStorage.setItem(SYNC_KEY, JSON.stringify({ url: st.url, token: st.token, peer: st.peer, last: st.last })); } catch { /* egal */ }
@@ -67,7 +82,13 @@
 
     if (st.hub) {
       const q = el("sync-qr");
-      if (q && st.url && QR) q.innerHTML = QR.svg(st.url, 3, "#000000", "#ffffff");
+      if (q && st.url && QR) {
+        try {
+          q.innerHTML = QR.svg(st.url, 3, "#000000", "#ffffff");
+        } catch (e) {
+          note("QR-FEHLER: " + (e && e.message ? e.message : String(e)));
+        }
+      }
       const u = el("sync-url");
       if (u) u.value = st.url || "";
       const s = el("sync-status");
@@ -98,7 +119,8 @@
     st.key = await S.deriveKey(st.token);
     const blob = await S.encrypt(st.key, S.snapshot(getDb()));
     const info = await invoke("sync_start", { token: st.token, blob: blob, name: deviceName() });
-    st.url = info.url;
+    st.url = urlFromInfo(info);
+    st.port = info && typeof info === "object" ? info.port : 0;
     paint();
     // Snapshot nach jeder Aenderung veröffentlichen
     if (st.hubTimer) clearInterval(st.hubTimer);
@@ -275,7 +297,7 @@
       if (c) c.addEventListener("click", async () => {
         try { await navigator.clipboard.writeText(st.url); toast(t("sync_copy")); } catch { /* clipboard blockiert */ }
       });
-      hubStart().catch(() => {});
+      hubStart().catch((e) => note("hubStart-FEHLER: " + (e && e.message ? e.message : String(e))));
     }
 
     if (st.client) {
@@ -312,5 +334,5 @@
   // Vom Rust-Teil aufgerufen, wenn ein Client pusht
   function receive(blob) { hubReceive(blob); }
 
-  window.__otSync = { start, receive, state: st, clientConnect, clientPoll, parseUrl };
+  window.__otSync = { start, receive, state: st, clientConnect, clientPoll, parseUrl, urlFromInfo };
 })();
