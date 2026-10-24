@@ -14,7 +14,7 @@
 (function () {
   "use strict";
   const SYNC_KEY = "outtrack_sync";
-  const POLL_MS = 5 * 60 * 1000;      // Poll-Intervall des Clients
+  const POLL_MS = 10 * 1000;        // Poll-Intervall des Clients (10s)
   const HUB_PUSH_MS = 3000;            // Hub: Snapshot nach aenderungen senden
 
   // Faehigkeiten kommen vom Wrapper (nicht von der Web-App selbst)
